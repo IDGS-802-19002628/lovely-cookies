@@ -5,6 +5,8 @@ from Models import Usuario, db
 from captcha.image import ImageCaptcha
 import random
 
+#prueba :)
+
 app = Flask(__name__)
 app.config.from_object(DevelomentConfig)
 
