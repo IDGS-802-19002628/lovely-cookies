@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/boxicons-2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>login</title>
+</head>
+<body>
+
+  </head>
+  <body>
+    {%from "_macros.html" import input_forms%}
+    <div class="container">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-header text-center">
+            <img src="/static/img/lovely-cookies.jpeg" alt="Logo" class="logo">
+          </div>
+          <div class="card-body">
+            <form id="login" name="login" action="/login" method="POST" novalidate>
+              
+              <div class=" mb-3">
+                
+                {{ input_forms(form.email, class="form-control", placeholder="Correo electrónico") }}
+            </div>
+            
+              <div class="mb-3">
+                
+                {{ input_forms(form.password, class="form-control", placeholder="Contraseña") }}
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class='bx bxs-lock' ></i> Iniciar sesión</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="/static/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bootstrap-5/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap-5/js/popper.min.js"></script>
+</body>
+</html>

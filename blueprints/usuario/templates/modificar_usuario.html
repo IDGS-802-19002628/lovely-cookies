@@ -1,0 +1,45 @@
+{% extends 'layout1.html' %}
+{% block content %}
+{%from "_macros.html" import input_forms%}
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <form id="modificar" name="modificar" action="/modificar" method="POST" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="mb-3 col-3">
+                            <div class="mb-3">
+                                <div class="form-group col-xs-12 float-label-form-group controls" hidden>
+                                    {{ input_forms(form.id, class="form-control", placeholder="") }}
+                                </div>
+                                {{ input_forms(form.nombre, class="form-control", placeholder="") }}
+                            </div>
+                            {{ input_forms(form.rol, class="form-select", placeholder="") }}
+                            <br>
+                                <div class="mb-3">
+                                    <div>
+                                        <button type="submit" id="modificar" name="modificar" class="btn btn-warning"><i class='bx bx-edit-alt bx-sm align-middle'></i>  Modificar</button>
+                                        <button type="button" class="btn btn-danger" ><i class='bx bx-x bx-sm align-middle' ></i> Cancelar</button>
+                                    </div>
+                                </div>
+                                
+                           
+                        </div>
+                        <div class="col-3">
+                           
+                            {{ input_forms(form.correo, class="form-control", placeholder="") }}
+                        </div>
+                        <div class="col-3">
+                
+                            {{ input_forms(form.pwd, class="form-control", placeholder="") }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

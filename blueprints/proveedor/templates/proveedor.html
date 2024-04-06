@@ -1,0 +1,47 @@
+{% extends 'layout1.html' %}
+{% block content %}
+{%from "_macros.html" import input_forms%}
+<div class="container">
+    <h1 class="mt-5 mb-4">Registrar Nueva Proveedor</h1>
+</div>
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <form id="proveedor" name="proveedor" action="/proveedor" method="POST" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="mb-3 col-3">
+                            <div class="mb-3">
+                                
+                                {{ input_forms(form.nombre_em, class="form-control", placeholder="") }}
+                            </div>
+                            {{ input_forms(form.nombre_e, class="form-control", placeholder="") }}
+                            
+                            <br>
+                                <div class="mb-3">
+                                    <div>
+                                        <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle bx-sm'></i> Agregar</button>
+                                        <button type="submit" class="btn btn-primary"><i class='bx bx-book-content  align-middle bx-sm' ></i> Registros</button>
+                                    </div>
+                                </div>
+                                
+                           
+                        </div>
+                        <div class="col-3">
+                           
+                            {{ input_forms(form.Telefono, class="form-control", placeholder="") }}
+                        </div>
+                        <div class="col-3">
+                            
+                            {{ input_forms(form.direccion, class="form-control", placeholder="") }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
