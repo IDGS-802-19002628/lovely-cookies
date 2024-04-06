@@ -1,0 +1,42 @@
+{% block content %}
+{%from "_macros.html" import input_forms%}
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <form id="eliminar" name="eliminar" action="/eliminar" method="POST" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="mb-3 col-3">
+                            <div class="mb-3">
+                                
+                                {{ input_forms(form.nombre, class="form-control", placeholder="") }}
+                            </div>
+                            {{ input_forms(form.rol, class="form-select", placeholder="") }}
+                            <br>
+                                <div class="mb-3">
+                                    <div>
+                                        <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle'></i>  Agregar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content aling-middle' ></i> Registros</button>
+                                    </div>
+                                </div>
+                                
+                           
+                        </div>
+                        <div class="col-3">
+                           
+                            {{ input_forms(form.correo, class="form-control", placeholder="") }}
+                        </div>
+                        <div class="col-3">
+                
+                            {{ input_forms(form.pwd, class="form-control", placeholder="") }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
