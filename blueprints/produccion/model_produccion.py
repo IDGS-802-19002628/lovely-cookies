@@ -1,12 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+from config import db
 
-db_produccion=SQLAlchemy()
-class Produccion(db_produccion.Model):
-    id=db_produccion.Column(db_produccion.Integer, primary_key=True)
-    nombre=db_produccion.Column(db_produccion.String(50))
-    pwd=db_produccion.Column(db_produccion.String(100))
-    correo=db_produccion.Column(db_produccion.String(50))
-    rol=db_produccion.Column(db_produccion.String(50))
-    estatus = db_produccion.Column(db_produccion.String(10))
-    create_date=db_produccion.Column(db_produccion.DateTime, default=datetime.datetime.now)
+
+
+class Produccion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50))
+    cantidad = db.Column(db.Integer)
+    estatus = db.Column(db.String(10))
+    create_date = db.Column(db.DateTime)
