@@ -1,0 +1,99 @@
+{% extends 'layout3.html' %}
+{% block content %}
+{%from "_macros.html" import input_forms%}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{n}}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <h1 class="mt-5 mb-4">Registrar Nueva Producción</h1>
+</div>
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <form id="modificar" name="modificar" action="/modificar_produccion" method="POST" novalidate>
+                    <div hidden>
+                        {{ input_forms(form.id, class="form-control", placeholder="") }}
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="mb-3 col-4">
+                            <div class="mb-4">
+                                
+                               
+                            </div>
+                            <br>
+                                <div class="mb-5">
+                                    <div>
+                                        <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle'></i>  Agregar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content aling-middle' ></i> Registros</button>
+                                        
+                                            <button type="submit"  class="btn btn-warning" name="disabled" value="editar"><i class='bx bx-edit-alt bx-sm aling-middle' ></i> Cantidad</button>
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <div class="col-4">
+                          {{ input_forms(form.galleta, class="form-select", placeholder="") }}
+                        </div>
+                        <div class="col-3">
+                          {{ input_forms(form.fecha, class="form-select", placeholder="") }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tabla_usuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title fs-5" id="exampleModalLabel">Registros de produccion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="table-responsive">
+                  <table class="table table-striped table-hover text-center" id="tabla_" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th scope="col">Galleta</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Estatus</th>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Acciones</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {% for p in r_produccion %}
+                          <tr>
+                              <td>{{ p.nombre }}</td>
+                              <td>{{ p.cantidad }}</td>
+                              <td>{{ p.estatus }}</td>
+                              <td>{{ p.create_date }}</td>
+                              <td>
+                                  <a class="btn btn-danger me-2" href="/eliminar?id"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
+                                  <a class="btn btn-warning" href="/modificar?"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
+                                  
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -10,34 +10,37 @@
 </head>
 <body>
 
-  </head>
-  <body>
-    {%from "_macros.html" import input_forms%}
-    <div class="container">
-      <div class="col-md-4">
+<div class="container">
+ 
+    <div class="col-md-4">
+      {% from "_macros.html" import input_forms %}
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class="alert alert-{{ n }}" role="alert">
+              {% for message in messages %}
+              {{ message }}
+              {% endfor %}
+          </div>
+          {% endif %}
+      {% endwith %}
         <div class="card text-center">
-          <div class="card-header text-center">
-            <img src="/static/img/lovely-cookies.jpeg" alt="Logo" class="logo">
-          </div>
-          <div class="card-body">
-            <form id="login" name="login" action="/login" method="POST" novalidate>
-              
-              <div class=" mb-3">
-                
-                {{ input_forms(form.email, class="form-control", placeholder="Correo electrónico") }}
+            <div class="card-header text-center">
+                <img src="/static/img/lovely-cookies.jpeg" alt="Logo" class="logo">
             </div>
-            
-              <div class="mb-3">
-                
-                {{ input_forms(form.password, class="form-control", placeholder="Contraseña") }}
-              </div>
-              
-              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class='bx bxs-lock' ></i> Iniciar sesión</button>
-            </form>
-          </div>
+            <div class="card-body">
+                <form id="login" name="login" action="/login" method="POST" novalidate>
+                    <div class="mb-3">
+                        {{ input_forms(form.correo, class="form-control", placeholder="Correo electrónico") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ input_forms(form.pwd, class="form-control", placeholder="Contraseña") }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm btn-block"><i class='bx bxs-lock' ></i> Iniciar sesión</button>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 <script src="/static/bootstrap-5/js/bootstrap.bundle.min.js"></script>
 <script src="/static/bootstrap-5/js/bootstrap.min.js"></script>
 <script src="/static/bootstrap-5/js/popper.min.js"></script>
