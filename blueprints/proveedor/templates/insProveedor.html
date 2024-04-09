@@ -1,0 +1,163 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% import "_macros.html" as macros %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Registro de Proveedor
+                </div>
+                <div class="card-body">
+                    <form action="/insProveedor" method="post">
+                        <div class="form-group">
+                            <label for="nomEmpresa">Nombre de la Empresa</label>
+                            <input type="text" class="form-control" id="nomEmpresa" name="nomEmpresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nomTrabajador">Nombre del Trabajador</label>
+                            <input type="text" class="form-control" id="nomTrabajador" name="nomTrabajador" required>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label>Surtiria:</label><br>
+                                {% for ingrediente in formMateP %}
+                                <input type="checkbox" id="ingrediente{{ ingrediente[0] }}" name="ingredientes"
+                                    value="{{ ingrediente[0] }}">
+                                <label for="ingrediente{{ ingrediente[0] }}">{{ ingrediente[1] }}</label><br>
+                                {% endfor %}
+                            </div><br>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Proveedores
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">Empresa</th>
+                                <th style="width: 30%;">Dirreccion</th>
+                                <th style="width: 20%;">Telefono</th>
+                                <th style="width: 20%;">Trabajador</th>
+                                <th style="width: 70%;">Ingredientes</th>
+                                <th style="width: 70%;">Eliminar</th>
+                                <th style="width: 70%;">Modificar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if datos_tabla %}
+                            {% for idProveedor, proveedor, direccion, telefono, nomTrabajador, ingredientes in
+                            datos_tabla %}
+                            <tr>
+                                <td>{{ proveedor }}</td>
+                                <td>{{ direccion }}</td>
+                                <td>{{ telefono }}</td>
+                                <td>{{ nomTrabajador }}</td>
+                                <td>
+                                    <p class="d-inline-flex gap-1">
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseExample{{idProveedor}}" aria-expanded="false"
+                                            aria-controls="collapseExample{{idProveedor}}">
+                                            Mostrar
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="collapseExample{{idProveedor}}">
+                                        <div class="card card-body">
+                                            <ul class="ingredient-list">
+                                                {% for ingrediente in ingredientes %}
+                                                <li>{{ ingrediente }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><a class="btn btn-danger" onclick="confirmDelete('{{ idProveedor }}')">Eliminar</a>
+                                </td>
+                                <td><button class="btn btn-primary"
+                                        onclick="llenarFormulario('{{ proveedor.id }}', '{{ proveedor.nomEmpresa }}', '{{ proveedor.direccion }}', '{{ proveedor.telefono }}', '{{ proveedor.nomTrabajador }}')">Editar</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="7">No hay datos disponibles</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+
+    function confirmDelete(proveedorId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No podrás revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Aquí puedes redirigir a una ruta que maneje la eliminación del proveedor
+                window.location.href = "/eliminarP?id=" + proveedorId;
+            }
+        });
+    }
+
+    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var target = document.querySelector(button.getAttribute('data-bs-target'));
+            if (target.classList.contains('show')) {
+                // Si el objetivo está abierto, ciérralo
+                target.classList.remove('show');
+            } else {
+                // Si el objetivo está cerrado, cierra todos los demás objetivos abiertos
+                document.querySelectorAll('.collapse.show').forEach(function (collapse) {
+                    if (collapse !== target) {
+                        collapse.classList.remove('show');
+                    }
+                });
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            var checkboxes = document.querySelectorAll("input[name='ingredientes']:checked");
+
+            if (checkboxes.length === 0) {
+                Swal.fire({
+                    title: "Verifica",
+                    text: "No seleccionaste ningun ingrediente",
+                    icon: "warning"
+                });
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+{% endblock %}

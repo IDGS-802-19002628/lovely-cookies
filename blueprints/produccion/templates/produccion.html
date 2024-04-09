@@ -1,0 +1,89 @@
+{% extends 'layout3.html' %}
+{% block content %}
+{%from "_macros.html" import input_forms%}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <h1 class="mt-5 mb-4">Registrar Nueva Producción</h1>
+</div>
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <form id="produccion" name="produccion" action="/produccion_cantidad" method="POST" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="mb-3 col-4">
+                            <div class="mb-4">
+                                
+                                {{ input_forms(form.cantidad, class="form-control", placeholder="", value=200, disabled=cantidad) }}
+                            </div>
+                            <br>
+                                <div class="mb-5">
+                                    <div>
+                                        <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle'></i>  Agregar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content aling-middle' ></i> Registros</button>
+                                        
+                                            <button type="submit"  class="btn btn-warning" name="disabled" value="editar"><i class='bx bx-edit-alt bx-sm aling-middle' ></i> Cantidad</button>
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <div class="col-4">
+                          {{ input_forms(form.galleta, class="form-select", placeholder="") }}
+                        </div>
+                        <div class="col-3">
+                          {{ input_forms(form.fecha, class="form-select", placeholder="") }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-xl" id="tabla_usuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registros de usuarios</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-hover text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   
+                  <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-danger" href="/eliminar"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
+                        <a class="btn btn-warning" href="/modificar"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}

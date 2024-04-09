@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static//boxicons-2.1.4/css/boxicons.min.css">
+    <title>lovely cookies</title>
+</head>
+<body>
+    <div class=" justify-content-start">
+        <div class="mt-1 ms-2">
+            <a href="/menu" class="btn btn-outline-light text-black border border-1">
+                <i class='bx bx-chevron-left'></i>
+                Volver
+            </a>
+        </div>
+    
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+</body>
+<script src="/static/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bootstrap-5/js/bootstrap.min.js"></script>
+<!--<script src="/static/bootstrap-5/js/popper.min.js"></script>
+    !-->
+<script>
+    $(document).ready(function() {
+        // Oculta los mensajes flash después de 5 segundos
+        $('.alert').delay(5000).fadeOut('slow');
+    });
+</script>
+</html>
