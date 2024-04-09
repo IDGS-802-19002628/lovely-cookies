@@ -10,7 +10,6 @@ def usuario():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
     usuarios = ''
-    #Julian es puto XD
     if request.method == "POST":
         print('hola')
         messages = gestor_usuario.guardar_usuario(form_user)
