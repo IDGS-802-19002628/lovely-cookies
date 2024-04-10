@@ -70,9 +70,7 @@
                                 <td>{{ nomTrabajador }}</td>
                                 <td>
                                     <p class="d-inline-flex gap-1">
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseExample{{idProveedor}}" aria-expanded="false"
-                                            aria-controls="collapseExample{{idProveedor}}">
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{idProveedor}}" aria-expanded="false" aria-controls="collapseExample{{idProveedor}}">
                                             Mostrar
                                         </button>
                                     </p>
@@ -126,23 +124,7 @@
         });
     }
 
-    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (button) {
-        button.addEventListener('click', function () {
-            var target = document.querySelector(button.getAttribute('data-bs-target'));
-            if (target.classList.contains('show')) {
-                // Si el objetivo está abierto, ciérralo
-                target.classList.remove('show');
-            } else {
-                // Si el objetivo está cerrado, cierra todos los demás objetivos abiertos
-                document.querySelectorAll('.collapse.show').forEach(function (collapse) {
-                    if (collapse !== target) {
-                        collapse.classList.remove('show');
-                    }
-                });
-            }
-        });
-    });
-
+    
     document.addEventListener("DOMContentLoaded", function () {
         var form = document.querySelector("form");
 

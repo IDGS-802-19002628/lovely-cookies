@@ -1,16 +1,16 @@
 {% extends 'layout1.html' %}
 {% block content %}
-{%from "_macros.html" import input_forms%}
+{% from "_macros.html" import input_forms %}
 <div class="container">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-success">
+        <div class="alert alert-{{ n }}" role="alert">
             {{ message }}
         </div>
         {% endfor %}
         {% endif %}
-        {% endwith %}
+    {% endwith %}
     <h1 class="mt-5 mb-4">Registrar Nueva Usuario</h1>
 </div>
 <div class="ms-5 mt-5">
@@ -19,74 +19,67 @@
             <div class="card-body">
                 <form id="usuario" name="usuario" action="/usuario" method="POST" novalidate>
                     <div class="row justify-content-center">
-                        <div class="mb-3 col-3">
+                        <div class="mb-3 col-md-3">
                             <div class="mb-3">
-                                
-                                {{ input_forms(form.nombre, class="form-control", placeholder="") }}
+                                {{ input_forms(form.nombre, class="form-control", placeholder="Nombre") }}
                             </div>
-                            {{ input_forms(form.rol, class="form-select", placeholder="") }}
+                            {{ input_forms(form.rol, class="form-select", placeholder="Rol") }}
                             <br>
-                                <div class="mb-3">
-                                    <div>
-                                        <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle'></i>  Agregar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content aling-middle' ></i> Registros</button>
-                                    </div>
+                            <div class="mb-3">
+                                <div>
+                                    <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical align-middle'></i> Agregar</button>
+                                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content align-middle'></i> Registros</button>
                                 </div>
-                                
-                           
+                            </div>
                         </div>
-                        <div class="col-3">
-                           
-                            {{ input_forms(form.correo, class="form-control", placeholder="") }}
+                        <div class="col-md-3">
+                            {{ input_forms(form.correo, class="form-control", placeholder="Correo") }}
                         </div>
-                        <div class="col-3">
-                
-                            {{ input_forms(form.pwd, class="form-control", placeholder="") }}
+                        <div class="col-md-3">
+                            {{ input_forms(form.pwd, class="form-control", placeholder="Contraseña") }}
                         </div>
-                    </div>
-                    <div class="row justify-content-start">
-                        
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade modal-xl" id="tabla_usuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Registros de usuarios</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="tabla_usuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Registros de usuarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-center" id="tabla_" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for u in r_usuarios %}
+                            <tr>
+                                <td>{{ u.correo }}</td>
+                                <td>{{ u.rol }}</td>
+                                <td>{{ u.estatus }}</td>
+                                <td>
+                                    <a class="btn btn-danger me-2" href="/eliminar?id={{ u.id }}"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
+                                    <a class="btn btn-warning" href="/modificar?id={{ u.id }}"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <table class="table table-hover text-center">
-                <thead>
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for u in r_usuarios %}
-                  <tr>
-                    <th scope="row">{{u.nombre}}</th>
-                    <td>{{u.correo}}</td>
-                    <td>{{u.rol}}</td>
-                    <td>
-                        <a class="btn btn-danger" href="/eliminar?id={{u.id}}"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
-                        <a class="btn btn-warning" href="/modificar?id={{u.id}}"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
-                    </td>
-                  </tr>
-                  {%endfor%}
-                </tbody>
-              </table>
-        </div>
-        
-      </div>
     </div>
-  </div>
-  
-{%endblock%}
+</div>
+
+{% endblock %}

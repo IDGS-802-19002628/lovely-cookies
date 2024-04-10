@@ -6,14 +6,8 @@ import forms
 
 proveedor_bp = Blueprint("proveedor", __name__, template_folder="templates")
 
-@proveedor_bp.route("/proveedor", methods=['GET', 'POST'])
-def proveedor():
-    form_proveedor = ProveedorForm(request.form)
-    if request.method == "POST" and form_proveedor.validate():
-      pass
-    return render_template("proveedor.html", form = form_proveedor) 
-
 @proveedor_bp.route("/insProveedor", methods=["GET", "POST"])
+@login_required
 def insProveedor():
     formProvedor = forms.ProveedorForm(request.form)
     formMateriaP = forms.MateriaPForm(request.form)
@@ -84,6 +78,7 @@ def insProveedor():
     return render_template("insProveedor.html", form=formProvedor, formMateP=ingredientes_choices, datos_tabla=datos_tabla)
 
 @proveedor_bp.route("/eliminarP", methods=["GET", "POST"])
+@login_required
 def eliminar():
     provee = int(request.args.get('id'))
     proveedor = Proveedor.query.get(provee)

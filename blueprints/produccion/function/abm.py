@@ -26,7 +26,7 @@ class Gestorproduccion:
          if method == 'GET':
            produccion_a_modificar = Produccion.query.filter(Produccion.id == id_produccion).first()
            form_pro.id.data = produccion_a_modificar.id
-           form_pro.nombre.data = produccion_a_modificar.nombre
+           form_pro.galleta.data = produccion_a_modificar.galleta
            form_pro.fecha.data = produccion_a_modificar.create_date
          if method == 'POST':
            print('Entro')

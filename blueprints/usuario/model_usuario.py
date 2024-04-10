@@ -1,7 +1,10 @@
-import datetime
+from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from config import db
+import datetime
 
-class Usuario(db.Model):
+
+class Usuario(UserMixin,db.Model):
     id=db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(50))
     pwd=db.Column(db.String(100))

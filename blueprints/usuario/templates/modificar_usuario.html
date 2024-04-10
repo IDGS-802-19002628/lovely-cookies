@@ -14,28 +14,37 @@
                                 </div>
                                 {{ input_forms(form.nombre, class="form-control", placeholder="") }}
                             </div>
-                            {{ input_forms(form.rol, class="form-select", placeholder="") }}
+                            
+                                {{ input_forms(form.rol, class="form-select", placeholder="") }}
+                            
                             <br>
                                 <div class="mb-3">
                                     <div>
                                         <button type="submit" id="modificar" name="modificar" class="btn btn-warning"><i class='bx bx-edit-alt bx-sm align-middle'></i>  Modificar</button>
-                                        <button type="button" class="btn btn-danger" ><i class='bx bx-x bx-sm align-middle' ></i> Cancelar</button>
+                                        <a href="/usuario" type="button" class="btn btn-danger" ><i class='bx bx-x bx-sm align-middle' ></i> Cancelar</a>
                                     </div>
                                 </div>
                                 
                            
                         </div>
                         <div class="col-3">
-                           
-                            {{ input_forms(form.correo, class="form-control", placeholder="") }}
+                            
+                            <div class="mb-3">
+                                {{ input_forms(form.correo, class="form-control", placeholder="") }}
+                            </div>
+                            {{ input_forms(form.estatus, class="form-select", placeholder="") }}
+                            
                         </div>
+                        
                         <div class="col-3">
                 
                             {{ input_forms(form.pwd, class="form-control", placeholder="") }}
+                           
                         </div>
+                        
                     </div>
                     <div class="row justify-content-start">
-                        
+                       
                     </div>
                 </form>
             </div>

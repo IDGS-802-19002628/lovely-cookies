@@ -18,3 +18,5 @@ class UserForm(Form):
     ])
     rol_choices = [('empleado', 'Empleado'),('administrador', 'Administrador'),  ('proveedor', 'Proveedor')]
     rol = SelectField("Rol", choices=rol_choices, validators=[validators.DataRequired(message='El campo es requerido')])
+    estatus_choices = [('activo', 'Activo'),('inactivo', 'Inactivo')]
+    estatus = SelectField("Estatus", choices=estatus_choices, validators=[validators.DataRequired(message='El campo es requerido')])

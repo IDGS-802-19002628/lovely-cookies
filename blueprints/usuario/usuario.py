@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, request, url_for, redirect, session
+from flask import Blueprint, render_template, request, url_for, redirect, session, flash
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, login_manager
 from .usuario_form import UserForm
-from .function.guardar import GestorUsuario  
-from flask import flash
+from .model_usuario import Usuario
+from .function.guardar import GestorUsuario
+
 
 usuario_bp = Blueprint("usuario", __name__, template_folder="templates")
 
@@ -10,24 +12,28 @@ def usuario():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
     usuarios = ''
+    alert = ''
+    
     if request.method == "POST":
-        print('hola')
-        messages = gestor_usuario.guardar_usuario(form_user)
-        print("usuarios de la base de datos",usuarios)
+        messages, alert = gestor_usuario.guardar_usuario(form_user)
         flash(messages)
-    usuarios = gestor_usuario.obtener_usuarios("activo")
-    return render_template("usuario.html", form=form_user, r_usuarios = usuarios)
+    usuarios = gestor_usuario.obtener_usuarios()
+    
+    return render_template("usuario.html", form=form_user, r_usuarios=usuarios, n=alert)
 
 @usuario_bp.route("/eliminar", methods=['GET', 'POST'])
 def eliminar():
+    form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
     id_usuario = request.args.get('id')
-    messages = gestor_usuario.eliminar_usuario(id_usuario)
+    messages, alert = gestor_usuario.eliminar_usuario(id_usuario)
     flash(messages)
-    return redirect('/usuario')
+    usuarios = gestor_usuario.obtener_usuarios()
+    return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
 
 @usuario_bp.route("/modificar", methods=['GET', 'POST'])
 def modificar():
+    
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
     id_usuario = request.args.get('id')
@@ -35,8 +41,11 @@ def modificar():
     id_u = session.get('id_usuario')
     method = request.method
     print('metodo ejecutado ', method)
-    messages, form_usuario = gestor_usuario.modificar_usuario(id_u, form_user, method)
-    flash(messages)
+    messages, form_usuario, alert = gestor_usuario.modificar_usuario(id_u, form_user, method)
     if request.method == 'POST':
-      return redirect('/usuario')
+      messages, form_usuario ,alert = gestor_usuario.modificar_usuario(id_u, form_usuario, method)
+      flash(messages)
+      usuarios = gestor_usuario.obtener_usuarios()
+      form_user = UserForm()
+      return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
     return render_template('modificar_usuario.html', form= form_usuario)

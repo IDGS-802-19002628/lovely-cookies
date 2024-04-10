@@ -19,6 +19,7 @@ def ventaC():
     return render_template("ventaCaja.html")
 
 @venta_bp.route("/venta", methods=['GET', 'POST'])
+@login_required
 def venta():
     idg = (request.args.get('id'))
     galleta = None
