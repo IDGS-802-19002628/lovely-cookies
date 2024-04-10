@@ -3,7 +3,9 @@
 
 <div class="ms-5 mt-5">
     <div class="row justify-content-center">
+      
         <div class="col-3">
+          {% if current_user.rol == 'administrador' %}
             <a href="/usuario" class="">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_Male_avatar_g98d.png" class="card-img-top" alt="..." width="100%">
@@ -12,8 +14,11 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
+          
         <div class="col-3" class="">
+          {% if current_user.rol == 'administrador'%}
             <a href="/proveedor">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_Team_page_re_cffb.png" class="card-img-top" alt="..." width="100%">
@@ -22,8 +27,10 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
         <div class="col-3">
+          {% if current_user.rol == 'administrador' %}
             <a href="">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_Cooking_p7m1.png" class="card-img-top" alt="..." width="100%">
@@ -33,10 +40,12 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-3">
+          {% if current_user.rol == 'administrador' %}
             <a href="/produccion">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_factory_dy0a.png" class="card-img-top" alt="..." width="100%">
@@ -47,8 +56,10 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
         <div class="col-3">
+          {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
             <a href="" class="">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_Wishlist_re_m7tv.png" class="card-img-top" alt="..." width="100%">
@@ -57,8 +68,10 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
         <div class="col-3">
+          {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
             <a href="" class="">
                 <div class="card h-100" style="width: 20rem;">
                     <img src="/static/img/undraw_Data_trends_re_2cdy.png" class="card-img-top" alt="..." width="100%">
@@ -67,10 +80,12 @@
                     </div>
                   </div>
             </a>
+            {% endif %}
         </div>
     </div>
     <div class="row justify-content-center mt-5 ">
       <div class="col-3 ms-1">
+        {% if current_user.rol == 'administrador' %}
         <a href="" class="">
           <div class="card h-100" style="width: 20rem;">
               <img src="/static/img/undraw_empty_cart_co35.png" class="card-img-top" alt="..." width="100%">
@@ -79,8 +94,10 @@
               </div>
             </div>
           </a>
+          {% endif %}
       </div>
       <div class="col-3">
+        {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
         <a href="" class="">
           <div class="card h-100" style="width: 20rem;">
               <img src="/static/img/undraw_undraw_undraw_undraw_shopping_bags_2ude_-1-_mnw3_-2-_q7y0_muk6.png" class="card-img-top" alt="..." width="100%">
@@ -90,6 +107,7 @@
               </div>
             </div>
           </a>
+          {% endif %}
       </div>
       <div class="col-3 opacity-0">
        
