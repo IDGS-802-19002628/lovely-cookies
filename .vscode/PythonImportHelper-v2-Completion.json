@@ -321,6 +321,14 @@
         "documentation": {}
     },
     {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "login_required",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -797,6 +805,14 @@
         "documentation": {}
     },
     {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
         "label": "CSRFProtect",
         "importPath": "flask_wtf.csrf",
         "description": "flask_wtf.csrf",
@@ -911,7 +927,7 @@
         "kind": 2,
         "importPath": "blueprints.menu.menu",
         "description": "blueprints.menu.menu",
-        "peekOfCode": "def menu():\n    return render_template(\"menu.html\")",
+        "peekOfCode": "def menu():\n    nombre = current_user.nombre\n    rol = current_user.rol\n    return render_template(\"menu.html\", username = nombre, rol = rol)",
         "detail": "blueprints.menu.menu",
         "documentation": {}
     },
@@ -920,7 +936,7 @@
         "kind": 5,
         "importPath": "blueprints.menu.menu",
         "description": "blueprints.menu.menu",
-        "peekOfCode": "menu_bp = Blueprint(\"menu\", __name__, template_folder=\"templates\")\n@menu_bp.route(\"/menu\")\n@login_required\ndef menu():\n    return render_template(\"menu.html\")",
+        "peekOfCode": "menu_bp = Blueprint(\"menu\", __name__, template_folder=\"templates\")\n@menu_bp.route(\"/menu\")\n@login_required\ndef menu():\n    nombre = current_user.nombre\n    rol = current_user.rol\n    return render_template(\"menu.html\", username = nombre, rol = rol)",
         "detail": "blueprints.menu.menu",
         "documentation": {}
     },
@@ -929,7 +945,7 @@
         "kind": 6,
         "importPath": "blueprints.produccion.function.abm",
         "description": "blueprints.produccion.function.abm",
-        "peekOfCode": "class Gestorproduccion:\n    def guardar_produccion(self, form_pro):\n        galleta = form_pro.galleta.data\n        produccion = int(200)\n        fecha = form_pro.fecha.data\n        estatus = 'processo'\n        nueva_Produccion = Produccion(nombre=galleta,\n                                cantidad=produccion,\n                                create_date=fecha,\n                                estatus=estatus)",
+        "peekOfCode": "class Gestorproduccion:\n    def guardar_produccion(self, form_pro):\n        galleta = form_pro.galleta.data\n        produccion = int(200)\n        fecha = form_pro.fecha.data\n        estatus = 'pendiente'\n        nueva_Produccion = Produccion(nombre=galleta,\n                                cantidad=produccion,\n                                create_date=fecha,\n                                estatus=estatus)",
         "detail": "blueprints.produccion.function.abm",
         "documentation": {}
     },
@@ -956,7 +972,7 @@
         "kind": 2,
         "importPath": "blueprints.produccion.produccion",
         "description": "blueprints.produccion.produccion",
-        "peekOfCode": "def modificar():\n    form_produccion = ProduccionForm(request.form)\n    id_produccion = request.args.get('id')\n    session['id_produccion'] = id_produccion\n    id_p = session.get('id_produccion')\n    method = request.method\n    print('metodo ejecutado ', method)\n    messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)\n    if request.method == 'POST':\n      messages, form_usuario ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)",
+        "peekOfCode": "def modificar():\n    form_produccion = ProduccionForm(request.form)\n    id_produccion = request.args.get('id')\n    session['id_produccion'] = id_produccion\n    id_p = session.get('id_produccion')\n    method = request.method\n    print('metodo ejecutado ', method)\n    messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)\n    if request.method == 'POST':\n      messages, form_pro ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)",
         "detail": "blueprints.produccion.produccion",
         "documentation": {}
     },
@@ -983,7 +999,7 @@
         "kind": 6,
         "importPath": "blueprints.produccion.produccion_form",
         "description": "blueprints.produccion.produccion_form",
-        "peekOfCode": "class ProduccionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad = IntegerField(\"Cantidad\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"La cantodad valida\")\n    ])\n    fecha = DateField('Fecha de Produccion')\n    galletas = [('chocolate y menta', 'Chocolate y Menta'),('avena y nueces', 'Avena y Nueces'),  ('limón', 'Limón'), ('coco',' Coco'), ('chocolate blanco y arándanos','Chocolate Blanco y Arándanos'), ('almendra','Almendra'), ('mantequilla de maní','Mantequilla de Maní'), ('chía y coco', 'Chía y Coco'), ('almendra y naranja','Almendra y Naranja'), ('maiz','Maiz')]\n    galleta = SelectField(\"Galletas\", choices=galletas, validators=[validators.DataRequired(message='Es nesesario seleccionar una galleta')])",
+        "peekOfCode": "class ProduccionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad = IntegerField(\"Cantidad\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"La cantodad valida\")\n    ])\n    fecha = DateField('Fecha de Produccion')\n    estatus_choices = [('pendiente', 'Pendiente'),('proceso', 'Proceso'), ('terminado','Terminado')]\n    estatus = SelectField(\"Estatus\", choices=estatus_choices, validators=[validators.DataRequired(message='El campo es requerido')])\n    galletas = [('chocolate y menta', 'Chocolate y Menta'),('avena y nueces', 'Avena y Nueces'),  ('limón', 'Limón'), ('coco',' Coco'), ('chocolate blanco y arándanos','Chocolate Blanco y Arándanos'), ('almendra','Almendra'), ('mantequilla de maní','Mantequilla de Maní'), ('chía y coco', 'Chía y Coco'), ('almendra y naranja','Almendra y Naranja'), ('maiz','Maiz')]",
         "detail": "blueprints.produccion.produccion_form",
         "documentation": {}
     },
