@@ -27,12 +27,14 @@ def modificar():
     print('metodo ejecutado ', method)
     messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)
     if request.method == 'POST':
-      messages, form_usuario ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)
+      
+      messages, form_pro ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)
+      form_usuario = ProduccionForm()
       flash(messages)
       producciones = Gestorproduccion().obtener_produccion()
       form_p = ProduccionForm()
       return render_template('produccion.html', form=form_p, r_produccion = producciones ,n=alert)
-    return render_template('modificar_usuario.html', form= form_usuario)
+    return render_template('modificar_produccion.html', form= form_pro)
 
 
 @produccion_bp.route('/produccion_cantidad', methods=['GET', 'POST'])

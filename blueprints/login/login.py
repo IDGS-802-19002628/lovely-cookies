@@ -40,7 +40,7 @@ def login():
         except Exception as e:
             alert = "warning"
             
-            flash("No se encontro el correo con el que intenta ingresar")
+            flash("No se encontro el correo con el que intenta ingresa")
             return render_template('login.html', form=form_auth, n=alert)
             
     return render_template('login.html', form=form_auth, n=alert)

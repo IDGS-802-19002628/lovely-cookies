@@ -18,6 +18,7 @@
         <div class="col-md-12">
             <div class="card-body">
                 <form id="produccion" name="produccion" action="/produccion" method="POST" novalidate>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="row justify-content-center">
                         <div class="mb-3 col-4">
                             <div class="mb-4">
@@ -29,9 +30,7 @@
                                     <div>
                                         <button type="submit" class="btn btn-success"><i class='bx bx-plus-medical  align-middle'></i>  Agregar</button>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabla_usuarios"><i class='bx bx-book-content aling-middle' ></i> Registros</button>
-                                        
-                                            <button type="submit"  class="btn btn-warning" name="disabled" value="editar"><i class='bx bx-edit-alt bx-sm aling-middle' ></i> Cantidad</button>
-                                        
+                                                                              
                                     </div>
                                 </div>
                         </div>
@@ -77,7 +76,7 @@
                               <td>{{ p.estatus }}</td>
                               <td>{{ p.create_date }}</td>
                               <td>
-                                  <a class="btn btn-danger me-2" href="/eliminar?id={{p.id}}"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
+                                 
                                   <a class="btn btn-warning" href="/modificar_produccion?id={{p.id}}"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
                                   
                               </td>
