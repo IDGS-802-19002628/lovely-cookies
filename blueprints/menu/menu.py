@@ -7,5 +7,6 @@ menu_bp = Blueprint("menu", __name__, template_folder="templates")
 
 @menu_bp.route("/menu")
 @login_required
-def receta():
+def menu():
+
     return render_template("menu.html")
