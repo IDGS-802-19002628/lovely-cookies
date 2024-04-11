@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask_login  import login_required
 from .produccion_form import ProduccionForm
 from .function.abm import Gestorproduccion 
 produccion_bp = Blueprint("produccion", __name__, template_folder="templates")
 
 @produccion_bp.route('/produccion', methods=['GET', 'POST'])
+@login_required
 def produccion_index():
     form_produccion = ProduccionForm(request.form)
     messages =''
@@ -15,6 +17,7 @@ def produccion_index():
     return render_template("produccion.html", form = form_produccion, r_produccion = b , n=alert)
   
 @produccion_bp.route("/modificar_produccion", methods=['GET', 'POST'])
+@login_required
 def modificar():
     form_produccion = ProduccionForm(request.form)
     id_produccion = request.args.get('id')
@@ -33,6 +36,7 @@ def modificar():
 
 
 @produccion_bp.route('/produccion_cantidad', methods=['GET', 'POST'])
+@login_required
 def produccion_cantidad():
     form_produccion = ProduccionForm(request.form)
     mi_variable_disabled = False

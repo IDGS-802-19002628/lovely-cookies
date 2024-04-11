@@ -3,25 +3,27 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from .usuario_form import UserForm
 from .model_usuario import Usuario
 from .function.guardar import GestorUsuario
-
+from urllib.parse import urlencode
+import logging
 
 usuario_bp = Blueprint("usuario", __name__, template_folder="templates")
 
 @usuario_bp.route("/usuario", methods=['GET', 'POST'])
+@login_required
 def usuario():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
     usuarios = ''
     alert = ''
-    
+    messages =''
     if request.method == "POST":
         messages, alert = gestor_usuario.guardar_usuario(form_user)
-        flash(messages)
+    flash(messages)
     usuarios = gestor_usuario.obtener_usuarios()
-    
     return render_template("usuario.html", form=form_user, r_usuarios=usuarios, n=alert)
 
 @usuario_bp.route("/eliminar", methods=['GET', 'POST'])
+@login_required
 def eliminar():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
@@ -32,6 +34,7 @@ def eliminar():
     return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
 
 @usuario_bp.route("/modificar", methods=['GET', 'POST'])
+@login_required
 def modificar():
     
     form_user = UserForm(request.form)

@@ -25,6 +25,14 @@
         "documentation": {}
     },
     {
+        "label": "db",
+        "importPath": "blueprints.usuario.model_usuario",
+        "description": "blueprints.usuario.model_usuario",
+        "isExtraImport": true,
+        "detail": "blueprints.usuario.model_usuario",
+        "documentation": {}
+    },
+    {
         "label": "Usuario",
         "importPath": "blueprints.usuario.model_usuario",
         "description": "blueprints.usuario.model_usuario",
@@ -38,6 +46,14 @@
         "description": "blueprints.usuario.model_usuario",
         "isExtraImport": true,
         "detail": "blueprints.usuario.model_usuario",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
         "documentation": {}
     },
     {
@@ -305,6 +321,14 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "UserMixin",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -398,6 +422,31 @@
         "description": "flask_login",
         "isExtraImport": true,
         "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "urlencode",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "urlencode",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
         "documentation": {}
     },
     {
@@ -689,6 +738,14 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "flask_login ",
+        "description": "flask_login ",
+        "isExtraImport": true,
+        "detail": "flask_login ",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -721,6 +778,38 @@
         "description": "sqlalchemy",
         "isExtraImport": true,
         "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "desencriptador",
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "isExtraImport": true,
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "URLSafeSerializer",
+        "importPath": "itsdangerous",
+        "description": "itsdangerous",
+        "isExtraImport": true,
+        "detail": "itsdangerous",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "CSRFProtect",
+        "importPath": "flask_wtf.csrf",
+        "description": "flask_wtf.csrf",
+        "isExtraImport": true,
+        "detail": "flask_wtf.csrf",
         "documentation": {}
     },
     {
@@ -768,7 +857,7 @@
         "kind": 6,
         "importPath": "blueprints.login.function.auth",
         "description": "blueprints.login.function.auth",
-        "peekOfCode": "class Autenticador:\n    def login(self, correo, password):\n        print(correo)\n        print(password)\n        usuario_a_login = Usuario.query.filter_by(correo=correo).first()\n        id = usuario_a_login.id\n        if usuario_a_login:\n            hashed_password_bytes = usuario_a_login.pwd.encode('utf-8')\n            if bcrypt.checkpw(password.encode('utf-8'), hashed_password_bytes):\n                alert = 'success'",
+        "peekOfCode": "class Autenticador:\n    def login(self, correo, password):\n        print(correo)\n        print(password)\n        usuario_a_login = Usuario.query.filter_by(correo=correo).first()\n        id = usuario_a_login.id\n        if not usuario_a_login:\n          print(\"No se encontro usuario\")\n          alert = 'warning'\n          messages = \"No se encontro el correo {} con el que intentas acceder\".format(correo)",
         "detail": "blueprints.login.function.auth",
         "documentation": {}
     },
@@ -777,7 +866,7 @@
         "kind": 6,
         "importPath": "blueprints.login.function.intentos_f",
         "description": "blueprints.login.function.intentos_f",
-        "peekOfCode": "class desactivar_cuenta:\n    def intentos(self, intentos):\n        print('intento fallido')\n        return",
+        "peekOfCode": "class desactivar_cuenta:\n    def intentos(self,):\n        if 'contador' not in session:\n            session['contador'] = 0\n        messages = ''\n        contador = session['contador']\n        contador += 1\n        print('intento', contador)\n        if contador > 3:\n          messages = \"Ha superado el número máximo de intentos. Su cuenta ha sido desactivada.\"",
         "detail": "blueprints.login.function.intentos_f",
         "documentation": {}
     },
@@ -786,7 +875,7 @@
         "kind": 2,
         "importPath": "blueprints.login.login",
         "description": "blueprints.login.login",
-        "peekOfCode": "def login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    contador = session['contador']\n    if request.method == 'POST':\n        messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n        if alert == 'warning':\n            flash(messages) \n            return render_template('login.html', form=form_auth, n=alert)",
+        "peekOfCode": "def login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n            messages, contador = desactivar_cuenta().intentos()\n            if alert == 'warning':\n                if contador > 3:",
         "detail": "blueprints.login.login",
         "documentation": {}
     },
@@ -804,7 +893,7 @@
         "kind": 5,
         "importPath": "blueprints.login.login",
         "description": "blueprints.login.login",
-        "peekOfCode": "login_bp = Blueprint(\"login\", __name__, template_folder=\"templates\")\n@login_bp.route(\"/login\", methods=['GET', 'POST'])\ndef login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    contador = session['contador']\n    if request.method == 'POST':\n        messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n        if alert == 'warning':",
+        "peekOfCode": "login_bp = Blueprint(\"login\", __name__, template_folder=\"templates\")\n@login_bp.route(\"/login\", methods=['GET', 'POST'])\ndef login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n            messages, contador = desactivar_cuenta().intentos()",
         "detail": "blueprints.login.login",
         "documentation": {}
     },
@@ -818,11 +907,11 @@
         "documentation": {}
     },
     {
-        "label": "receta",
+        "label": "menu",
         "kind": 2,
         "importPath": "blueprints.menu.menu",
         "description": "blueprints.menu.menu",
-        "peekOfCode": "def receta():\n    return render_template(\"menu.html\")",
+        "peekOfCode": "def menu():\n    return render_template(\"menu.html\")",
         "detail": "blueprints.menu.menu",
         "documentation": {}
     },
@@ -831,7 +920,7 @@
         "kind": 5,
         "importPath": "blueprints.menu.menu",
         "description": "blueprints.menu.menu",
-        "peekOfCode": "menu_bp = Blueprint(\"menu\", __name__, template_folder=\"templates\")\n@menu_bp.route(\"/menu\")\n@login_required\ndef receta():\n    return render_template(\"menu.html\")",
+        "peekOfCode": "menu_bp = Blueprint(\"menu\", __name__, template_folder=\"templates\")\n@menu_bp.route(\"/menu\")\n@login_required\ndef menu():\n    return render_template(\"menu.html\")",
         "detail": "blueprints.menu.menu",
         "documentation": {}
     },
@@ -885,7 +974,7 @@
         "kind": 5,
         "importPath": "blueprints.produccion.produccion",
         "description": "blueprints.produccion.produccion",
-        "peekOfCode": "produccion_bp = Blueprint(\"produccion\", __name__, template_folder=\"templates\")\n@produccion_bp.route('/produccion', methods=['GET', 'POST'])\ndef produccion_index():\n    form_produccion = ProduccionForm(request.form)\n    messages =''\n    alert=''\n    if request.method == 'POST':\n      messages, alert = Gestorproduccion().guardar_produccion(form_produccion)\n    b = Gestorproduccion().obtener_produccion()\n    flash(messages)",
+        "peekOfCode": "produccion_bp = Blueprint(\"produccion\", __name__, template_folder=\"templates\")\n@produccion_bp.route('/produccion', methods=['GET', 'POST'])\n@login_required\ndef produccion_index():\n    form_produccion = ProduccionForm(request.form)\n    messages =''\n    alert=''\n    if request.method == 'POST':\n      messages, alert = Gestorproduccion().guardar_produccion(form_produccion)\n    b = Gestorproduccion().obtener_produccion()",
         "detail": "blueprints.produccion.produccion",
         "documentation": {}
     },
@@ -912,7 +1001,7 @@
         "kind": 5,
         "importPath": "blueprints.receta.receta",
         "description": "blueprints.receta.receta",
-        "peekOfCode": "recetas_bp = Blueprint(\"receta\", __name__, template_folder=\"templates\")\n@recetas_bp.route(\"/receta\")\ndef receta():\n    return render_template(\"receta.html\")",
+        "peekOfCode": "recetas_bp = Blueprint(\"receta\", __name__, template_folder=\"templates\")\n@recetas_bp.route(\"/receta\")\n@login_required\ndef receta():\n    return render_template(\"receta.html\")",
         "detail": "blueprints.receta.receta",
         "documentation": {}
     },
@@ -975,7 +1064,7 @@
         "kind": 2,
         "importPath": "blueprints.usuario.usuario",
         "description": "blueprints.usuario.usuario",
-        "peekOfCode": "def usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    if request.method == \"POST\":\n        messages, alert = gestor_usuario.guardar_usuario(form_user)\n        flash(messages)\n    usuarios = gestor_usuario.obtener_usuarios()\n    return render_template(\"usuario.html\", form=form_user, r_usuarios=usuarios, n=alert)",
+        "peekOfCode": "def usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    messages =''\n    if request.method == \"POST\":\n        messages, alert = gestor_usuario.guardar_usuario(form_user)\n    flash(messages)\n    usuarios = gestor_usuario.obtener_usuarios()",
         "detail": "blueprints.usuario.usuario",
         "documentation": {}
     },
@@ -984,7 +1073,7 @@
         "kind": 2,
         "importPath": "blueprints.usuario.usuario",
         "description": "blueprints.usuario.usuario",
-        "peekOfCode": "def eliminar():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    id_usuario = request.args.get('id')\n    messages, alert = gestor_usuario.eliminar_usuario(id_usuario)\n    flash(messages)\n    usuarios = gestor_usuario.obtener_usuarios()\n    return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)\n@usuario_bp.route(\"/modificar\", methods=['GET', 'POST'])\ndef modificar():",
+        "peekOfCode": "def eliminar():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    id_usuario = request.args.get('id')\n    messages, alert = gestor_usuario.eliminar_usuario(id_usuario)\n    flash(messages)\n    usuarios = gestor_usuario.obtener_usuarios()\n    return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)\n@usuario_bp.route(\"/modificar\", methods=['GET', 'POST'])\n@login_required",
         "detail": "blueprints.usuario.usuario",
         "documentation": {}
     },
@@ -1002,7 +1091,7 @@
         "kind": 5,
         "importPath": "blueprints.usuario.usuario",
         "description": "blueprints.usuario.usuario",
-        "peekOfCode": "usuario_bp = Blueprint(\"usuario\", __name__, template_folder=\"templates\")\n@usuario_bp.route(\"/usuario\", methods=['GET', 'POST'])\ndef usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    if request.method == \"POST\":\n        messages, alert = gestor_usuario.guardar_usuario(form_user)\n        flash(messages)",
+        "peekOfCode": "usuario_bp = Blueprint(\"usuario\", __name__, template_folder=\"templates\")\n@usuario_bp.route(\"/usuario\", methods=['GET', 'POST'])\n@login_required\ndef usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    messages =''\n    if request.method == \"POST\":",
         "detail": "blueprints.usuario.usuario",
         "documentation": {}
     },
@@ -1020,7 +1109,7 @@
         "kind": 6,
         "importPath": "config",
         "description": "config",
-        "peekOfCode": "class Config(object):\n    SECRET_KEY='CLAVE SECRETA'\n    SESSION_COOKIE_SECURE=False\n    @staticmethod\n    def init_app(app):\n        pass\nclass DevelomentConfig(Config):\n    DEBUG=True\n    SQLALCHEMY_DATABASE_URI='mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'\ndb = SQLAlchemy()",
+        "peekOfCode": "class Config(object):\n    SECRET_KEY='CLAVE SECRETA'\n    SESSION_COOKIE_SECURE=False\n    @staticmethod\n    def init_app(app):\n        pass\nclass DevelomentConfig(Config):\n    DEBUG=True\n    SQLALCHEMY_DATABASE_URI=desencriptador\ndb = SQLAlchemy()",
         "detail": "config",
         "documentation": {}
     },
@@ -1029,7 +1118,7 @@
         "kind": 6,
         "importPath": "config",
         "description": "config",
-        "peekOfCode": "class DevelomentConfig(Config):\n    DEBUG=True\n    SQLALCHEMY_DATABASE_URI='mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'\ndb = SQLAlchemy()",
+        "peekOfCode": "class DevelomentConfig(Config):\n    DEBUG=True\n    SQLALCHEMY_DATABASE_URI=desencriptador\ndb = SQLAlchemy()",
         "detail": "config",
         "documentation": {}
     },
@@ -1040,6 +1129,60 @@
         "description": "config",
         "peekOfCode": "db = SQLAlchemy()",
         "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "ConnectionEncryptor",
+        "kind": 6,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "class ConnectionEncryptor:\n    def __init__(self, secret_key):\n        self.serializer = URLSafeSerializer(secret_key)\n    def encriptar(self, connection_string):\n        return self.serializer.dumps(connection_string)\n    def desencriptar(self, encrypted_connection_string):\n        return self.serializer.loads(encrypted_connection_string)\nSECRET_KEY = 'Jz4wT#Lc9R@!xFqG'\nencrptador = ConnectionEncryptor('Jz4wT#Lc9R@!xFqG')\nconexion = 'mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'",
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "SECRET_KEY = 'Jz4wT#Lc9R@!xFqG'\nencrptador = ConnectionEncryptor('Jz4wT#Lc9R@!xFqG')\nconexion = 'mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'\nencrptardor = encrptador.encriptar(conexion)\ndesencriptador = encrptador.desencriptar(encrptardor)",
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "encrptador",
+        "kind": 5,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "encrptador = ConnectionEncryptor('Jz4wT#Lc9R@!xFqG')\nconexion = 'mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'\nencrptardor = encrptador.encriptar(conexion)\ndesencriptador = encrptador.desencriptar(encrptardor)",
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "conexion",
+        "kind": 5,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "conexion = 'mysql+pymysql://admin:Guanajuato2001@127.0.0.1/lovely_cookies'\nencrptardor = encrptador.encriptar(conexion)\ndesencriptador = encrptador.desencriptar(encrptardor)",
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "encrptardor",
+        "kind": 5,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "encrptardor = encrptador.encriptar(conexion)\ndesencriptador = encrptador.desencriptar(encrptardor)",
+        "detail": "encriptar_config",
+        "documentation": {}
+    },
+    {
+        "label": "desencriptador",
+        "kind": 5,
+        "importPath": "encriptar_config",
+        "description": "encriptar_config",
+        "peekOfCode": "desencriptador = encrptador.desencriptar(encrptardor)",
+        "detail": "encriptar_config",
         "documentation": {}
     },
     {
@@ -1065,7 +1208,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = Flask(__name__)\napp.config.from_object(DevelomentConfig)\napp._static_folder = 'static'\nlogin_manager = LoginManager(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
+        "peekOfCode": "app = Flask(__name__)\napp.config.from_object(DevelomentConfig)\napp._static_folder = 'static'\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):",
         "detail": "main",
         "documentation": {}
     },
@@ -1074,7 +1217,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app._static_folder = 'static'\nlogin_manager = LoginManager(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(recetas_bp)\napp.register_blueprint(menu_bp)",
+        "peekOfCode": "app._static_folder = 'static'\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)",
         "detail": "main",
         "documentation": {}
     },
@@ -1083,7 +1226,25 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "login_manager = LoginManager(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(recetas_bp)\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)",
+        "peekOfCode": "login_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "log_directory",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "log_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "csrf",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "csrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(recetas_bp)\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)",
         "detail": "main",
         "documentation": {}
     }

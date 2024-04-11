@@ -12,7 +12,7 @@ insecure_passwords = [
     'welcome',
     'admin',
     'password1',
-    'password123',
+    'password123P*',
     '123qwe',
     'admin123',
     'test123',
