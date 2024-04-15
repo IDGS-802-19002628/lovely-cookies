@@ -8,184 +8,206 @@
     .table {
         width: 80%; /* Establece el ancho máximo de la tabla */
         margin: 0 auto; /* Centra la tabla en la página */
+        font-family: 'Times New Roman', Times, serif; /* Cambia la fuente de la tabla */
+        font-size: 16px; /* Cambia el tamaño de la fuente de la tabla */
+        background-color: #D4EDDA; /* Color de fondo de la tabla */
     }
 
     /* Estilo para las celdas de encabezado */
     .table th {
-        background-color: #343a40; /* Color de fondo del encabezado */
+        background-color: #008f39 ; /* Color de fondo del encabezado */
         color: #ffffff; /* Color del texto del encabezado */
     }
 
     /* Estilo para las filas impares */
     .table tbody tr:nth-child(odd) {
-        background-color: #f8f9fa; /* Color de fondo de las filas impares */
+        background-color: #008f39 ; /* Color de fondo de las filas impares */
     }
 
     /* Estilo para las filas pares */
     .table tbody tr:nth-child(even) {
-        background-color: #ffffff; /* Color de fondo de las filas pares */
+        background-color: #FFFFFF; /* Color de fondo de las filas pares */
     }
 
     /* Estilo para resaltar la fila seleccionada */
     .selected-row {
-        background-color: #ff6961;
+        background-color: #DAB785;
+    }
+
+    /* Estilo para el título */
+    .titulo {
+        font-size: 32px; /* Tamaño de la fuente del título */
+        color: #3E3E3E; /* Color del título */
+        text-align: center; /* Centra el texto */
+        margin-top: 20px; /* Margen superior */
+        margin-bottom: 30px; /* Margen inferior */
     }
 </style>
+<div class="titulo">Recetas</div>
+<!-- Botones para abrir los formularios en una ventana modal -->
+<div class="text-center mb-3">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaGalletaModal">Registrar Nueva Galleta</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Nueva Receta</button>
+</div>
 
-    <!-- Botones para abrir los formularios en una ventana modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaGalletaModal">Registrar Nueva Galleta</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Nueva Receta</button>
-
-    <!-- Formulario de registro de galleta -->
-    <div class="modal fade" id="nuevaGalletaModal" tabindex="-1" role="dialog" aria-labelledby="nuevaGalletaModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="nuevaGalletaModalLabel">Registrar Nueva Galleta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="galletaForm" action="/recetas" method="post">
-                        {{ input_forms(galleta_form.nombre, class="form-control form-control-sm") }}
-                        {{ input_forms(galleta_form.descripcion, class="form-control form-control-sm") }}
-                        {{ input_forms(galleta_form.precio, class="form-control form-control-sm") }}
-                        {{ input_forms(galleta_form.peso, class="form-control form-control-sm") }}
-                        <button type="submit" name="crear_galleta" class="btn btn-primary">Crear Galleta</button>
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    </form>
-                </div>
+<!-- Formulario de registro de galleta -->
+<div class="modal fade" id="nuevaGalletaModal" tabindex="-1" role="dialog" aria-labelledby="nuevaGalletaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaGalletaModalLabel">Registrar Nueva Galleta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Formulario de registro de recetas -->
-    <div class="modal fade" id="nuevaRecetaModal" tabindex="-1" role="dialog" aria-labelledby="nuevaRecetaModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="nuevaRecetaModalLabel">Registrar Nueva Receta</h5>
+            <div class="modal-body">
+                <form id="galletaForm" action="/recetas" method="post">
+                    {{ input_forms(galleta_form.nombre, class="form-control form-control-sm") }}
+                    {{ input_forms(galleta_form.descripcion, class="form-control form-control-sm") }}
+                    {{ input_forms(galleta_form.precio, class="form-control form-control-sm") }}
+                    {{ input_forms(galleta_form.peso, class="form-control form-control-sm") }}
+                    <button type="submit" name="crear_galleta" class="btn btn-primary">Crear Galleta</button>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="recetaForm" action="/recetas" method="post">
-                        <!-- Campos del formulario de receta -->
-                        <div class="form-group">
-                            <label for="idGalleta">Seleccionar Galleta:</label>
-                            {{ input_forms(recetas_form.idGalleta, class="form-control form-control-sm", id="idGalleta") }}
-                        </div>
-                        <div class="form-group">
-                            <label for="idMp">Seleccionar Ingrediente:</label>
-                            {{ input_forms(recetas_form.idMp, class="form-control form-control-sm", id="idMp") }}
-                        </div>
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad:</label>
-                            {{ input_forms(recetas_form.cantidad, class="form-control form-control-sm", id="cantidad") }}
-                        </div>
-                        <ul id="ingredientList" class="ingredient-list"></ul>
-                        <button type="button" id="agregarIngrediente" class="btn btn-success">Agregar Ingrediente</button>
-                        <button type="submit" name="crear_receta" class="btn btn-primary">Registrar Receta</button>
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    <!-- Tabla de recetas -->
-    {% for galleta_nombre, recetas in recetas_agrupadas.items() %}
-        <h2>{{ galleta_nombre }}</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Ingrediente</th>
-                        <th>Cantidad</th>
-                        <th>Medición</th>
-                        <!-- Añadir más columnas si es necesario -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for receta in recetas %}
-                        <tr>
-                            <td>{{ receta.ingrediente }}</td>
-                            <td>{{ receta.cantidad }}</td>
-                            <td>{{ receta.medicion }}</td>
+</div>
 
-                            <!-- Añadir más celdas si es necesario -->
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+ <!-- Formulario de registro de recetas -->
+ <div class="modal fade" id="nuevaRecetaModal" tabindex="-1" role="dialog" aria-labelledby="nuevaRecetaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaRecetaModalLabel">Registrar Nueva Receta</h5>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="recetaForm" action="/recetas" method="post">
+                    <!-- Campos del formulario de receta -->
+                    <div class="form-group">
+                      
+                        {{ input_forms(recetas_form.idGalleta, class="form-control form-control-sm", id="idGalleta") }}
+                    </div>
+                    <div class="form-group">
+                        
+                        {{ input_forms(recetas_form.idMp, class="form-control form-control-sm", id="idMp") }}
+                    </div>
+                    <div class="form-group">
+                        {{ input_forms(recetas_form.cantidad, class="form-control form-control-sm", id="cantidad") }}
+                    </div>
+                    <ul id="ingredientList" class="ingredient-list"></ul>
+                    <button type="button" id="agregarIngrediente" class="btn btn-success">Agregar Ingrediente</button>
+                    <button type="submit" name="crear_receta" class="btn btn-primary">Registrar Receta</button>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                </form>
+            </div>
         </div>
-    {% endfor %}
+    </div>
+</div>
 
-    <!-- jQuery -->
-    <script>
-        $(document).ready(function() {
-            // Lista de ingredientes seleccionados
-            var ingredientList = [];
-    
-            function agregarIngrediente() {
-                var nombreIngrediente = $("#idMp option:selected").text();
-                var cantidad = $("#cantidad").val();
-                var idGalleta = $("#idGalleta").val();
-                
-                // Agregar el ingrediente a la lista
-                ingredientList.push({ nombre: nombreIngrediente, cantidad: cantidad, idGalleta: idGalleta });
-            
-                // Mostrar la lista actualizada en la interfaz
-                mostrarListaIngredientes();
-            }
-            
-            // Función para mostrar la lista de ingredientes en la interfaz
-            function mostrarListaIngredientes() {
-                // Limpiar la lista actual
-                $("#ingredientList").empty();
-        
-                // Agregar cada ingrediente a la lista
-                ingredientList.forEach(function(ingrediente) {
-                    var listItem = $("<li class='ingredient-item'></li>").text("Ingrediente: " + ingrediente.nombre + " , Cantidad: " + ingrediente.cantidad + " , idGalleta: " + ingrediente.idGalleta);
-                    $("#ingredientList").append(listItem);
-                });
-            }
-        
-            $("#agregarIngrediente").click(function() {
-                agregarIngrediente();
-            });
-    
-            $("#recetaForm").submit(function() {
-                // Limpiar campos ocultos existentes para evitar duplicados
-                $("#recetaForm input[name^='ingredientes']").remove();
-            
-                // Agregar campos ocultos para cada ingrediente seleccionado
-                ingredientList.forEach(function(ingrediente, index) {
-                    $("<input>").attr({
-                        type: "hidden",
-                        name: "ingredientes[" + index + "][nombre]",
-                        value: ingrediente.nombre
-                    }).appendTo("#recetaForm");
-            
-                    $("<input>").attr({
-                        type: "hidden",
-                        name: "ingredientes[" + index + "][cantidad]",
-                        value: ingrediente.cantidad
-                    }).appendTo("#recetaForm");
-            
-                    $("<input>").attr({
-                        type: "hidden",
-                        name: "ingredientes[" + index + "][idGalleta]",
-                        value: ingrediente.idGalleta
-                    }).appendTo("#recetaForm");
-                });
-            });
+<!-- Tabla de recetas -->
+{% for idGalleta, recetas in recetas_agrupadas.items() %}
+{% set galleta = recetas[0]['galleta'] %}
+<div class="text-center mb-3">
+    <h2>{{ galleta }}</h2>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead >
+            <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Medición</th>
+                <!-- Añadir más columnas si es necesario -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for receta in recetas %}
+            <tr>
+                <td>{{ receta.ingrediente }}</td>
+                <td>{{ receta.cantidad }}</td>
+                <td>{{ receta.medicion }}</td>
+                <!-- Añadir más celdas si es necesario -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+
+<!-- jQuery -->
+<script>
+    $(document).ready(function() {
+        // Tu código jQuery aquí
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Evento al hacer clic en el botón de crear galleta
+        $("#crearGalletaBtn").click(function() {
+            // Mostrar la ventana modal para agregar una receta automáticamente después de crear la galleta
+            $('#nuevaRecetaModal').modal('show');
         });
-    </script>
-    <!-- Bootstrap CSS -->
-
+    });
+    $(document).ready(function() {
+        // Lista de ingredientes seleccionados
+        var ingredientList = [];
     
+        function agregarIngrediente() {
+            var nombreIngrediente = $("#idMp option:selected").text();
+            var cantidad = $("#cantidad").val();
+            var idGalleta = $("#idGalleta").val();
+            var idMp = $("#idMp").val(); // Obtener el valor de idMp
+            
+            // Agregar el ingrediente a la lista
+            ingredientList.push({ nombre: nombreIngrediente, cantidad: cantidad, idGalleta: idGalleta, idMp: idMp });
+        
+            // Mostrar la lista actualizada en la interfaz
+            mostrarListaIngredientes();
+        }
+        
+        // Función para mostrar la lista de ingredientes en la interfaz
+        function mostrarListaIngredientes() {
+            // Limpiar la lista actual
+            $("#ingredientList").empty();
+    
+            // Agregar cada ingrediente a la lista
+            ingredientList.forEach(function(ingrediente, index) {
+                var listItem = $("<li class='ingredient-item'></li>").text("Ingrediente: " + ingrediente.nombre + " , Cantidad: " + ingrediente.cantidad + " , idGalleta: " + ingrediente.idGalleta);
+                var deleteButton = $("<button>Eliminar</button>").click(function() {
+                    // Eliminar el ingrediente de la lista
+                    ingredientList.splice(index, 1);
+                    // Mostrar la lista actualizada
+                    mostrarListaIngredientes();
+                });
+                listItem.append(deleteButton);
+                $("#ingredientList").append(listItem);
+            });
+        }
+    
+        $("#agregarIngrediente").click(function() {
+            agregarIngrediente();
+        });
+    
+        $("#recetaForm").submit(function() {
+            // Convertir la lista de ingredientes a texto
+            var ingredientText = JSON.stringify(ingredientList);
+    
+            // Agregar el campo oculto al formulario
+            $("<input>").attr({
+                type: "hidden",
+                name: "ingredientes_texto",
+                value: ingredientText
+            }).appendTo("#recetaForm");
+            alert(ingredientText)
+            // Continuar con el envío del formulario
+            return true;
+        });
+    });
+</script>
 {% endblock %}

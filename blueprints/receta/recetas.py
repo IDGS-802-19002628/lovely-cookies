@@ -18,6 +18,10 @@ def crear_receta():
     # Crear las instancias de los formularios
     galleta_form = GalletaForm(request.form)
     recetas_form = RecetaForm(request.form)
+    ingredientes_texto = request.form.get('ingredientes_texto')
+    ingredientes = []
+    if ingredientes_texto is not None:
+        ingredientes = json.loads(ingredientes_texto)
 
     # Obtener las opciones para los campos de selección
     lista_ingredientes = [(mp.idMP, mp.ingrediente) for mp in Mp.query.all()]
@@ -48,15 +52,16 @@ def crear_receta():
                 cantidades = request.form.getlist('cantidad')
 
                 # Crear una nueva receta para cada ingrediente seleccionado
-                for ingrediente_id, cantidad in zip(ingredientes_seleccionados, cantidades):
-                    # Crear la nueva receta
+                for ingrediente in ingredientes:
                     nueva_receta = Receta(
-                        idMP=ingrediente_id,
-                        cantidad=cantidad,
-                        idGalleta=id_galleta
+                        idMP=ingrediente['idMp'],
+                        cantidad=ingrediente['cantidad'],
+                        idGalleta=ingrediente['idGalleta']
                     )
                     db.session.add(nueva_receta)
-
+                print(ingredientes)
+                print(ingredientes_texto)
+                # Guardar los cambios en la base de datos
                 db.session.commit()
                 flash('¡Recetas creadas correctamente!', 'success')
 
