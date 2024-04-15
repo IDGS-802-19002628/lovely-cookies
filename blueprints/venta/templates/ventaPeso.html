@@ -15,7 +15,7 @@
                             <th class="text-end">
                                 <div class="row justify-content-end">
                                     <div class="col-5">
-                                        <input type="number" class="form-control" id="txtCantidadPeso" placeholder="Cantidad (g)" min="20" oninput="validarCantidadPeso()" onkeypress="presionarTeclaPeso(event);">
+                                        <input type="number" class="form-control" id="txtCantidadPeso"  name="caja" placeholder="Cantidad (g)" min="20" oninput="validarCantidadPeso()" onkeypress="presionarTeclaPeso(event);">
                                     </div>
                                 </div>
                             </th>
@@ -25,6 +25,7 @@
                             <th class="text-end">
                                 <label for="txtCantidadGalletasPeso"></label>
                                 <label id="txtCantidadGalletasPeso" ></label>
+                                <input type="hidden" id="cantidadGalletaP" name="cantidadGalletaP" value="">
                             </th>
                         </tr>
                         <tr>
@@ -32,12 +33,14 @@
                             <th class="text-end">
                                 <label for="txtTotalPeso"></label>
                                 <label id="txtTotalPeso" ></label>
+                                <input type="hidden" id="TotalPeso" name="TotalPeso" value="">
                             </th>
                         </tr>
                     </thead>                                        
                 </table>
-                <div class="d-flex justify-content-end mt-4">                       
-                    <button id="btnAgregarVentaPeso" class="button" onclick="agregarFilaPeso();" disabled><i class="fas fa-cart-plus me-2"></i> Agregar</button>
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="btnAgregarVentaPeso" class="button" type="submit" disabled><i class="fas fa-cart-plus me-2"></i>
+                        Agregar</button>
                 </div>
             </div>
         </div>

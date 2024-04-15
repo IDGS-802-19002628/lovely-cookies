@@ -11,8 +11,6 @@ from blueprints.usuario.usuario import usuario_bp
 from blueprints.usuario.model_usuario import Usuario
 
 
-
-
 app = Flask(__name__)
 app.config.from_object(DevelomentConfig)
 app._static_folder = 'static'
