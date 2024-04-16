@@ -12,7 +12,7 @@
                             <div class="d-flex align-items-center">
                                 <span class="h5 text-white"
                                     style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">
-                                    Tipo de galletas</span>
+                                    Menu de Galletas </span>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
             <div class="col-md-6 col-sm-12">
                 <!-- Este es el contenedor donde va el cuestionario y la tabla superpuestos -->
                 <div class="card">
-                    <div class="card-header bg-gradient" style="background-color: #000000;">
-                        Tipo de venta
+                    <div class="card-header text-white card-hform" style="background-color: #000000;">
+                        Ticket
                     </div>
                     <div class="card-body">
                         <form method="GET" action="/guatabla">
@@ -193,11 +193,9 @@
     }
 
     function calcularTotalCaja() {
-        precio_por_gramo = 0
-            costo_total = 0
-            cantidad_galletas = 0
-            cantidadGalletas = 0
-
+        precio_por_gramo = 0;
+        costo_total = 0;
+        cantidad_galletas = 0;
         // Obtener los elementos del DOM
         let precioElementText = document.getElementById('txtPrecio').textContent;
         let totalElement = document.getElementById('txtTotalCaja');
@@ -246,7 +244,7 @@
         // Calcular el total en pesos
         let totalDinero = cantidadGalletas * precio;
 
-        validarCaja();
+        validarCaja(cantidadGalletas);
 
         // Actualizar el contenido del label con la cantidad de galletas y el total en pesos
         cantidadGalletasElement.textContent = cantidadGalletas;
@@ -300,7 +298,7 @@
 
     function calcularTotalPieza() {
         var inputNumerico = document.getElementById('txtCantidadPieza');
-            // Establecer el valor máximo del input
+        // Establecer el valor máximo del input
         inputNumerico.max = "{{galletaoinve.cantidad}}";
         // Obtener los elementos del DOM
         let precioElementText = document.getElementById('txtPrecio').textContent;
@@ -340,14 +338,15 @@
         btnAgregarVenta.disabled = false;
     }
 
-    function validarCaja() {
+    function validarCaja(galletasCan) {
         const caja700Gramos = document.getElementById('700Gramos');
         const cajaKilo = document.getElementById('kilo');
         let btnAgregarVenta = document.getElementById('btnAgregarVentaCaja');
 
         let pesoSeleccionado = 0;
         if (caja700Gramos.checked || cajaKilo.checked) {
-            btnAgregarVenta.disabled = false;
+            if (galletasCan <= "{{galletaoinve.cantidad}}")
+                btnAgregarVenta.disabled = false;
         } else {
             Swal.fire({
                 icon: 'warning',
@@ -371,9 +370,9 @@
 
     function calcularTotalPeso() {
         var inputNumerico = document.getElementById('txtCantidadPeso');
-        pesoMax = "{{galletaoinve.cantidad}}"*"{{galleta.peso}}"
+        pesoMax = "{{galletaoinve.cantidad}}" * "{{galleta.peso}}"
         console.log(pesoMax)
-            // Establecer el valor máximo del input
+        // Establecer el valor máximo del input
         inputNumerico.max = pesoMax;
         // Obtener los elementos del DOM
         let precioElementText = document.getElementById('txtPrecio').textContent;
