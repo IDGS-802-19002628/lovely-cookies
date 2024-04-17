@@ -109,9 +109,18 @@
           </a>
           {% endif %}
       </div>
-      <div class="col-3 opacity-0">
-       
-        
+      <div class="col-3">
+        {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
+        <a href="/mp">
+          <div class="card h-100" style="width: 20rem;">
+              <img src="/static/img/undraw_undraw_undraw_undraw_shopping_bags_2ude_-1-_mnw3_-2-_q7y0_muk6.png" class="card-img-top" alt="..." width="100%">
+              <div class="card-body  text-center mt-2"> 
+                <br>
+                <h1 class="card-title">Ingredientes</h1>
+              </div>
+            </div>
+          </a>
+          {% endif %}
       </div>
     
     </div>

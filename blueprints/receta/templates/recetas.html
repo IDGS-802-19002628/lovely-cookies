@@ -3,14 +3,17 @@
 {% from "_macros.html" import input_forms %}
 
 {% block content %}
+
 <style>
-    /* Estilo para las tablas */
+    body {
+        background-color: #ffffff;
+    }
     .table {
         width: 80%; /* Establece el ancho máximo de la tabla */
         margin: 0 auto; /* Centra la tabla en la página */
         font-family: 'Times New Roman', Times, serif; /* Cambia la fuente de la tabla */
         font-size: 16px; /* Cambia el tamaño de la fuente de la tabla */
-        background-color: #D4EDDA; /* Color de fondo de la tabla */
+        background-color: #c29b61; /* Color de fondo de la tabla */
     }
 
     /* Estilo para las celdas de encabezado */
@@ -37,17 +40,53 @@
     /* Estilo para el título */
     .titulo {
         font-size: 32px; /* Tamaño de la fuente del título */
-        color: #3E3E3E; /* Color del título */
+        color: white; /* Color del título */
         text-align: center; /* Centra el texto */
         margin-top: 20px; /* Margen superior */
         margin-bottom: 30px; /* Margen inferior */
+        background-color: #35682D; /* Fondo del título */
+        padding: 10px; /* Espacio alrededor del texto */
+        transition: background-color 0.5s ease; /* Animación */
     }
+
+    /* Cambia el color de fondo del título al pasar el cursor */
+    .titulo-receta:hover {
+        background-color: #804008;
+        color: white;
+    }
+
+    
+
+    .titulo-receta {
+        cursor: pointer; 
+        font-size: 32px; /* Tamaño de la fuente del título */
+        color: #3E3E3E; /* Color del título */
+        text-align: center; /* Centra el texto */
+        margin-top: 20px; /* Margen superior */
+        border: 1px solid green; /* Cambia el color según lo necesites */
+        margin-bottom: 30px; /* Margen inferior */ /* Fondo del título */
+        padding: 10px; /* Espacio alrededor del texto */
+        transition: background-color 0.5s ease; /* Animación *//* Cambia el cursor a un puntero */
+    }
+    
 </style>
-<div class="titulo">Recetas</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="titulo">
+Recetas
+<br>
 <!-- Botones para abrir los formularios en una ventana modal -->
-<div class="text-center mb-3">
+
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaGalletaModal">Registrar Nueva Galleta</button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Nueva Receta</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Ingredientes a Receta</button>
+    
 </div>
 
 <!-- Formulario de registro de galleta -->
@@ -61,11 +100,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="galletaForm" action="/recetas" method="post">
+                <form id="galletaForm" action="/recetas" method="post" enctype="multipart/form-data">
                     {{ input_forms(galleta_form.nombre, class="form-control form-control-sm") }}
                     {{ input_forms(galleta_form.descripcion, class="form-control form-control-sm") }}
                     {{ input_forms(galleta_form.precio, class="form-control form-control-sm") }}
                     {{ input_forms(galleta_form.peso, class="form-control form-control-sm") }}
+                    <!-- Campo para subir la imagen -->
+                    <div class="form-group">
+                        <label for="imagen">Imagen:</label>
+                    {{ input_forms(galleta_form.imagen, class="form-control form-control-sm") }}
+                    </div>
                     <button type="submit" name="crear_galleta" class="btn btn-primary">Crear Galleta</button>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 </form>
@@ -113,11 +157,12 @@
 <!-- Tabla de recetas -->
 {% for idGalleta, recetas in recetas_agrupadas.items() %}
 {% set galleta = recetas[0]['galleta'] %}
-<div class="text-center mb-3">
-    <h2>{{ galleta }}</h2>
-</div>
-<div class="table-responsive">
-    <table class="table table-striped table-bordered">
+<div class="receta-container">
+    <div class="text-center mb-3 titulo-receta">
+        <h2>{{ galleta }}</h2>
+    </div>
+    <div class="table-responsive tabla-receta" style="display: none;">
+        <table class="table table-striped table-bordered">
         <thead >
             <tr>
                 <th>Ingrediente</th>
@@ -140,42 +185,78 @@
 </div>
 {% endfor %}
 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- jQuery -->
 <script>
     $(document).ready(function() {
-        // Tu código jQuery aquí
+        // Resto del código JavaScript
+
+        // Agregar evento de clic a los títulos de las recetas
+        $(".titulo-receta").click(function() {
+            // Buscar la tabla correspondiente y cambiar su visibilidad
+            $(this).next(".tabla-receta").toggle();
+        });
     });
 </script>
 <script>
     $(document).ready(function() {
-        // Evento al hacer clic en el botón de crear galleta
-        $("#crearGalletaBtn").click(function() {
-            // Mostrar la ventana modal para agregar una receta automáticamente después de crear la galleta
-            $('#nuevaRecetaModal').modal('show');
-        });
-    });
-    $(document).ready(function() {
         // Lista de ingredientes seleccionados
         var ingredientList = [];
-    
+
         function agregarIngrediente() {
             var nombreIngrediente = $("#idMp option:selected").text();
             var cantidad = $("#cantidad").val();
             var idGalleta = $("#idGalleta").val();
             var idMp = $("#idMp").val(); // Obtener el valor de idMp
-            
-            // Agregar el ingrediente a la lista
-            ingredientList.push({ nombre: nombreIngrediente, cantidad: cantidad, idGalleta: idGalleta, idMp: idMp });
         
+            // Verificar si el ingrediente ya existe en la lista
+            var ingredienteExistente = ingredientList.find(function(ingrediente) {
+                return ingrediente.idMp === idMp && ingrediente.idGalleta === idGalleta;
+            });
+        
+            if (ingredienteExistente) {
+                // Si el ingrediente ya existe, preguntar al usuario si desea reemplazarlo
+                swal({
+                    title: "¿Estás seguro?",
+                    text: "Este ingrediente ya está registrado para esta galleta. ¿Deseas reemplazarlo?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        // Si el usuario confirma, reemplazar el ingrediente
+                        ingredienteExistente.nombre = nombreIngrediente;
+                        ingredienteExistente.cantidad = cantidad;
+                        swal("El ingrediente ha sido reemplazado.", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("El ingrediente no ha sido reemplazado.");
+                    }
+                });
+            } else {
+                // Si el ingrediente no existe, agregarlo a la lista
+                ingredientList.push({ nombre: nombreIngrediente, cantidad: cantidad, idGalleta: idGalleta, idMp: idMp });
+                
+               
+            
+                // Bloquear el campo de selección de galleta después de agregar el primer ingrediente
+                if (ingredientList.length === 1) {
+                    $("#idGalleta").prop("disabled", true);
+                }
+            }
+            
             // Mostrar la lista actualizada en la interfaz
             mostrarListaIngredientes();
         }
-        
+
         // Función para mostrar la lista de ingredientes en la interfaz
         function mostrarListaIngredientes() {
             // Limpiar la lista actual
             $("#ingredientList").empty();
-    
+
             // Agregar cada ingrediente a la lista
             ingredientList.forEach(function(ingrediente, index) {
                 var listItem = $("<li class='ingredient-item'></li>").text("Ingrediente: " + ingrediente.nombre + " , Cantidad: " + ingrediente.cantidad + " , idGalleta: " + ingrediente.idGalleta);
@@ -184,28 +265,30 @@
                     ingredientList.splice(index, 1);
                     // Mostrar la lista actualizada
                     mostrarListaIngredientes();
+                    // Si no hay ingredientes, habilitar el campo de selección de galleta
+                    if (ingredientList.length === 0) {
+                        $("#idGalleta").prop("disabled", false);
+                    }
                 });
                 listItem.append(deleteButton);
                 $("#ingredientList").append(listItem);
             });
         }
-    
+
         $("#agregarIngrediente").click(function() {
             agregarIngrediente();
         });
-    
+
         $("#recetaForm").submit(function() {
             // Convertir la lista de ingredientes a texto
             var ingredientText = JSON.stringify(ingredientList);
-    
+
             // Agregar el campo oculto al formulario
             $("<input>").attr({
                 type: "hidden",
                 name: "ingredientes_texto",
                 value: ingredientText
             }).appendTo("#recetaForm");
-            alert(ingredientText)
-            // Continuar con el envío del formulario
             return true;
         });
     });

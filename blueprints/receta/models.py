@@ -17,5 +17,5 @@ class Galleta(db.Model):
     descripcion = db.Column(db.String(80))
     precio = db.Column(db.Float)
     peso = db.Column(db.Float)
-    # Ruta de la imagen
+    imagen = db.Column(db.String(120))  # Ruta de la imagen
 

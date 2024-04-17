@@ -2,6 +2,8 @@ from wtforms import Form
 from wtforms import StringField,FileField,FloatField,FieldList, HiddenField, SelectField,  IntegerField
 from wtforms import validators
 from wtforms.validators import ValidationError
+from flask_wtf.file import FileField, FileAllowed
+
 import re
 
 class RecetaForm(Form):
@@ -17,10 +19,12 @@ class RecetaForm(Form):
 
 
 class GalletaForm(Form):
-    idGalleta = IntegerField('Ingrediente')
+    idGalleta = IntegerField('Ingrediente',)
     nombre = StringField('Nombre')
     descripcion = StringField('Descripcion')
     precio=FloatField('Precio')
     peso=FloatField('Peso')
+    imagen = FileField('Imagen', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Solo imágenes!')])
+
 class MpForm(Form):
     ingredientes = FieldList(SelectField('Ingrediente', coerce=int), min_entries=1)

@@ -7,6 +7,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from config import DevelomentConfig, db
 from flask_wtf.csrf import CSRFProtect
 from blueprints.receta.recetas import recetas_bp
+from blueprints.mp.mp import mp_bp
 from blueprints.menu.menu import menu_bp
 from blueprints.login.login import login_bp
 from blueprints.produccion.produccion import produccion_bp
@@ -39,6 +40,8 @@ app.register_blueprint(recetas_bp)
 app.register_blueprint(menu_bp)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(login_bp)
+app.register_blueprint(mp_bp)
+
 app.register_blueprint(produccion_bp)
 
 if __name__ == '__main__':

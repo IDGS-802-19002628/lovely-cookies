@@ -16,7 +16,7 @@ SECRET_KEY = 'Jz4wT#Lc9R@!xFqG'
 
 encrptador = ConnectionEncryptor('Jz4wT#Lc9R@!xFqG')
 
-conexion = 'mysql+pymysql://julian:Alfred25092@127.0.0.1/don_galleto'
+conexion = 'mysql+pymysql://julian:Alfred25092@127.0.0.1/lovely_cookies'
 
 encrptardor = encrptador.encriptar(conexion)
 

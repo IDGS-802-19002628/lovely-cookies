@@ -5,13 +5,16 @@ from .models import Receta, Galleta, db
 from .forms import RecetaForm,GalletaForm
 from blueprints.mp.models import Mp
 from flask_login import login_required
-
+from werkzeug.utils import secure_filename
+import os
 # Crear el Blueprint
 
 recetas_bp = Blueprint("recetas", __name__, template_folder="templates")
 
 
 # Definir la ruta y la vista correspondiente
+
+
 @recetas_bp.route("/recetas", methods=['GET', 'POST'])
 @login_required
 def crear_receta():
@@ -30,13 +33,26 @@ def crear_receta():
     # Asignar las opciones a los campos de selección
     recetas_form.idMp.choices = lista_ingredientes
     recetas_form.idGalleta.choices = lista_galletas
-
+    ultima_galleta = Galleta.query.order_by(Galleta.idGalleta.desc()).first()
+    if ultima_galleta:
+        recetas_form.idGalleta.data = ultima_galleta.idGalleta
     # Manejar el envío del formulario
     if request.method == 'POST':
         if 'crear_galleta' in request.form:
             if galleta_form.validate():
                 # Crear una nueva galleta
-                nueva_galleta = Galleta(nombre=galleta_form.nombre.data)
+                nueva_galleta = Galleta(nombre=galleta_form.nombre.data,
+                                        descripcion=galleta_form.descripcion.data,
+                                        precio=galleta_form.precio.data,
+                                        peso=galleta_form.peso.data)
+
+                # Guardar la imagen
+                imagen = request.files['imagen']
+                if imagen:
+                    filename = secure_filename(imagen.filename)
+                    imagen.save(os.path.join('C:/Users/Julian/Pictures/imagenes galletas', filename))
+                    nueva_galleta.imagen = filename
+
                 db.session.add(nueva_galleta)
                 db.session.commit()
                 flash('¡Galleta creada correctamente!', 'success')
@@ -86,3 +102,21 @@ def crear_receta():
     # Renderizar la plantilla HTML con los datos
     return render_template('recetas.html', galleta_form=galleta_form, recetas_form=recetas_form,
                            recetas_agrupadas=recetas_agrupadas)
+
+@recetas_bp.route("/eliminar_receta", methods=['POST'])
+@login_required
+def eliminar_receta():
+
+    id_galleta = request.form.get('idGalleta')
+    recetas = Receta.query.filter_by(idGalleta=id_galleta).all()
+
+    for receta in recetas:
+        db.session.delete(receta)
+
+    # Guardar los cambios en la base de datos
+    db.session.commit()
+
+    flash('¡Recetas eliminadas correctamente!', 'success')
+
+    # Redireccionar a la página principal para evitar reenvío del formulario
+    return redirect(url_for('recetas.crear_receta'))
