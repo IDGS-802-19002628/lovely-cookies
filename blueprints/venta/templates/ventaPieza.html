@@ -1,0 +1,31 @@
+<div>
+    <div class="table-responsive">
+        <table id="tblEmpleados" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Canidad: </th>
+                    <th class="text-end">
+                        <div class="row justify-content-end">
+                            <div class="col-5">
+                                <input type="number" class="form-control" name="txtCantidadPieza" id="txtCantidadPieza" placeholder="Cantidad"
+                                    min="1" oninput="validarCantidad();" onkeypress="presionarTecla(event);">
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Total: </th>
+                    <th class="text-end">
+                        <label for="txtTotalPieza"></label>
+                        <label id="txtTotalPieza" oninput="validarCantidad()"></label>
+                        <input type="hidden" id="txtTotalPiezas" name="txtTotalPiezas" value="">
+                    </th>
+                </tr>                
+            </thead>
+        </table>
+        <div class="d-flex justify-content-end mt-4">
+            <button id="btnAgregarVenta" class="button" type="submit" disabled><i class="fas fa-cart-plus me-2"></i>
+                Agregar</button>
+        </div>
+    </div>
+</div>

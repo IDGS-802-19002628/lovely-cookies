@@ -1,8 +1,8 @@
 import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
-from encriptar_config import desencriptador
-
+load_dotenv()
 
 class Config(object):
     SECRET_KEY='CLAVE SECRETA'
@@ -13,7 +13,11 @@ class Config(object):
 
 class DevelomentConfig(Config):
     DEBUG=True
-    
-    SQLALCHEMY_DATABASE_URI=desencriptador
+    usuario = os.getenv("DB_USERNAME")
+    pwd = os.getenv("DB_PASSWORD")
+    DB = os.getenv("DB")
+    DB_H = os.getenv("DB_HOST")
+    print(usuario)
+    SQLALCHEMY_DATABASE_URI=f"mysql+pymysql://{usuario}:{pwd}@{DB_H}/{DB}"
     
 db = SQLAlchemy()
