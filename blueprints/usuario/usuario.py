@@ -41,9 +41,9 @@ def usuario():
     rol = current_user.rol
     print('rol:', rol)
     if rol != 'administrador':
-      print('entro a la validacion')
-      print(static_folder)
-      abort(403)
+        print('entro a la validacion')
+        print(static_folder)
+        abort(403)
     if request.method == "POST":
         messages, alert = gestor_usuario.guardar_usuario(form_user)
         
@@ -75,10 +75,10 @@ def modificar():
     print('metodo ejecutado ', method)
     messages, form_usuario, alert = gestor_usuario.modificar_usuario(id_u, form_user, method)
     if request.method == 'POST':
-      messages, form_usuario ,alert = gestor_usuario.modificar_usuario(id_u, form_usuario, method)
-      flash(messages)
-      usuarios = gestor_usuario.obtener_usuarios()
-      form_user = UserForm()
+        messages, form_usuario ,alert = gestor_usuario.modificar_usuario(id_u, form_usuario, method)
+        flash(messages)
+        usuarios = gestor_usuario.obtener_usuarios()
+        form_user = UserForm()
 
-      return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
+        return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
     return render_template('modificar_usuario.html', form= form_usuario)

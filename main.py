@@ -15,6 +15,7 @@ from blueprints.usuario.model_usuario import Usuario
 from blueprints.venta.ventas import venta_bp
 from blueprints.proveedor.proveedor import proveedor_bp
 from blueprints.receta.recetas import recetas_bp
+from blueprints.Compras.compra import compra_dp
 
 
 
@@ -56,6 +57,7 @@ app.register_blueprint(proveedor_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(produccion_bp)
 app.register_blueprint(tablero_bp)
+app.register_blueprint(compra_dp)
 
 if __name__ == '__main__':
     db.init_app(app)

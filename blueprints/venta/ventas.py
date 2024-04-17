@@ -218,3 +218,10 @@ def actualizar_inventario_por_id(id_galleta, cantidad_vendida):
         print(f"Inventario actualizado: cantidad de galletas restantes: {inventario.cantidad}")
     else:
         print(f"No se encontró un registro con idGalleta {id_galleta}.")
+
+@venta_bp.route("/eliminarGaTab", methods=["GET", "POST"])
+def eliminarGaTab():
+    posicion = int(request.args.get('id'))
+    if request.method=='GET':
+        preVenGa.pop(posicion)
+    return redirect(url_for('.venta'))

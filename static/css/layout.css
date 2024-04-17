@@ -127,3 +127,22 @@
     height: 120px; /* Ajusta según tus necesidades */
     object-fit: cover; /* Cubre el contenedor con la imagen */
 }
+
+@media print {
+    /* Establecer encabezado y pie de página a none */
+    @page {
+        margin: 0; /* Ajusta los márgenes según sea necesario */
+    }
+
+    /* En algunos navegadores, puedes especificar las siguientes reglas para ocultar encabezados y pies de página */
+    * {
+        -webkit-print-color-adjust: exact; /* Se aplica a Chrome */
+    }
+
+    /* Oculta la barra de URL */
+    nav,
+    header,
+    footer {
+        display: none;
+    }
+}

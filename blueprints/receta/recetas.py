@@ -26,9 +26,9 @@ def crear_receta():
     rol = current_user.rol
     print('rol:', rol)
     if rol != 'administrador':
-      print('entro a la validacion')
-      print(static_folder)
-      abort(403)
+        print('entro a la validacion')
+        print(static_folder)
+        abort(403)
     # Crear las instancias de los formularios
     galleta_form = GalletaForm(request.form)
     recetas_form = RecetaForm(request.form)
