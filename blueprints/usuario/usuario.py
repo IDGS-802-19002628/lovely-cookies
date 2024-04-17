@@ -1,12 +1,33 @@
-from flask import Blueprint, render_template, request, url_for, redirect, session, flash
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, login_manager
+from flask import Blueprint, render_template, request, url_for, redirect, session, flash, send_from_directory, abort
+from flask_login import current_user,  login_required
 from .usuario_form import UserForm
 from .model_usuario import Usuario
 from .function.guardar import GestorUsuario
 from urllib.parse import urlencode
 import logging
+import os
+from cryptography.fernet import Fernet
 
 usuario_bp = Blueprint("usuario", __name__, template_folder="templates")
+
+static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+
+
+@usuario_bp.route('/redireccionar')
+def redireccionar():
+    clave = Fernet.generate_key()
+    cipher_suite = Fernet(clave)
+
+
+    url_original = "http://localhost:5000/modificar?id"
+    url_encriptada = cipher_suite.encrypt(url_original.encode())
+    print(url_encriptada)
+    return redirect(url_encriptada)
+
+@usuario_bp.errorhandler(403)
+def acceso_forbidden(error):
+    static_folder = 'static'
+    return send_from_directory(static_folder, 'acceso_rol.html'), 403
 
 @usuario_bp.route("/usuario", methods=['GET', 'POST'])
 @login_required
@@ -16,8 +37,16 @@ def usuario():
     usuarios = ''
     alert = ''
     messages =''
+    print('Antes de la validacion')
+    rol = current_user.rol
+    print('rol:', rol)
+    if rol != 'administrador':
+      print('entro a la validacion')
+      print(static_folder)
+      abort(403)
     if request.method == "POST":
         messages, alert = gestor_usuario.guardar_usuario(form_user)
+        
     flash(messages)
     usuarios = gestor_usuario.obtener_usuarios()
     return render_template("usuario.html", form=form_user, r_usuarios=usuarios, n=alert)
@@ -34,7 +63,7 @@ def eliminar():
     return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
 
 @usuario_bp.route("/modificar", methods=['GET', 'POST'])
-@login_required
+
 def modificar():
     
     form_user = UserForm(request.form)
@@ -50,5 +79,6 @@ def modificar():
       flash(messages)
       usuarios = gestor_usuario.obtener_usuarios()
       form_user = UserForm()
+
       return render_template('usuario.html', form=form_user, r_usuarios = usuarios ,n=alert)
     return render_template('modificar_usuario.html', form= form_usuario)

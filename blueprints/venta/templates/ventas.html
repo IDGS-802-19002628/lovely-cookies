@@ -1,0 +1,430 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% import "_macros.html" as macros %}
+
+<body>
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-gradient" style="background-color: #000000;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="h5 text-white"
+                                    style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">
+                                    Menu de Galletas </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <div class="form">
+                            <div class="row">
+                                <div class="botones-en-linea d-flex flex-wrap">
+                                    {% for gatas, gatasinv in galletas_y_inventario %}
+                                    <div class="boton-con-info">
+                                        <a href="/venta?id={{gatas.idGalleta}}" class="boton-circular">
+                                            <img src="/static/img/Galletas/{{gatas.idGalleta}}.jfif"
+                                                alt="Imagen de {{gatas.nombre}}">
+                                        </a>
+                                        <label>{{gatas.nombre}} <br> ${{gatas.precio}} Cantidad
+                                            Disponibles:{{gatasinv.cantidad}}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <!-- Este es el contenedor donde va el cuestionario y la tabla superpuestos -->
+                <div class="card">
+                    <div class="card-header text-white card-hform" style="background-color: #000000;">
+                        Ticket
+                    </div>
+                    <div class="card-body">
+                        <form method="GET" action="/guatabla">
+                            <div class="table-responsive mb-4">
+                                <table id="tblEmpleados" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <input type="hidden" id="IDG" name="idG" value="{{galleta.idGalleta}}">
+                                            <input type="hidden" id="Peso" name="peso" value="{{galleta.peso}}">
+                                            <th>Nombre de Galleta:</th>
+                                            <th class="text-end">
+                                                <input type="hidden" id="nombre" name="nombre"
+                                                    value="{{galleta.nombre}}">
+                                                <label id="txtNombreNombre">{{galleta.nombre}}</label>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Precio:</th>
+                                            <th class="text-end">
+                                                <label id="txtPrecio">{{galleta.precio}}</label>
+                                                <input type="hidden" id="txtPrecio" name="txtPrecio"
+                                                    value="{{galleta.precio}}">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <!-- Radios para seleccionar categoría -->
+                                <div>
+                                    <input type="radio" id="pieza" name="categoria" value="1"
+                                        onclick="cargarContenido('pieza');">
+                                    <label for="pieza">Pieza</label>
+
+                                    <input type="radio" id="peso" name="categoria" value="2"
+                                        onclick="cargarContenido('peso');">
+                                    <label for="peso">Peso (g)</label>
+
+                                    <input type="radio" id="caja" name="categoria" value="3"
+                                        onclick="cargarContenido('caja');">
+                                    <label for="caja">Caja</label>
+                                </div>
+                            </div>
+                            <div id="contenedor_tabla" class="p-2">
+                                <!-- El contenido de las tablas se cargará aquí -->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <!-- Ticket section -->
+                        <div class="card-header text-white card-hform" style="background-color: #000000">
+                            Ticket
+                        </div>
+                        <div class="card-body" id="contenidoTicket">
+                            <div class="table-responsive">
+                                <a class="navbar-brand" href="#">
+                                    <label class="d-inline-block align-middle"
+                                        style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #000000;">
+                                        Don Galleto</label>
+                                </a>
+                                <table id="tblVentasPieza" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre Galleta</th>
+                                            <th>Tipo de Venta</th>
+                                            <th>Cantidad</th>
+                                            <th>Peso (g)</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                            <th style="width: 50px;">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if Databla %}
+                                        {% for tab in Databla %}
+                                        <tr>
+                                            <td>{{tab.nombreGalleta}}</td>
+                                            <td>{{tab.tipoVenta}}</td>
+                                            <td>{{tab.cantidad}}</td>
+                                            <td>{{tab.peso}}</td>
+                                            <td>{{tab.precio}}</td>
+                                            <td>{{tab.subTotal}}</td>
+                                            <td>
+                                                <a class="btn btn-danger"
+                                                    onclick="confirmDelete('{{idProveedor}}')">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="6">No hay datos disponibles</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                    {% if total %}
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td>Total</td>
+                                        <td>{{total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                                <div class="d-flex justify-content-end mt-4">
+                                    <a class="btn btn-danger" href="/limTabla">Cancelar</a>
+                                    <a class="btn btn-primary" href="/guardar?total={{total}}">Guardar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
+{% block script %}
+<script>
+    function cargarContenido(categoria) {
+        let ruta;
+        switch (categoria) {
+            case 'pieza':
+                ruta = '/ventaPieza';
+                break;
+            case 'peso':
+                ruta = '/ventaPeso';
+                break;
+            case 'caja':
+                ruta = '/ventaCaja';
+                break;
+            default:
+                console.error('Categoría no reconocida');
+                return;
+        }
+
+        fetch(ruta)
+            .then(respuesta => {
+                if (!respuesta.ok) {
+                    throw new Error(`No se pudo cargar el archivo. Código de estado: ${respuesta.status}`);
+                }
+                return respuesta.text();
+            })
+            .then(datos => {
+                document.getElementById('contenedor_tabla').innerHTML = datos;
+            })
+            .catch(error => {
+                console.error('Error al cargar el archivo:', error);
+            });
+    }
+
+    function calcularTotalCaja() {
+        precio_por_gramo = 0;
+        costo_total = 0;
+        cantidad_galletas = 0;
+        // Obtener los elementos del DOM
+        let precioElementText = document.getElementById('txtPrecio').textContent;
+        let totalElement = document.getElementById('txtTotalCaja');
+        let cantidadGalletasElement = document.getElementById('txtCantidadGalletasCaja');
+
+
+        // Convertir el valor del precio a un número
+        let precio = parseFloat(precioElementText) || 0;
+
+        // Mostrar alerta si el tipo de galleta no está seleccionado
+        if (precioElementText === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'Seleccione un tipo de Galleta.',
+            });
+            return;
+        }
+
+        // Obtener el tipo de caja seleccionado
+        let tipoCaja = obtenerTipoCaja();
+
+        // Calcular la cantidad de galletas según el tipo de caja
+        let cantidadGalletas; // Declara una variable para almacenar la cantidad de galletas.
+
+        if (tipoCaja === '700 Gramos') {
+            precio_por_gramo = "{{galleta.presio}}" / "{{galleta.peso}}"
+            costo_total = precio_por_gramo * 700
+            cantidad_galletas = 700 / "{{galleta.peso}}"
+            cantidadGalletas = Math.round(cantidad_galletas)
+        } else if (tipoCaja === 'Kilo') {
+            precio_por_gramo = "{{galleta.presio}}" / "{{galleta.peso}}"
+            costo_total = precio_por_gramo * 1000
+            cantidad_galletas = 1000 / "{{galleta.peso}}"
+            cantidadGalletas = Math.round(cantidad_galletas)
+        } else {
+            // Tipo de caja no seleccionado
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'Seleccione un tipo de caja (medio kilo o kilo).',
+            });
+            return;
+        }
+
+        // Calcular el total en pesos
+        let totalDinero = cantidadGalletas * precio;
+
+        validarCaja(cantidadGalletas);
+
+        // Actualizar el contenido del label con la cantidad de galletas y el total en pesos
+        cantidadGalletasElement.textContent = cantidadGalletas;
+        totalElement.textContent = totalDinero.toFixed(2); // Redondear a dos decimales
+        document.getElementById("CantidadGalletasCaja").value = cantidadGalletas;
+        document.getElementById("TotalCaja").value = totalDinero.toFixed(2);
+    }
+
+    function obtenerTipoCaja() {
+        let medioKiloRadio = document.getElementById('700Gramos');
+        if (medioKiloRadio.checked) {
+            return '700 Gramos';
+        }
+
+        let kiloRadio = document.getElementById('kilo');
+        if (kiloRadio.checked) {
+            return 'Kilo';
+        }
+
+        return ''; // Ninguna opción de caja seleccionada
+    }
+
+    function validarCantidad() {
+        let cantidadInput = document.getElementById('txtCantidadPieza');
+        let totalLabel = document.getElementById('txtTotalPieza');
+        let btnAgregarVenta = document.getElementById('btnAgregarVenta');
+
+        cantidadInput.value = cantidadInput.value.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+
+
+        // Habilitar o deshabilitar el botón de agregar según si el campo de total tiene datos
+        btnAgregarVenta.disabled = isNaN(parseFloat(totalLabel.textContent.trim()));
+        calcularTotalPieza();
+    }
+
+    function presionarTecla(event) {
+        // Verificar si la tecla presionada es 'Enter' (código 13)
+        if (event.keyCode === 13) {
+            event.preventDefault(); // Evitar el comportamiento por defecto del 'Enter' en un formulario
+            calcularTotalPieza();
+        }
+    }
+
+    function presionarTeclaPeso(event) {
+        // Verificar si la tecla presionada es 'Enter' (código 13)
+        if (event.keyCode === 13) {
+            event.preventDefault(); // Evitar el comportamiento por defecto del 'Enter' en un formulario
+            calcularTotalPeso();
+        }
+    }
+
+    function calcularTotalPieza() {
+        var inputNumerico = document.getElementById('txtCantidadPieza');
+        // Establecer el valor máximo del input
+        inputNumerico.max = "{{galletaoinve.cantidad}}";
+        // Obtener los elementos del DOM
+        let precioElementText = document.getElementById('txtPrecio').textContent;
+        let cantidadElement = document.getElementById('txtCantidadPieza');
+        let totalElement = document.getElementById('txtTotalPieza');
+        let btnAgregarVenta = document.getElementById('btnAgregarVenta');
+
+        // Convertir el valor del precio a un número
+        let precio = parseFloat(precioElementText) || 0;
+        let cantidad = parseInt(cantidadElement.value) || 0;
+
+        // Calcular el total
+        let total = precio * cantidad;
+
+        if (precioElementText === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'Selecione un tipo de Galleta.',
+            });
+            btnAgregarVenta.disabled = true; // Desactivar el botón
+            return;
+        }
+        // Mostrar alerta si la cantidad es 0 y el total es 0.00
+        if (cantidad === 0 && total === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'La cantidad de galletas no puede ser 0. Ingresa un número mayor o igual a 1.',
+            });
+            btnAgregarVenta.disabled = true; // Desactivar el botón
+            return;
+        }
+        // Actualizar el contenido del label con el total calculado
+        totalElement.textContent = total.toFixed(2); // Redondear a dos decimales
+        document.getElementById("txtTotalPiezas").value = total.toFixed(2);
+        btnAgregarVenta.disabled = false;
+    }
+
+    function validarCaja(galletasCan) {
+        const caja700Gramos = document.getElementById('700Gramos');
+        const cajaKilo = document.getElementById('kilo');
+        let btnAgregarVenta = document.getElementById('btnAgregarVentaCaja');
+
+        let pesoSeleccionado = 0;
+        if (caja700Gramos.checked || cajaKilo.checked) {
+            if (galletasCan <= "{{galletaoinve.cantidad}}")
+                btnAgregarVenta.disabled = false;
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'Selecione un tipo de Galleta.',
+            });
+        }
+    }
+
+    function validarCantidadPeso() {
+        let cantidadInput = document.getElementById('txtCantidadPeso');
+        let totalLabel = document.getElementById('txtTotalPeso');
+        let btnAgregarVenta = document.getElementById('btnAgregarVentaPeso');
+
+        cantidadInput.value = cantidadInput.value.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+
+        // Habilitar o deshabilitar el botón de agregar según si el campo de total tiene datos
+        btnAgregarVenta.disabled = isNaN(parseFloat(totalLabel.textContent.trim()));
+        calcularTotalPeso();
+    }
+
+    function calcularTotalPeso() {
+        var inputNumerico = document.getElementById('txtCantidadPeso');
+        pesoMax = "{{galletaoinve.cantidad}}" * "{{galleta.peso}}"
+        console.log(pesoMax)
+        // Establecer el valor máximo del input
+        inputNumerico.max = pesoMax;
+        // Obtener los elementos del DOM
+        let precioElementText = document.getElementById('txtPrecio').textContent;
+        let cantidadElement = document.getElementById('txtCantidadPeso');
+        let totalElement = document.getElementById('txtTotalPeso');
+        let cantidadGalletasElement = document.getElementById('txtCantidadGalletasPeso');
+        let pesoGalleta = "{{galleta.peso}}";
+        let btnAgregarVenta = document.getElementById('btnAgregarVentaPeso');
+        // Convertir el valor del precio a un número
+        let precio = parseFloat(precioElementText) || 0;
+        // Convertir la cantidad de galletas a un número
+        let cantidad = parseFloat(cantidadElement.value) || 0;
+
+        // Mostrar alerta si el tipo de galleta no está seleccionado
+        if (precioElementText === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'Seleccione un tipo de Galleta.',
+            });
+            btnAgregarVenta.disabled = true; // Desactivar el botón
+            return;
+        }
+
+        // Mostrar alerta si la cantidad en gramos no es válida
+        if (cantidad.length > 2 && cantidad < 20) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Advertencia',
+                text: 'La cantidad en gramos no es válida. Ingrese un número mayor o igual a 20.',
+            });
+            btnAgregarVenta.disabled = true; // Desactivar el botón
+            return;
+        }
+
+        // Calcular la cantidad de galletas
+        const cantidadGalletas = Math.ceil(cantidad / pesoGalleta); // Redondear hacia arriba
+        // Calcular el total a cobrar
+        const totalDinero = cantidadGalletas * precio;
+
+        // Actualizar el contenido del label con el total en gramos
+        totalElement.textContent = totalDinero.toFixed(2); // Redondear a dos decimales
+
+        // Mostrar la cantidad de galletas
+        cantidadGalletasElement.textContent = cantidadGalletas;
+
+        // Activar el botón de agregar
+        btnAgregarVenta.disabled = false;
+        document.getElementById("cantidadGalletaP").value = cantidadGalletas;
+        document.getElementById("TotalPeso").value = totalDinero.toFixed(2);
+        return totalDinero.toFixed(2);
+    }
+
+</script>
+{% endblock %}
