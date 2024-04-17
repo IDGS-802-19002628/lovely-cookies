@@ -15,9 +15,5 @@ class ingredienteProveedor(db.Model):
     idProveedor = db.Column(db.Integer, db.ForeignKey('proveedor.idProveedor'))
     idMP = db.Column(db.Integer, db.ForeignKey('mp.idMP'))
     proveedor = db.relationship('Proveedor', backref=db.backref('ingredientes_proveedor', lazy=True))
-    mp = db.relationship('MP', backref=db.backref('proveedores', lazy=True))
+    #mp = db.relationship('MP', backref=db.backref('proveedores', lazy=True))
 
-class MP(db.Model):
-    idMP = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    ingrediente = db.Column(db.String(30))
-    descripcion = db.Column(db.Text)

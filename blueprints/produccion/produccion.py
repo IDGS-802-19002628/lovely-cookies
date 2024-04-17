@@ -1,8 +1,17 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, send_from_directory ,abort
+from flask_login import current_user
 from flask_login  import login_required
 from .produccion_form import ProduccionForm
 from .function.abm import Gestorproduccion 
+import os
 produccion_bp = Blueprint("produccion", __name__, template_folder="templates")
+static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+
+@produccion_bp.errorhandler(403)
+def acceso_forbidden(error):
+    static_folder = 'static'
+    return send_from_directory(static_folder, 'acceso_rol.html'), 403
+
 
 @produccion_bp.route('/produccion', methods=['GET', 'POST'])
 @login_required
@@ -10,6 +19,13 @@ def produccion_index():
     form_produccion = ProduccionForm(request.form)
     messages =''
     alert=''
+    rol = current_user.rol
+    print('rol:', rol)
+    if rol != 'administrador':
+      print('entro a la validacion')
+      print(static_folder)
+      abort(403)
+    
     if request.method == 'POST':
       messages, alert = Gestorproduccion().guardar_produccion(form_produccion)
     b = Gestorproduccion().obtener_produccion()

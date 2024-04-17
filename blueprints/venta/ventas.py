@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response, send_from_directory
+from blueprints.receta.models import Galleta
 from .venta_form import GalletaForm
 from flask_login import login_required, current_user
-from .model_venta import Galleta, InventarioG, VentaGalleta, VentaTotal
+from .model_venta import  InventarioG, VentaGalleta, VentaTotal
 from config import db
 from datetime import datetime
 
@@ -9,6 +10,11 @@ venta_bp = Blueprint("venta", __name__, template_folder="templates")
 
 preVenGa = []  # Lista para almacenar las ventas
 ventaTotalG = 0
+
+@venta_bp.errorhandler(403)
+def acceso_forbidden(error):
+    static_folder = 'static'
+    return send_from_directory(static_folder, 'acceso_rol.html'), 403
 
 @venta_bp.route("/ventaPieza")
 def ventaP():
@@ -31,7 +37,7 @@ def venta():
     galletaoinve = None
     galletaInven = InventarioG.query.all()
     galletas = Galleta.query.all()
-
+    
     if request.method == 'POST' or 'GET':
         if idg is not None:
             galleta = consultar_galleta_por_id(idg)
@@ -212,10 +218,3 @@ def actualizar_inventario_por_id(id_galleta, cantidad_vendida):
         print(f"Inventario actualizado: cantidad de galletas restantes: {inventario.cantidad}")
     else:
         print(f"No se encontró un registro con idGalleta {id_galleta}.")
-
-@venta_bp.route("/eliminar", methods=["GET", "POST"])
-def eliminar():
-    posicion = int(request.args.get('id'))
-    if request.method=='GET':
-        preVenGa.pop(posicion)
-    return redirect(url_for('.venta'))
