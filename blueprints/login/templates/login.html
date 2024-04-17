@@ -29,6 +29,7 @@
             </div>
             <div class="card-body">
                 <form id="login" name="login" action="/login" method="POST" novalidate>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="mb-3">
                         {{ input_forms(form.correo, class="form-control", placeholder="Correo electrónico") }}
                     </div>

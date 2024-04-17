@@ -124,10 +124,7 @@
                                             <td>{{tab.peso}}</td>
                                             <td>{{tab.precio}}</td>
                                             <td>{{tab.subTotal}}</td>
-                                            <td>
-                                                <a class="btn btn-danger"
-                                                    onclick="confirmDelete('{{idProveedor}}')">Eliminar</a>
-                                            </td>
+                                            <td><a class="btn btn-danger" href="/eliminar?id={{loop.index-1}}">Eliminar</a></td>
                                         </tr>
                                         {% endfor %}
                                         {% else %}

@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask_login  import login_required
 from .produccion_form import ProduccionForm
 from .function.abm import Gestorproduccion 
 produccion_bp = Blueprint("produccion", __name__, template_folder="templates")
 
 @produccion_bp.route('/produccion', methods=['GET', 'POST'])
+@login_required
 def produccion_index():
     form_produccion = ProduccionForm(request.form)
     messages =''
@@ -15,6 +17,7 @@ def produccion_index():
     return render_template("produccion.html", form = form_produccion, r_produccion = b , n=alert)
   
 @produccion_bp.route("/modificar_produccion", methods=['GET', 'POST'])
+@login_required
 def modificar():
     form_produccion = ProduccionForm(request.form)
     id_produccion = request.args.get('id')
@@ -24,15 +27,18 @@ def modificar():
     print('metodo ejecutado ', method)
     messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)
     if request.method == 'POST':
-      messages, form_usuario ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)
+      
+      messages, form_pro ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)
+      form_usuario = ProduccionForm()
       flash(messages)
       producciones = Gestorproduccion().obtener_produccion()
       form_p = ProduccionForm()
       return render_template('produccion.html', form=form_p, r_produccion = producciones ,n=alert)
-    return render_template('modificar_usuario.html', form= form_usuario)
+    return render_template('modificar_produccion.html', form= form_pro)
 
 
 @produccion_bp.route('/produccion_cantidad', methods=['GET', 'POST'])
+@login_required
 def produccion_cantidad():
     form_produccion = ProduccionForm(request.form)
     mi_variable_disabled = False
