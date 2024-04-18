@@ -8,7 +8,8 @@ class CompraProducto(db.Model):
     idCompraProducto = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombreProducto = db.Column(db.String(30))
     cantidad = db.Column(db.Float)
-    medida = db.Column(db.String(25))
+    medida = db.Column(db.String(25)),
+    subTotal = db.Column(db.Double),
     idProveedor = db.Column(db.Integer, db.ForeignKey('Proveedor.idProveedor'))
     idMP = db.Column(db.Integer, db.ForeignKey('MP.idMP'))
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'))

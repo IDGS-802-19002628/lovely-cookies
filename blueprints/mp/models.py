@@ -7,3 +7,4 @@ class MP(db.Model):
     ingrediente = db.Column(db.String(30)) 
     medicion = db.Column(db.String(15))
     descripcion = db.Column(db.Integer, db.ForeignKey('galleta.idGalleta')) 
+    precio = db.Column(db.Double)

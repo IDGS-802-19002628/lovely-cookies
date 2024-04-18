@@ -21,9 +21,9 @@ def insProveedor():
     rol = current_user.rol
     print('rol:', rol)
     if rol != 'administrador':
-      print('entro a la validacion')
-      print(static_folder)
-      abort(403)
+        print('entro a la validacion')
+        print(static_folder)
+        abort(403)
     formProvedor = ProveedorForm(request.form)
     formMateriaP = MateriaPForm(request.form)
     ingredientes_choices = None
