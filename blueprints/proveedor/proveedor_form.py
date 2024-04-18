@@ -4,7 +4,6 @@ from wtforms import StringField, SelectMultipleField, ValidationError
 from wtforms import validators
 
 class ProveedorForm(Form):
-    
     nomEmpresa = StringField("Nombre de la empresa", [
         validators.DataRequired(message='El campo es requerido'),
         validators.Length(min=1, max=30, message="Ingresa un nombre de empresa válido")

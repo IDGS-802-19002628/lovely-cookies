@@ -95,6 +95,7 @@
 2024-04-15 19:21:43,259 - INFO - Inicio de sesi√≥n con el correo Pedro@gmail.com
 2024-04-15 19:59:55,315 - INFO - Inicio de sesi√≥n con el correo Pedro@gmail.com
 2024-04-15 20:13:50,643 - INFO - The CSRF token is missing.
+<<<<<<< HEAD
 2024-04-17 10:45:03,674 - INFO - Inicio de sesiÛn con el correo francisco
 2024-04-17 11:07:01,224 - INFO - The CSRF token is missing.
 2024-04-17 11:07:12,324 - INFO - The CSRF token is missing.
@@ -108,3 +109,18 @@
 2024-04-18 14:06:46,310 - INFO - Inicio de sesiÛn con el correo francis@gmail.com
 2024-04-18 14:07:52,579 - INFO - The CSRF token is missing.
 2024-04-18 14:09:08,140 - INFO - The CSRF token is missing.
+=======
+2024-04-17 16:54:19,747 - INFO - Inicio de sesiÛn con el correo julian@gmail.com
+2024-04-18 10:31:08,116 - INFO - Inicio de sesiÛn con el correo julian@gmail.com
+2024-04-18 11:33:31,849 - INFO - The CSRF token is missing.
+2024-04-18 14:17:58,410 - INFO - The CSRF token is missing.
+>>>>>>> 44cc01acaf187eaee0309cda2015dc061928c97b
+2024-04-18 14:59:13,883 - INFO - The CSRF token is missing.
+2024-04-18 14:59:29,648 - INFO - The CSRF token is missing.
+2024-04-18 14:59:48,231 - INFO - The CSRF token is missing.
+2024-04-18 15:00:14,366 - INFO - The CSRF token is missing.
+2024-04-18 15:26:52,442 - INFO - Inicio de sesiÛn con el correo francis@gmail.com
+2024-04-18 15:29:41,586 - INFO - The CSRF token is missing.
+2024-04-18 15:31:24,455 - INFO - The CSRF token is missing.
+2024-04-18 15:31:44,049 - INFO - The CSRF token is missing.
+2024-04-18 15:36:14,256 - INFO - The CSRF token is missing.

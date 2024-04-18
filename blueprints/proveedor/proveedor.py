@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, abort, send_from_directory
-from blueprints.mp.models import MP
+from blueprints.mp.models import Mp
 from .proveedor_form import ProveedorForm
 from flask_login import login_required, current_user
 from .model_proveedor import Proveedor,db,ingredienteProveedor
@@ -15,6 +15,7 @@ static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static
 def acceso_forbidden(error):
     static_folder = 'static'
     return send_from_directory(static_folder, 'acceso_rol.html'), 403
+
 @proveedor_bp.route("/insProveedor", methods=["GET", "POST"])
 @login_required
 def insProveedor():
@@ -28,7 +29,7 @@ def insProveedor():
     formMateriaP = MateriaPForm(request.form)
     ingredientes_choices = None
     
-    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in MP.query.all()]
+    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in Mp.query.all()]
 
     pro = Proveedor.query.all()
     
@@ -38,11 +39,11 @@ def insProveedor():
     Proveedor.direccion,
     Proveedor.telefono,
     Proveedor.nomTrabajador,
-    db.func.group_concat(MP.ingrediente)
+    db.func.group_concat(Mp.ingrediente)
         ).join(
     ingredienteProveedor, Proveedor.idProveedor == ingredienteProveedor.idProveedor
         ).join(
-    MP, ingredienteProveedor.idMP == MP.idMP
+    Mp, ingredienteProveedor.idMP == Mp.idMP
         ).filter(
     Proveedor.estatus.is_(True)  # Filtrar por estatus verdadero (True)
         ).group_by(
@@ -52,7 +53,7 @@ def insProveedor():
     print(resultados)
     datos_tabla = [(idProveedor, proveedor, direccion, telefono, nomTrabajador, ingredientes.split(',')) for idProveedor, proveedor, direccion, telefono, nomTrabajador, ingredientes in resultados]
     
-    if request.method == 'POST' and formProvedor.validate():
+    if request.method == 'GET' and formProvedor.validate():
         proveedor = Proveedor(
             nomEmpresa=formProvedor.nomEmpresa.data,
             direccion=formProvedor.direccion.data,
@@ -60,6 +61,8 @@ def insProveedor():
             nomTrabajador=formProvedor.nomTrabajador.data,
             estatus = 1
         )
+
+        print("Nmms que mmsd"+proveedor)
         
         # Insertar el proveedor en la base de datos
         db.session.add(proveedor)
@@ -116,11 +119,11 @@ def actualizar():
     Proveedor.direccion,
     Proveedor.telefono,
     Proveedor.nomTrabajador,
-    db.func.group_concat(MP.ingrediente)
+    db.func.group_concat(Mp.ingrediente)
         ).join(
     ingredienteProveedor, Proveedor.idProveedor == ingredienteProveedor.idProveedor
         ).join(
-    MP, ingredienteProveedor.idMP == MP.idMP
+    Mp, ingredienteProveedor.idMP == Mp.idMP
         ).filter(
     Proveedor.idProveedor == proveedor_id  # Filtrar por estatus verdadero (True)
         ).group_by(

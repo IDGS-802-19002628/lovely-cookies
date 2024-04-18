@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, abort, send_from_directory
-from blueprints.mp.models import MP
+from blueprints.mp.models import Mp
 from flask_login import login_required, current_user
 from .model_compras import CompraProducto, CompraTotal, db
 from blueprints.proveedor.model_proveedor import Proveedor
-from blueprints.mp.models import MP
+from blueprints.mp.models import Mp
 import os
 
 
@@ -45,7 +45,7 @@ def compras():
         total = 0
         
         for mp_id, cantidad in zip(materias_primas, cantidades):
-            mp = MP.query.get(mp_id)
+            mp = Mp.query.get(mp_id)
             sub_total = float(cantidad) * mp.precio
             total += sub_total
             
@@ -70,6 +70,6 @@ def compras():
     
     # Obtener la lista de proveedores y materias primas para mostrar en la interfaz
     lista_proveedores = Proveedor.query.all()
-    lista_materias_primas = MP.query.all()
+    lista_materias_primas = Mp.query.all()
     
     return render_template('compras.html', lista_proveedores=lista_proveedores, lista_materias_primas=lista_materias_primas)

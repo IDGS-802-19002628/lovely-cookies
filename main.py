@@ -10,6 +10,7 @@ from blueprints.menu.menu import menu_bp
 from blueprints.login.login import login_bp
 from blueprints.produccion.produccion import produccion_bp
 from blueprints.usuario.usuario import usuario_bp
+from blueprints.mp.mp import mp_bp
 from blueprints.tablero.tablero import tablero_bp
 from blueprints.usuario.model_usuario import Usuario
 from blueprints.venta.ventas import venta_bp
@@ -47,8 +48,6 @@ def page_not_found(e):
     return send_from_directory(app.static_folder,'404.html'), 404
 
 
-
-
 app.register_blueprint(menu_bp)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(venta_bp)
@@ -56,6 +55,7 @@ app.register_blueprint(recetas_bp)
 app.register_blueprint(proveedor_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(produccion_bp)
+app.register_blueprint(mp_bp)
 app.register_blueprint(tablero_bp)
 app.register_blueprint(compra_dp)
 

@@ -16,4 +16,3 @@ class ingredienteProveedor(db.Model):
     idMP = db.Column(db.Integer, db.ForeignKey('mp.idMP'))
     proveedor = db.relationship('Proveedor', backref=db.backref('ingredientes_proveedor', lazy=True))
     #mp = db.relationship('MP', backref=db.backref('proveedores', lazy=True))
-
