@@ -17,14 +17,14 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card-body">
-                <form id="usuario" name="usuario" action="/usuario" method="POST" novalidate>
+                <form id="merma" name="merma" action="/merma" method="POST" novalidate>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="row justify-content-center">
                         <div class="mb-3 col-md-3">
                             <div class="mb-3">
-                                {{ input_forms(form.nombre, class="form-control", placeholder="Nombre") }}
+                                {{ input_forms(form.galleta, class="form-control", placeholder="") }}
                             </div>
-                            {{ input_forms(form.rol, class="form-select", placeholder="Rol") }}
+                           
                             <br>
                             <div class="mb-3">
                                 <div>
@@ -34,10 +34,10 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            {{ input_forms(form.correo, class="form-control", placeholder="Correo") }}
+                            {{ input_forms(form.cantidad_m, class="form-control", placeholder="") }}
                         </div>
                         <div class="col-md-3">
-                            {{ input_forms(form.pwd, class="form-control", placeholder="Contraseña") }}
+                            {{ input_forms(form.observaciones, class="form-control", placeholder="Nombre") }}
                         </div>
                     </div>
                 </form>
@@ -49,7 +49,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5" id="exampleModalLabel">Registros de usuarios</h5>
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Registros de Merma</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -66,12 +66,12 @@
                         <tbody>
                             {% for u in r_usuarios %}
                             <tr>
-                                <td>{{ u.correo }}</td>
-                                <td>{{ u.rol }}</td>
-                                <td>{{ u.estatus }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>
-                                    <a class="btn btn-danger me-2" href="/eliminar?id={{ u.id }}"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
-                                    <a class="btn btn-warning" href="/modificar?id={{ u.id }}"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
+                                    <a class="btn btn-danger me-2" href="/eliminar"><i class='bx bx-trash bx-sm align-middle'></i> Eliminar</a>
+                                    <a class="btn btn-warning" href="/modificar"><i class='bx bx-edit-alt bx-sm align-middle'></i> Modificar</a>
                                 </td>
                             </tr>
                             {% endfor %}

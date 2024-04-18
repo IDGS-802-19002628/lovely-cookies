@@ -19,7 +19,7 @@ def login():
     form_auth = loginForm(request.form)
     messages = ''
     alert = ''
-    
+    mostrar = ''
     if request.method == 'POST':
         try:
             messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)
@@ -41,8 +41,10 @@ def login():
                 username = current_user.nombre
                 rol = current_user.rol
                 ultima = current_user.ultima_conexion
+                if ultima == None:
+                  mostrar = 'NO'
                 logging.info('Inicio de sesión con el correo %s', user.correo)
-                return render_template('menu.html' , username = username, rol = rol, ultima = ultima)
+                return render_template('menu.html' , username = username, rol = rol, ultima = ultima , m = mostrar)
         except Exception as e:
             alert = "warning"
             
