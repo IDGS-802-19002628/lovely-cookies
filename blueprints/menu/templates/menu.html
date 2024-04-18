@@ -1,9 +1,9 @@
 {% extends 'layout2.html' %}
 {% block content %}
-
+{% if current_user.rol == 'administrador' %}
 <div class="ms-5 mt-5">
     <div class="row justify-content-center">
-        {% if current_user.rol == 'administrador' %}
+       
         <div class="col-3">
             <a href="/usuario" class="">
                 <div class="card h-100" style="width: 20rem;">
@@ -14,9 +14,8 @@
                 </div>
             </a>
         </div>
-        {% endif %}
+     
         
-        {% if current_user.rol == 'administrador' %}
         <div class="col-3">
             <a href="/insProveedor">
                 <div class="card h-100" style="width: 20rem;">
@@ -27,9 +26,8 @@
                 </div>
             </a>
         </div>
-        {% endif %}
-        
-        {% if current_user.rol == 'administrador' %}
+       
+      
         <div class="col-3">
             <a href="/recetas">
                 <div class="card h-100" style="width: 20rem;">
@@ -41,10 +39,10 @@
                 </div>
             </a>
         </div>
-        {% endif %}
+  
     </div>
     <div class="row justify-content-center mt-5">
-        {% if current_user.rol == 'administrador' %}
+      
         <div class="col-3">
             <a href="/produccion">
                 <div class="card h-100" style="width: 20rem;">
@@ -57,9 +55,7 @@
                 </div>
             </a>
         </div>
-        {% endif %}
-        
-        {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
+    
         <div class="col-3">
             <a href="" class="">
                 <div class="card h-100" style="width: 20rem;">
@@ -70,9 +66,7 @@
                 </div>
             </a>
         </div>
-        {% endif %}
-        
-        {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
+       
         <div class="col-3">
             <a href="/dashboard" class="">
                 <div class="card h-100" style="width: 20rem;">
@@ -83,10 +77,10 @@
                 </div>
             </a>
         </div>
-        {% endif %}
+      
     </div>
     <div class="row justify-content-center mt-5 ">
-        {% if current_user.rol == 'administrador' %}
+        
         <div class="col-3 ms-1">
             <a href="" class="">
                 <div class="card h-100" style="width: 20rem;">
@@ -97,9 +91,8 @@
                 </div>
             </a>
         </div>
-        {% endif %}
         
-        {% if current_user.rol == 'administrador' or  current_user.rol == 'empleado' %}
+        
         <div class="col-3">
             <a href="/venta" class="">
                 <div class="card h-100" style="width: 20rem;">
@@ -111,11 +104,93 @@
                 </div>
             </a>
         </div>
-        {% endif %}
+
         
         <div class="col-3 opacity-0">
             <!-- Esto asegura que siempre haya tres columnas visibles -->
         </div>
     </div>
 </div>
+{% endif %}
+
+{% if current_user.rol == 'empleado' %}
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+       
+        <div class="col-3">
+            <a href="/venta" class="">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_undraw_undraw_undraw_shopping_bags_2ude_-1-_mnw3_-2-_q7y0_muk6.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-3"> 
+                        <br><br>
+                        <h1 class="card-title">Ventas</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+     
+        
+        <div class="col-3">
+            <a href="/insProveedor">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_Team_page_re_cffb.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center">
+                        <h1 class="card-title">Proveedores</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-3">
+            <a href="/dashboard" class="">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_Data_trends_re_2cdy.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-4"> 
+                        <br><br>
+                        <h1 class="card-title">Dashboard</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+      
+       
+  
+    </div>
+
+</div>
+{% endif %}
+
+{% if current_user.rol == 'Producción' %}
+<div class="ms-5 mt-5">
+    <div class="row justify-content-center">
+       
+        <div class="col-3">
+            <a href="/produccion">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_factory_dy0a.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-5">
+                        <br><br>
+                        <h1 class="card-title">Producciones</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-3">
+            <a href="/dashboard" class="">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_Data_trends_re_2cdy.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-4">
+                        <br> 
+                        <h1 class="card-title">Dashboard</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+      
+       
+  
+    </div>
+
+</div>
+{% endif %}
 {% endblock %}

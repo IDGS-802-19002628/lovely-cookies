@@ -10,6 +10,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/insProveedor" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="nomEmpresa">Nombre de la Empresa</label>
                             <input type="text" class="form-control" id="nomEmpresa" name="nomEmpresa" required>
