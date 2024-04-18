@@ -1,5 +1,5 @@
-{%macro datos(name, placeholder, type="text")%}
-<p><input name="{{name}}"  placeholder="{{placeholder}}" type="type"></p>
+{%macro datos(name, placeholder ,type="text", aria_label="", aria_describedby="")%}
+<p><input name="{{name}}"  placeholder="{{placeholder}}"  type="type" disabled"></p>
 {%endmacro%}
 
 {%macro input_forms(field)%}

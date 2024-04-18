@@ -11,10 +11,6 @@ import os
 
 recetas_bp = Blueprint("recetas", __name__, template_folder="templates")
 
-
-# Definir la ruta y la vista correspondiente
-
-
 @recetas_bp.route("/recetas", methods=['GET', 'POST'])
 @login_required
 def crear_receta():
@@ -120,3 +116,37 @@ def eliminar_receta():
 
     # Redireccionar a la página principal para evitar reenvío del formulario
     return redirect(url_for('recetas.crear_receta'))
+
+@recetas_bp.route("/calcular_utilidades", methods=['GET'])
+@login_required
+def calcular_utilidades():
+    # Obtener todas las galletas de la base de datos
+    galletas = Galleta.query.all()
+
+    # Lista para almacenar los resultados de los cálculos
+    resultados = []
+
+    # Iterar sobre cada galleta y calcular su costo y utilidad
+    for galleta in galletas:
+        # Obtener los ingredientes y cantidades de la receta de la galleta
+        recetas = Receta.query.filter_by(idGalleta=galleta.idGalleta).all()
+        costo_total = 0
+
+        # Calcular el costo total de los ingredientes
+        for receta in recetas:
+            ingrediente = Mp.query.get(receta.idMP)
+            costo_total += (ingrediente.precio * receta.cantidad)
+
+        # Calcular la utilidad y el costo por galleta
+        costo_por_galleta = costo_total
+        utilidad = galleta.precio - costo_por_galleta
+
+        # Agregar los resultados a la lista
+        resultados.append({
+            'galleta': galleta,
+            'costo_por_galleta': costo_por_galleta,
+            'utilidad': utilidad
+        })
+
+    # Renderizar la plantilla HTML con los resultados
+    return render_template('costo_utilidad.html', resultados=resultados)

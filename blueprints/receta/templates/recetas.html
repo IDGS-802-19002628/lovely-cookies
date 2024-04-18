@@ -86,7 +86,9 @@ Recetas
 
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaGalletaModal">Registrar Nueva Galleta</button>
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Ingredientes a Receta</button>
-    
+    <div class="text-center mt-4">
+        <a href="{{ url_for('recetas.calcular_utilidades') }}" class="btn btn-primary">Calcular Utilidades</a>
+    </div>
 </div>
 
 <!-- Formulario de registro de galleta -->

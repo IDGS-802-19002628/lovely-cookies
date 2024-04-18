@@ -3,21 +3,31 @@ import os
 from flask_cors import CORS
 from flask import Flask, render_template, send_from_directory
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager
 from config import DevelomentConfig, db
 from flask_wtf.csrf import CSRFProtect
-from blueprints.receta.recetas import recetas_bp
-from blueprints.mp.mp import mp_bp
 from blueprints.menu.menu import menu_bp
 from blueprints.login.login import login_bp
 from blueprints.produccion.produccion import produccion_bp
 from blueprints.usuario.usuario import usuario_bp
+from blueprints.mp.mp import mp_bp
+from blueprints.tablero.tablero import tablero_bp
 from blueprints.usuario.model_usuario import Usuario
+from blueprints.venta.ventas import venta_bp
+from blueprints.proveedor.proveedor import proveedor_bp
+from blueprints.receta.recetas import recetas_bp
+
 
 
 app = Flask(__name__)
 app.config.from_object(DevelomentConfig)
 app._static_folder = 'static'
+
+
+allowed_ips = ["127.0.0.1","192.168.1.100"]
+
+
+cors = CORS(app, resources={r"*": {"origins": allowed_ips}})
 
 login_manager = LoginManager(app)
 log_directory = '/logs'
@@ -36,13 +46,16 @@ def load_user(user_id):
 def page_not_found(e):
     return send_from_directory(app.static_folder,'404.html'), 404
 
-app.register_blueprint(recetas_bp)
+
 app.register_blueprint(menu_bp)
 app.register_blueprint(usuario_bp)
+app.register_blueprint(venta_bp)
+app.register_blueprint(recetas_bp)
+app.register_blueprint(proveedor_bp)
 app.register_blueprint(login_bp)
-app.register_blueprint(mp_bp)
-
 app.register_blueprint(produccion_bp)
+app.register_blueprint(mp_bp)
+app.register_blueprint(tablero_bp)
 
 if __name__ == '__main__':
     db.init_app(app)

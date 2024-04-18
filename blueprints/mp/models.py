@@ -8,5 +8,4 @@ class Mp(db.Model):
 
     medicion = db.Column(db.String)
     descripcion = db.Column(db.Integer, db.ForeignKey('galleta.idGalleta')) 
-
-
+    precio = db.Column(db.Float)

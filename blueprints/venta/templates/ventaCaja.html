@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Venta por caja</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <div class="table-responsive">
+                <table id="tblVentaCaja" class="table table-hover">                                                                       
+                    <thead>
+                        <tr>
+                            <th>Tipo de caja: </th>
+                            <th class="text-end">
+                                <div class="row justify-content-end">
+                                    <div>
+                                        <input type="radio" id="700Gramos" name="caja" value="700" onclick="calcularTotalCaja()">
+                                        <label for="700Gramos">Caja de 700 gramos</label>
+
+                                        <input type="radio" id="kilo" name="caja" value="1000" onclick="calcularTotalCaja()">
+                                        <label for="kilo">Caja de kilo </label>
+                                    </div>                              
+                                </div>
+                            </th>
+                        </tr>
+                        
+                        <tr>
+                            <th>Cantidad de galletas: </th>
+                            <th class="text-end">
+                                <label for="txtCantidadGalletasCaja"></label>
+                                <label id="txtCantidadGalletasCaja" ></label>
+                                <input type="hidden" id="CantidadGalletasCaja" name="CantidadGalletasCaja" value="">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Total: </th>
+                            <th class="text-end">
+                                <label for="txtTotalCaja"></label>
+                                <label id="txtTotalCaja" ></label>
+                                <input type="hidden" id="TotalCaja" name="TotalCaja" value="">
+                            </th>
+                        </tr>
+                    </thead>                                        
+                </table>
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="btnAgregarVentaCaja" class="button" type="submit" disabled><i class="fas fa-cart-plus me-2"></i>
+                        Agregar</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+        </script>
+    </body>
+</html>
