@@ -126,7 +126,7 @@ def calcular_utilidades():
     # Lista para almacenar los resultados de los cálculos
     resultados = []
 
-    # Iterar sobre cada galleta y calcular su costo y utilidad
+    # Iterar sobre cada galleta y calcular su costo, utilidad y porcentaje de ganancia
     for galleta in galletas:
         # Obtener los ingredientes y cantidades de la receta de la galleta
         recetas = Receta.query.filter_by(idGalleta=galleta.idGalleta).all()
@@ -135,17 +135,23 @@ def calcular_utilidades():
         # Calcular el costo total de los ingredientes
         for receta in recetas:
             ingrediente = Mp.query.get(receta.idMP)
-            costo_total += (ingrediente.precio * receta.cantidad)
+            costo_ingrediente = round(((ingrediente.precio / 1000) * receta.cantidad) / 12,2)  # Convertir el precio a precio por gramo
+            costo_total += costo_ingrediente
 
         # Calcular la utilidad y el costo por galleta
         costo_por_galleta = costo_total
-        utilidad = galleta.precio - costo_por_galleta
+        utilidad_por_galleta = round(galleta.precio - costo_por_galleta,2)
+
+        # Calcular el porcentaje de ganancia
+        porcentaje_ganancia = round((utilidad_por_galleta / galleta.precio) * 100,2)
 
         # Agregar los resultados a la lista
         resultados.append({
-            'galleta': galleta,
+            'galleta_nombre': galleta.nombre,
+            'precio_galleta': galleta.precio,
             'costo_por_galleta': costo_por_galleta,
-            'utilidad': utilidad
+            'utilidad_por_galleta': utilidad_por_galleta,
+            'porcentaje_ganancia': porcentaje_ganancia
         })
 
     # Renderizar la plantilla HTML con los resultados

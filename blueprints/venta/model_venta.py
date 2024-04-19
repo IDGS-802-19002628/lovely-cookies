@@ -38,3 +38,16 @@ class VentaGalleta(db.Model):
     # Relaciones con Galleta y VentaTotal
     galleta = db.relationship('Galleta', backref='venta_galleta')
     venta_total = db.relationship('VentaTotal', backref='venta_galleta')
+
+class Cajach(db.Model):
+    __tablename__ = 'cajach'
+    
+    idCajach = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    total = db.Column(db.Float, nullable=False)
+
+class Pago_p(db.Model):
+    __tablename__ = 'pago_p'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    cantidad = db.Column(db.Float)  # Asegúrate de que esta línea esté en tu modelo
+    fecha = db.Column(db.Date)

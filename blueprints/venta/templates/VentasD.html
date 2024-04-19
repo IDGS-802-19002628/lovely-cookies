@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% import "_macros.html" as macros %}
+<style>
+    #ventasDiariasContent {
+      max-height: 600px; /* Limita la altura de la tabla para que tenga una barra de desplazamiento si hay demasiados registros */
+      overflow-y: auto; /* Agrega una barra de desplazamiento vertical si la tabla es más grande que el contenedor */
+    }
+    .center-content {
+        margin: 0 auto; /* Centra el contenido horizontalmente */
+        max-width: 1000px; /* Establece el ancho máximo del contenedor */
+    }
+</style>
+
+<div class="center-content">
+    <h1 class="text-center">Ventas Diarias</h1>
+    <div id="ventasDiariasContent" class="table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <thead class="bg-success text-white">
+                <tr>
+                    <th>Total de la venta</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas_totales %}
+                <tr>
+                    <td>{{ venta.total }}</td>
+                    <td>{{ venta.fecha }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h1 class="text-center">Pagos realizados a proveedores</h1>
+    <div id="ventasDiariasContent" class="table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <thead class="bg-success text-white">
+                <tr>
+                    <th>Pago a proveedor</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pago in pagos %}
+                <tr>
+                    <td>{{ pago.cantidad }}</td>
+                    <td>{{ pago.fecha }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <form action="/restar_venta" method="post">
+        <div style="text-align: right;">
+            <label for="cantidad">Cantidad pagada a proveedor:</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+            <input type="submit" value="Registrar">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        </div>
+    </form>
+    <br>
+    <h4 style="text-align: center;">Total de ventas del día: {{ suma_ventas }}</h4>
+</div>
+{% endblock %}

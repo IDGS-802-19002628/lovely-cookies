@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response, send_from_directory
+from flask import Blueprint, render_template, request,flash, redirect, url_for, jsonify, Response, send_from_directory
 from blueprints.receta.models import Galleta
 from .venta_form import GalletaForm
 from flask_login import login_required, current_user
-from .model_venta import  InventarioG, VentaGalleta, VentaTotal
+from .model_venta import  InventarioG, VentaGalleta, VentaTotal, Cajach,Pago_p
 from config import db
 from datetime import datetime
 
@@ -173,6 +173,7 @@ def guardar():
             id = user_id,
             fecha = fecha_actual
         )
+    sumar_totales_ventas(tota)
     db.session.add(ventaTotaldb)
     db.session.commit()
     ultimoVenta = VentaTotal.query.order_by(VentaTotal.idVentaTotal.desc()).first()
@@ -225,3 +226,77 @@ def eliminarGaTab():
     if request.method=='GET':
         preVenGa.pop(posicion)
     return redirect(url_for('.venta'))
+
+def sumar_totales_ventas(tota):
+        # Consultar todas las ventas en la tabla VentaTotal
+    ventas = VentaTotal.query.all()
+        
+        # Inicializar la variable para almacenar la suma de los totales
+    suma_totales = 0
+        
+        # Sumar los totales de todas las ventas
+    for venta in ventas:
+        suma_totales += venta.total
+        
+        # Actualizar el campo total en la tabla Cajach con la suma de los totales
+    cajach = Cajach.query.first()
+    cajach.total += float(tota) + float(200)
+        
+        # Guardar los cambios en la base de datos
+    db.session.commit()
+
+@venta_bp.route("/ventas_totales", methods=['GET'])
+@login_required
+def ventas_totales():
+    # Consulta todos los registros en la tabla VentaTotal
+    ventas_totales = VentaTotal.query.filter(VentaTotal.fecha == datetime.now().date()).all()
+    pagosp = Pago_p.query.all()
+    # Crear una lista para almacenar los datos de las ventas
+    ventas_totales_datos = []
+
+    # Iterar sobre cada venta total y agregar sus datos a la lista
+    suma_ventas = 0  # Variable para almacenar la suma de todas las ventas
+
+    for venta in ventas_totales:
+        venta_datos = {
+            'idVentaTotal': venta.idVentaTotal,
+            'total': venta.total,
+            'id': venta.id,
+            'fecha': venta.fecha  # Si 'fecha' ya es una cadena, no necesitas usar strftime
+        }
+        ventas_totales_datos.append(venta_datos)
+
+        suma_ventas += venta.total  # Sumar el total de cada venta
+
+    # Renderizar la plantilla y pasar los datos de las ventas totales y la suma de las ventas
+    return render_template('ventasD.html', ventas_totales=ventas_totales_datos, suma_ventas=suma_ventas,pagos=pagosp)
+
+@venta_bp.route("/restar_venta", methods=['POST'])
+@login_required
+def restar_venta():
+    # Obtener la cantidad del formulario
+    cantidad = request.form.get('cantidad')
+
+    # Convertir la cantidad a float
+    cantidad = float(cantidad)
+
+    # Consultar el registro de CajaCh
+    caja_ch = Cajach.query.first()
+
+    # Verificar si hay suficiente total en CajaCh
+    if caja_ch.total < cantidad:
+        flash('No hay suficiente total en CajaCh para restar esta cantidad.', 'error')
+        return redirect(url_for('venta.ventas_totales'))
+
+    # Restar la cantidad al total de CajaCh
+    caja_ch.total -= cantidad
+
+    # Crear un nuevo registro en Pago_p con la cantidad restada
+    nuevo_pago = Pago_p(cantidad=cantidad, fecha=datetime.now().date())
+    db.session.add(nuevo_pago)
+
+    # Guardar los cambios en la base de datos
+    db.session.commit()
+
+    flash('La cantidad ha sido restada exitosamente.', 'success')
+    return redirect(url_for('venta.ventas_totales'))

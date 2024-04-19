@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% import "_macros.html" as macros %}
+<body>
+    <h1>Inventario de Materias Primas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Materia</th>
+                <th>Nombre</th>
+                <th>Existencias</th>
+                <th>Fecha de Caducidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idMateria, ingrediente, existencias, fecha_caducidad in inventario %}
+                <tr>
+                    <td>{{ idMateria }}</td>
+                    <td>{{ ingrediente }}</td>
+                    <td>{{ existencias }}</td>
+                    <td>{{ fecha_caducidad }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}
