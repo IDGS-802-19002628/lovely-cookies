@@ -1,21 +1,37 @@
 
+from blueprints.mp.models import Mp
+from blueprints.venta.model_venta import InventarioG
+from blueprints.receta.models import Galleta, Receta
+from blueprints.receta.recetas import recetas_bp
 from ..model_produccion import Produccion, db
 
 
 class Gestorproduccion:
     def guardar_produccion(self, form_pro):
+        lista_ = []
         galleta = form_pro.galleta.data
         produccion = int(200)
         fecha = form_pro.fecha.data
         estatus = 'pendiente'
+        #Recetas, invetario_materia invetario_g
+        galleta = Galleta.query.filter(Galleta.nombre == galleta).first()
+        inventario_in = InventarioG.query.filter(InventarioG.idGalleta == galleta.idGalleta).first()
+        ingre = Receta.query.filter_by(idGalleta=inventario_in.idGalleta).all()
+        print(ingre)
+        print('prueba')
+        incremento = inventario_in.cantidad + produccion
         
+        incremento = inventario_in.cantidad + produccion
+        inventario_in.cantidad = incremento
+        db.session.add(inventario_in)
+        db.session.commit()
         nueva_Produccion = Produccion(nombre=galleta,
                                 cantidad=produccion,
                                 create_date=fecha,
                                 estatus=estatus)
         db.session.add(nueva_Produccion)
         db.session.commit()
-        messages = "Se a registrado la produccion"
+        messages = "La producción ha sido registrada exitosamente."
         alert = 'success'
         return messages, alert
     def obtener_produccion(self):

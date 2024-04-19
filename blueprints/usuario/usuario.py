@@ -30,7 +30,7 @@ def acceso_forbidden(error):
     return send_from_directory(static_folder, 'acceso_rol.html'), 403
 
 @usuario_bp.route("/usuario", methods=['GET', 'POST'])
-@login_required
+#@login_required
 def usuario():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
@@ -38,14 +38,12 @@ def usuario():
     alert = ''
     messages =''
     print('Antes de la validacion')
-    rol = current_user.rol
-    print('rol:', rol)
-    if rol != 'administrador':
-      print('entro a la validacion')
-      print(static_folder)
-      abort(403)
+   
     if request.method == "POST":
         messages, alert = gestor_usuario.guardar_usuario(form_user)
+        print('prueba')
+        if messages == 'info':
+          print('desactivar')
         
     flash(messages)
     usuarios = gestor_usuario.obtener_usuarios()

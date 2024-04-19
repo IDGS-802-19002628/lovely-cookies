@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, abort, send_from_directory
-from blueprints.mp.models import MP
+from flask import Blueprint, render_template, request, redirect, url_for, abort, send_from_directory, flash
+from blueprints.mp.models import Mp
 from .proveedor_form import ProveedorForm
 from flask_login import login_required, current_user
 from .model_proveedor import Proveedor,db,ingredienteProveedor
@@ -28,7 +28,7 @@ def insProveedor():
     formMateriaP = MateriaPForm(request.form)
     ingredientes_choices = None
     
-    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in MP.query.all()]
+    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in Mp.query.all()]
 
     pro = Proveedor.query.all()
     
@@ -38,11 +38,11 @@ def insProveedor():
     Proveedor.direccion,
     Proveedor.telefono,
     Proveedor.nomTrabajador,
-    db.func.group_concat(MP.ingrediente)
+    db.func.group_concat(Mp.ingrediente)
         ).join(
     ingredienteProveedor, Proveedor.idProveedor == ingredienteProveedor.idProveedor
         ).join(
-    MP, ingredienteProveedor.idMP == MP.idMP
+    Mp, ingredienteProveedor.idMP == Mp.idMP
         ).filter(
     Proveedor.estatus.is_(True)  # Filtrar por estatus verdadero (True)
         ).group_by(
@@ -116,11 +116,11 @@ def actualizar():
     Proveedor.direccion,
     Proveedor.telefono,
     Proveedor.nomTrabajador,
-    db.func.group_concat(MP.ingrediente)
+    db.func.group_concat(Mp.ingrediente)
         ).join(
     ingredienteProveedor, Proveedor.idProveedor == ingredienteProveedor.idProveedor
         ).join(
-    MP, ingredienteProveedor.idMP == MP.idMP
+    Mp, ingredienteProveedor.idMP == Mp.idMP
         ).filter(
     Proveedor.idProveedor == proveedor_id  # Filtrar por estatus verdadero (True)
         ).group_by(
@@ -132,3 +132,40 @@ def actualizar():
 
         proveedor = Proveedor.query.get(proveedor_id)
         return render_template("InsProveedor.html", proveedor=datos_tabla)
+    
+@proveedor_bp.route("/updProveedor/<int:id>", methods=["GET", "POST"])
+@login_required
+def updProveedor(id):
+    rol = current_user.rol
+    if rol != 'administrador':
+        abort(403)
+
+    proveedor = Proveedor.query.get_or_404(id)
+    form = ProveedorForm(request.form, obj=proveedor)
+    formMateP = MateriaPForm(request.form)
+
+    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in Mp.query.all()]
+
+    if request.method == 'POST' and form.validate():
+        form.populate_obj(proveedor)
+        proveedor.estatus = True  # Actualizar el estatus si es necesario
+
+        # Actualizar los ingredientes del proveedor
+        ingredientes_seleccionados = formMateP.ingredientes.data
+        ingredientes = [int(id_ingrediente) for id_ingrediente in ingredientes_seleccionados]
+
+        # Eliminar los ingredientes anteriores del proveedor
+        proveedor.ingredientes_proveedor.clear()
+
+        # Agregar los nuevos ingredientes al proveedor
+        for id_ingrediente in ingredientes:
+            ingred_proveedor = ingredienteProveedor(idProveedor=proveedor.idProveedor, idMP=id_ingrediente)
+            db.session.add(ingred_proveedor)
+
+        # Hacer el commit
+        db.session.commit()
+
+        flash('Proveedor actualizado correctamente', 'success')
+        return redirect(url_for('.insProveedor'))
+
+    return render_template("updProveedor.html", form=form, formMateP=ingredientes_choices, proveedor=proveedor)

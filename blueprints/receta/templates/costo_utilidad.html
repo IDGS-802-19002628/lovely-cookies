@@ -1,0 +1,43 @@
+{% import "_macros.html" as macros %}
+{% from "_macros.html" import input_forms %}
+{% extends "layout1.html" %}
+
+{% block content %}
+
+<style>
+    /* Estilos CSS para las tarjetas */
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    .card-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container">
+    <h1>Utilidades de Galletas</h1>
+    <hr>
+
+    {% for resultado in resultados %}
+    <div class="card">
+        <h2 class="card-title">{{ resultado.galleta_nombre }}</h2>
+        <p class="card-text">Precio por galleta: ${{ resultado.precio_galleta }}</p>
+        <p class="card-text">Costo por galleta: ${{ resultado.costo_por_galleta }}</p>
+        <p class="card-text">Utilidad por galleta: ${{ resultado.utilidad_por_galleta }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

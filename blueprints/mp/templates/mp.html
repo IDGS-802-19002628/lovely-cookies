@@ -1,0 +1,101 @@
+{% extends "layout1.html" %}
+{% import "_macros.html" as macros %}
+{% from "_macros.html" import input_forms %}
+
+{% block content %}
+
+<!-- Botones para abrir los formularios en una ventana modal -->
+<div class="text-center mb-3">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoIngredienteModal">Registrar Nuevo Ingrediente</button>
+</div>
+
+<!-- Modal para registrar nuevo ingrediente -->
+<div class="modal fade" id="nuevoIngredienteModal" tabindex="-1" role="dialog" aria-labelledby="nuevaGalletaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaGalletaModalLabel">Registrar Nuevo Ingrediente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="galletaForm" action="/mp" method="post" enctype="multipart/form-data">
+                    {{input_forms(mp_form.ingrediente, class="form-control mb-3")}}
+                    {{ input_forms(mp_form.medicion, class="form-control mb-3") }}
+                    {{ input_forms(mp_form.descripcion, class="form-control mb-3") }}
+                    {{ input_forms(mp_form.precio, class="form-control mb-3") }}
+
+                    <button type="submit" name="crear_galleta" class="btn btn-primary">Agregar Ingrediente</button>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container"> <!-- Contenedor para limitar el ancho de la tabla -->
+    <!-- Tabla para mostrar las materias primas -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Ingrediente</th>
+                    <th>Medición</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for materia_prima in materias_primas %}
+                <tr>
+                    <td>{{ materia_prima.ingrediente }}</td>
+                    <td>{{ materia_prima.medicion }}</td>
+                    <td>{{ materia_prima.descripcion }}</td>
+                    <td>{{ materia_prima.precio }}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarIngredienteModal{{ materia_prima.idMP }}">Modificar</button>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('mp.eliminar_mp', id=materia_prima.idMP) }}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este ingrediente?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% for materia_prima in materias_primas %}
+<!-- Modal para modificar el ingrediente -->
+<div class="modal fade" id="modificarIngredienteModal{{ materia_prima.idMP }}" tabindex="-1" role="dialog" aria-labelledby="modificarIngredienteModalLabel{{ materia_prima.idMP }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarIngredienteModalLabel{{ materia_prima.idMP }}">Modificar Ingrediente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="modificarIngredienteForm{{ materia_prima.idMP }}" action="{{ url_for('mp.modificar_mp', id=materia_prima.idMP) }}" method="post" enctype="multipart/form-data">
+                    {{input_forms(mp_form.ingrediente, class="form-control mb-3", value=materia_prima.ingrediente)}}
+                    {{input_forms(mp_form.medicion, class="form-control mb-3", value=materia_prima.medicion)}}
+                    {{input_forms(mp_form.descripcion, class="form-control mb-3", value=materia_prima.descripcion)}}
+                    {{input_forms(mp_form.precio, class="form-control mb-3", value=materia_prima.precio)}}
+
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

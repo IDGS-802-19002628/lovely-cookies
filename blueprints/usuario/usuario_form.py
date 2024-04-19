@@ -16,7 +16,7 @@ class UserForm(Form):
         validators.DataRequired(message='El campo es requerido'),
         validators.length(min=0, max=50, message="Ingresa correo valido")
     ])
-    rol_choices = [('empleado', 'Empleado'),('administrador', 'Administrador'),  ('produccion', 'Producción')]
+    rol_choices = [('empleado', 'Empleado'),('administrador', 'Administrador')]
     rol = SelectField("Rol", choices=rol_choices, validators=[validators.DataRequired(message='El campo es requerido')])
     estatus_choices = [('activo', 'Activo'),('inactivo', 'Inactivo')]
     estatus = SelectField("Estatus", choices=estatus_choices, validators=[validators.DataRequired(message='El campo es requerido')])

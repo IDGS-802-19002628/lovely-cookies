@@ -16,6 +16,7 @@ from blueprints.venta.ventas import venta_bp
 from blueprints.proveedor.proveedor import proveedor_bp
 from blueprints.receta.recetas import recetas_bp
 from blueprints.merma.merma import merma_bp
+from blueprints.notificacion.notificacion import notificaciones_bp
 
 
 
@@ -50,7 +51,6 @@ def page_not_found(e):
 
 
 
-
 app.register_blueprint(menu_bp)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(venta_bp)
@@ -60,6 +60,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(produccion_bp)
 app.register_blueprint(tablero_bp)
 app.register_blueprint(merma_bp)
+app.register_blueprint(notificaciones_bp)
 
 if __name__ == '__main__':
     db.init_app(app)

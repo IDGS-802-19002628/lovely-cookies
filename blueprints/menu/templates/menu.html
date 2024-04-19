@@ -104,6 +104,18 @@
                 </div>
             </a>
         </div>
+        <div class="col-3">
+            <a href="/merma_tablero" class="">
+                <div class="card h-100" style="width: 20rem;">
+                    <img src="/static/img/undraw_Throw_away_re_x60k.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-3"> 
+                        <br><br>
+                        <h1 class="card-title">Merma</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+
 
         
         <div class="col-3 opacity-0">
@@ -155,12 +167,6 @@
        
   
     </div>
-
-</div>
-{% endif %}
-
-{% if current_user.rol == 'Producción' %}
-<div class="ms-5 mt-5">
     <div class="row justify-content-center">
        
         <div class="col-3">
@@ -174,23 +180,34 @@
                 </div>
             </a>
         </div>
-
-        <div class="col-3">
-            <a href="/dashboard" class="">
-                <div class="card h-100" style="width: 20rem;">
-                    <img src="/static/img/undraw_Data_trends_re_2cdy.png" class="card-img-top" alt="..." width="100%">
-                    <div class="card-body  text-center mt-4">
-                        <br> 
-                        <h1 class="card-title">Dashboard</h1>
+        <div class="col-3" >
+            <a href="/produccion">
+                <div class="card h-100" style="display: none;">
+                    <img src="/static/img/undraw_factory_dy0a.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-5">
+                        <br><br>
+                        <h1 class="card-title">Producciones</h1>
                     </div>
                 </div>
             </a>
         </div>
-      
-       
-  
+        <div class="col-3" >
+            <a href="/produccion">
+                <div class="card h-100" style="display: none;">
+                    <img src="/static/img/undraw_factory_dy0a.png" class="card-img-top" alt="..." width="100%">
+                    <div class="card-body  text-center mt-5">
+                        <br><br>
+                        <h1 class="card-title">Producciones</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 
 </div>
+
+</div>
 {% endif %}
+
+
 {% endblock %}

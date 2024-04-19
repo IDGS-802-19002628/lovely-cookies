@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template,abort, send_from_directory
 from flask_login import login_required, current_user
 from blueprints.tablero.function.abm import Dashboard
+
 import os
 
 tablero_bp = Blueprint("tablero", __name__, template_folder="templates")
@@ -22,5 +23,6 @@ def tablero():
       print('entro a la validacion')
       print(static_folder)
       abort(403)
-    Dashboard().guardar_dashboard
+    dash = Dashboard()
+    dash.guardar_dashboard()
     return render_template("tablero.html")
