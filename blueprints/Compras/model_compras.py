@@ -9,7 +9,7 @@ class CompraProducto(db.Model):
     nombreProducto = db.Column(db.String(30))
     cantidad = db.Column(db.Float)
     medida = db.Column(db.String(25)),
-    subTotal = db.Column(db.Double),
+    subTotal = db.Column(db.Float),
     idProveedor = db.Column(db.Integer, db.ForeignKey('Proveedor.idProveedor'))
     idMP = db.Column(db.Integer, db.ForeignKey('MP.idMP'))
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'))

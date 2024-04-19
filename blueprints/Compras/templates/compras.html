@@ -3,35 +3,36 @@
 {% import "_macros.html" as macros %}
 <body>
     <h1>Compras</h1>
-
-    <!-- Formulario para seleccionar el proveedor -->
-    <form action="/compras" method="post">
-        <label for="proveedor">Selecciona un proveedor:</label>
-        <select id="proveedor" name="proveedor" required>
-            <option value="">Seleccione un proveedor</option>
+    <!-- Formulario de compras -->
+    <form method="GET" action="/compras">
+        <!-- Selección de proveedor -->
+        <label for="proveedor">Seleccionar proveedor:</label>
+        <select name="proveedor_id" id="proveedor" onchange="this.form.submit()">
+            <option value="">-- Seleccionar --</option>
+            <!-- Mostrar lista de proveedores -->
             {% for proveedor in lista_proveedores %}
-                <option value="{{ proveedor.idProveedor }}">{{ proveedor.nomEmpresa }}</option>
+                <option value="{{ proveedor.idProveedor }}"
+                    {% if proveedor.idProveedor == proveedor_id %} selected {% endif %}>
+                    {{ proveedor.nomEmpresa }}
+                </option>
             {% endfor %}
         </select>
-        <br>
-        
-        <!-- Lista de materias primas -->
-        <div id="materias-primas">
-            {% for mp in lista_materias_primas %}
-                <div class="materia-prima">
-                    <input type="hidden" name="mp_id" value="{{ mp.idMP }}">
-                    <label>{{ mp.ingrediente }} ({{ mp.medicion }})</label>
-                    <input type="number" name="mp_cantidad" min="0" step="0.01" placeholder="Cantidad" required>
-                </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Botón para enviar la compra -->
-        <button type="submit" class="btn btn-primary">Guardar Compra</button>
     </form>
-</body>
+
+    <!-- Lista de materias primas (solo se muestra si hay un proveedor seleccionado) -->
+    {% if listaIngre %}
+        <h2>Materias primas del proveedor seleccionado:</h2>
+        <ul>
+            {% for materia in listaIngre %}
+                <li>{{ materia.ingrediente }} - {{ materia.medicion }} - Precio: {{ materia.precio }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Seleccione un proveedor para ver las materias primas disponibles.</p>
+    {% endif %}
 
 {% endblock %}
+
 {% block script %}
 <script>
 

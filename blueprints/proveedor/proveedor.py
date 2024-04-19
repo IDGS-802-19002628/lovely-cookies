@@ -53,7 +53,7 @@ def insProveedor():
     print(resultados)
     datos_tabla = [(idProveedor, proveedor, direccion, telefono, nomTrabajador, ingredientes.split(',')) for idProveedor, proveedor, direccion, telefono, nomTrabajador, ingredientes in resultados]
     
-    if request.method == 'GET' and formProvedor.validate():
+    if request.method == 'POST' and formProvedor.validate():
         proveedor = Proveedor(
             nomEmpresa=formProvedor.nomEmpresa.data,
             direccion=formProvedor.direccion.data,
@@ -61,8 +61,6 @@ def insProveedor():
             nomTrabajador=formProvedor.nomTrabajador.data,
             estatus = 1
         )
-
-        print("Nmms que mmsd"+proveedor)
         
         # Insertar el proveedor en la base de datos
         db.session.add(proveedor)

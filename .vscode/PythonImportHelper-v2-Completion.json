@@ -995,6 +995,14 @@
         "documentation": {}
     },
     {
+        "label": "TextAreaField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
         "label": "validators",
         "importPath": "wtforms",
         "description": "wtforms",
@@ -1783,6 +1791,14 @@
         "documentation": {}
     },
     {
+        "label": "merma_bp",
+        "importPath": "blueprints.merma.merma",
+        "description": "blueprints.merma.merma",
+        "isExtraImport": true,
+        "detail": "blueprints.merma.merma",
+        "documentation": {}
+    },
+    {
         "label": "Autenticador",
         "kind": 6,
         "importPath": "blueprints.login.function.auth",
@@ -1864,11 +1880,11 @@
         "documentation": {}
     },
     {
-        "label": "ProduccionForm",
+        "label": "MermaForm",
         "kind": 6,
         "importPath": "blueprints.merma.form_merma",
         "description": "blueprints.merma.form_merma",
-        "peekOfCode": "class ProduccionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad_m = IntegerField(\"Cantidad Merma\",[\n        validators.DataRequired(message='El campo es requerido'),\n    ])\n    cantidad_v = IntegerField(\"Cantidad Lote\",[\n        validators.DataRequired(message='El campo es requerido'),\n    ])",
+        "peekOfCode": "class MermaForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad_m = IntegerField(\"Cantidad Merma\",[\n        validators.DataRequired(message='El campo es requerido'),\n    ])\n    galleta = StringField(\"Gallata\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"Ingresa contraseña valido\")\n    ])\n    observaciones = TextAreaField(\"Observaciones\",[",
         "detail": "blueprints.merma.form_merma",
         "documentation": {}
     },
@@ -1877,7 +1893,7 @@
         "kind": 2,
         "importPath": "blueprints.merma.merma",
         "description": "blueprints.merma.merma",
-        "peekOfCode": "def merma():\n    return",
+        "peekOfCode": "def merma():\n    merma_form = MermaForm(request.form)\n    return render_template(\"merma.html\", form=merma_form)",
         "detail": "blueprints.merma.merma",
         "documentation": {}
     },
@@ -1886,7 +1902,7 @@
         "kind": 5,
         "importPath": "blueprints.merma.merma",
         "description": "blueprints.merma.merma",
-        "peekOfCode": "merma_bp = Blueprint(\"merma\", __name__, template_folder=\"templates\")\n@merma_bp.route('/merma')\ndef merma():\n    return",
+        "peekOfCode": "merma_bp = Blueprint(\"merma\", __name__, template_folder=\"templates\")\n@merma_bp.route('/merma')\ndef merma():\n    merma_form = MermaForm(request.form)\n    return render_template(\"merma.html\", form=merma_form)",
         "detail": "blueprints.merma.merma",
         "documentation": {}
     },
@@ -2521,6 +2537,15 @@
         "documentation": {}
     },
     {
+        "label": "unauthorized_error",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
         "label": "load_user",
         "kind": 2,
         "importPath": "main",
@@ -2552,7 +2577,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app._static_folder = 'static'\nallowed_ips = [\"127.0.0.1\",\"192.168.1.100\"]\ncors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):",
+        "peekOfCode": "app._static_folder = 'static'\nallowed_ips = [\"127.0.0.1\",\"192.168.1.100\"]\ncors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):",
         "detail": "main",
         "documentation": {}
     },
@@ -2561,7 +2586,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "allowed_ips = [\"127.0.0.1\",\"192.168.1.100\"]\ncors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))",
+        "peekOfCode": "allowed_ips = [\"127.0.0.1\",\"192.168.1.100\"]\ncors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401",
         "detail": "main",
         "documentation": {}
     },
@@ -2570,7 +2595,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "cors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)",
+        "peekOfCode": "cors = CORS(app, resources={r\"*\": {\"origins\": allowed_ips}})\nlogin_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader",
         "detail": "main",
         "documentation": {}
     },
@@ -2579,7 +2604,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "login_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):",
+        "peekOfCode": "login_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):",
         "detail": "main",
         "documentation": {}
     },
@@ -2588,7 +2613,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "log_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
+        "peekOfCode": "log_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))",
         "detail": "main",
         "documentation": {}
     },
@@ -2597,7 +2622,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "csrf = CSRFProtect(app)\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)\napp.register_blueprint(venta_bp)",
+        "peekOfCode": "csrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
         "detail": "main",
         "documentation": {}
     }

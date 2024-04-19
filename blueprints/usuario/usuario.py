@@ -30,7 +30,6 @@ def acceso_forbidden(error):
     return send_from_directory(static_folder, 'acceso_rol.html'), 403
 
 @usuario_bp.route("/usuario", methods=['GET', 'POST'])
-@login_required
 def usuario():
     form_user = UserForm(request.form)
     gestor_usuario = GestorUsuario()
