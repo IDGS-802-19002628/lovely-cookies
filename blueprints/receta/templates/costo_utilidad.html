@@ -1,43 +1,54 @@
+{% extends "layout1.html" %}
 {% import "_macros.html" as macros %}
 {% from "_macros.html" import input_forms %}
-{% extends "layout1.html" %}
-
 {% block content %}
 
-<style>
-    /* Estilos CSS para las tarjetas */
-    .card {
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
-    }
+    <style>
+        /* Estilos CSS para las tarjetas */
+        .card {
+            flex: 0 0 25%; /* Esto hará que las tarjetas ocupen el 30% del ancho del contenedor */
+            margin: 0.50%; /* Pequeño margen para dar espacio entre las tarjetas */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: beige;
+            transition: transform 0.3s ease-in-out;
+            
+        }
 
-    .card-title {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
+        .card:hover {
+            background-color: #e9ecef;
+            transform: scale(1.05);
+        }
 
-    .card-text {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-</style>
+        /* Estilos para el contenedor de las tarjetas */
+        .card-container {
+            display: flex; /* Esto hará que las tarjetas se muestren en línea */
+            flex-wrap: wrap; /* Esto permitirá que las tarjetas se envuelvan a la siguiente línea si no hay suficiente espacio */
+            justify-content: space-between; /* Esto distribuirá las tarjetas de manera uniforme en el contenedor */
+        }
+    </style>
 
 <div class="container">
-    <h1>Utilidades de Galletas</h1>
+    <div class="container">
+        <h1 style="text-align: center;">Utilidades de Galletas</h1>
+        <hr>
+
+        <div class="card-container">
+            {% for resultado in resultados %}
+            <div class="card">
+                <h4 class="card-title">{{ resultado.galleta_nombre }}</h4>
+                <p class="card-text">Precio por galleta: ${{ resultado.precio_galleta }}</p>
+                <p class="card-text">Costo por galleta: ${{ resultado.costo_por_galleta }}</p>
+                <p class="card-text">Utilidad por galleta: ${{ resultado.utilidad_por_galleta }}</p>
+                <p class="card-text">Porcentaje de utilidad: {{ resultado.porcentaje_ganancia }}%</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     <hr>
 
-    {% for resultado in resultados %}
-    <div class="card">
-        <h2 class="card-title">{{ resultado.galleta_nombre }}</h2>
-        <p class="card-text">Precio por galleta: ${{ resultado.precio_galleta }}</p>
-        <p class="card-text">Costo por galleta: ${{ resultado.costo_por_galleta }}</p>
-        <p class="card-text">Utilidad por galleta: ${{ resultado.utilidad_por_galleta }}</p>
-    </div>
-    {% endfor %}
-</div>
+   
 
 {% endblock %}

@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-md-6 col-sm-12">
                 <!-- Este es el contenedor donde va el cuestionario y la tabla superpuestos -->
                 <div class="card">
@@ -151,14 +151,17 @@
                             </div>
                         </div>
                     </div>
+                    <a href="{{ url_for('venta.ventas_totales') }}" class="btn btn-success">Ver ventas totales del día</a>
                 </div>
             </div>
         </div>
     </div>
 </body>
+  
 
 {% endblock %}
 {% block script %}
+
 <script>
     function cargarContenido(categoria) {
         let ruta;

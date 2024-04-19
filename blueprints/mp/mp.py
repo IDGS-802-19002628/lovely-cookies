@@ -18,7 +18,8 @@ def ingresar_mp():
     if request.method=='POST' and mp_form.validate():
             mp=Mp(ingrediente=mp_form.ingrediente.data,
                         medicion=mp_form.medicion.data,
-                        descripcion=mp_form.descripcion.data
+                        descripcion=mp_form.descripcion.data,
+                        precio=mp_form.precio.data
                         )
             db.session.add(mp)
             db.session.commit()
