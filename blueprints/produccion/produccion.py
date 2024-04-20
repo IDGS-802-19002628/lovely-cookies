@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, send_from_directory ,abort
 from flask_login import current_user
 from flask_login  import login_required
+from blueprints.receta.models import Galleta
 from .produccion_form import ProduccionForm
 from .function.abm import Gestorproduccion 
 import os
@@ -29,8 +30,10 @@ def produccion_index():
     if request.method == 'POST':
       messages, alert = Gestorproduccion().guardar_produccion(form_produccion)
     b = Gestorproduccion().obtener_produccion()
+    g = Galleta.query.all();
     flash(messages)
-    return render_template("produccion.html", form = form_produccion, r_produccion = b , n=alert)
+    
+    return render_template("produccion.html", form = form_produccion, r_produccion = b , galleta= g,  n=alert)
   
 @produccion_bp.route("/modificar_produccion", methods=['GET', 'POST'])
 @login_required
@@ -41,6 +44,7 @@ def modificar():
     id_p = session.get('id_produccion')
     method = request.method
     print('metodo ejecutado ', method)
+    g ={}
     messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)
     if request.method == 'POST':
       
@@ -49,8 +53,9 @@ def modificar():
       flash(messages)
       producciones = Gestorproduccion().obtener_produccion()
       form_p = ProduccionForm()
-      return render_template('produccion.html', form=form_p, r_produccion = producciones ,n=alert)
-    return render_template('modificar_produccion.html', form= form_pro)
+      g = Galleta.query.all()
+      return render_template('produccion.html', form=form_p, r_produccion = producciones, galleta= g ,n=alert)
+    return render_template('modificar_produccion.html', form= form_pro,  galleta= g)
 
 
 @produccion_bp.route('/produccion_cantidad', methods=['GET', 'POST'])

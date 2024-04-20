@@ -12,7 +12,10 @@
                             <div class="d-flex align-items-center">
                                 <span class="h5 text-white"
                                     style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">
-                                    Menu de Galletas </span>
+                                    Menu de Galletas </span>  
+                            </div>
+                            <div class="div">
+                                <a href="/merma" class="btn btn-primary"> <i class='bx bx-error-alt bx-sm align-middle'></i> Merma</a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +26,7 @@
                                     {% for gatas, gatasinv in galletas_y_inventario %}
                                     <div class="boton-con-info">
                                         <a href="/venta?id={{gatas.idGalleta}}" class="boton-circular">
-                                            <img src="/static/img/Galletas/{{gatas.idGalleta}}.jfif"
+                                            <img src="../static/img/Galletas/{{gatas.idGalleta}}.jfif"
                                                 alt="Imagen de {{gatas.nombre}}">
                                         </a>
                                         <label>{{gatas.nombre}} <br> ${{gatas.precio}} Cantidad
@@ -36,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6 col-sm-12">
                 <!-- Este es el contenedor donde va el cuestionario y la tabla superpuestos -->
                 <div class="card">
@@ -100,7 +103,7 @@
                                 <a class="navbar-brand" href="#">
                                     <label class="d-inline-block align-middle"
                                         style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #000000;">
-                                        Don Galleto</label>
+                                        Lovely Cookie</label>
                                 </a>
                                 <table id="tblVentasPieza" class="table table-hover">
                                     <thead>
@@ -124,10 +127,7 @@
                                             <td>{{tab.peso}}</td>
                                             <td>{{tab.precio}}</td>
                                             <td>{{tab.subTotal}}</td>
-                                            <td>
-                                                <a class="btn btn-danger"
-                                                    onclick="confirmDelete('{{idProveedor}}')">Eliminar</a>
-                                            </td>
+                                            <td><a class="btn btn-danger" href="/eliminarGaTab?id={{loop.index-1}}">Eliminar</a></td>
                                         </tr>
                                         {% endfor %}
                                         {% else %}
@@ -146,22 +146,23 @@
                                 </table>
                                 <div class="d-flex justify-content-end mt-4">
                                     <a class="btn btn-danger" href="/limTabla">Cancelar</a>
-                                    <a class="btn btn-primary" href="/guardar?total={{total}}">Guardar</a>
+                                    <form action="/guardar" method="get" id="formGuardarVenta">
+                                        <input type="hidden" name="total" value="{{ total }}">
+                                        <button type="submit" onclick="guardarVenta(event)" class="btn btn-primary">Guardar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <a href="{{ url_for('venta.ventas_totales') }}" class="btn btn-success">Ver ventas totales del día</a>
+
                 </div>
             </div>
         </div>
     </div>
 </body>
-  
-
 {% endblock %}
 {% block script %}
-
 <script>
     function cargarContenido(categoria) {
         let ruta;
@@ -429,5 +430,56 @@
         return totalDinero.toFixed(2);
     }
 
+    function guardarVenta(event) {
+        event.preventDefault(); // Evita el envío inmediato del formulario.
+    
+        Swal.fire({
+            title: 'Venta guardada correctamente.',
+            text: '¿Desea imprimir el Ticket?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Imprimir Ticket',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // El usuario eligió imprimir el ticket.
+                imprimirTicket();
+                // Envía el formulario después de imprimir el ticket.
+                document.getElementById('formGuardarVenta').submit();
+            } else {
+                // El usuario eligió no imprimir el ticket.
+                document.getElementById('formGuardarVenta').submit();
+                // Muestra un mensaje de información.
+                Swal.fire('Venta guardada', 'La venta ha sido guardada sin imprimir el Ticket.', 'info');
+            }
+        });
+    }
+    
+    function imprimirTicket() {
+        // Clona el contenido del ticket.
+        var contenidoTicket = document.getElementById('contenidoTicket').cloneNode(true);
+        
+        // Selecciona y elimina los elementos no deseados, incluyendo los botones de eliminación.
+        var elementosNoDeseados = contenidoTicket.querySelectorAll('script, button, input, label, select, a.btn-danger');
+        elementosNoDeseados.forEach(function (elemento) {
+            elemento.remove();
+        });
+        
+        // Guarda el contenido original de la página.
+        var contenidoOriginal = document.body.innerHTML;
+        
+        // Reemplaza el contenido de la página actual con el contenido del ticket.
+        document.body.innerHTML = '<html><head><title>Ticket</title></head><body>';
+        document.body.innerHTML += '<h1>Lovely Cookies</h1>';
+        document.body.innerHTML += contenidoTicket.innerHTML;
+        document.body.innerHTML += '</body></html>';
+        
+        // Imprime el contenido de la ventana actual.
+        window.print();
+        
+        // Restaura el contenido original de la página.
+        document.body.innerHTML = contenidoOriginal;
+    }
+    
 </script>
 {% endblock %}
