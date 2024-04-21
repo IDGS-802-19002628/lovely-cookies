@@ -115,3 +115,12 @@
 2024-04-19 18:47:00,192 - INFO - Inicio de sesión con el correo Pedro@gmail.com
 2024-04-19 19:05:31,574 - INFO - Inicio de sesión con el correo Carlos@gmail.com
 2024-04-19 19:11:07,692 - INFO - Inicio de sesión con el correo Pedro@gmail.com
+2024-04-21 00:17:21,540 - INFO - Inicio de sesión con el correo julian@gmail.com
+2024-04-21 13:16:13,202 - INFO - The CSRF token is missing.
+2024-04-21 13:20:06,691 - INFO - The CSRF token is missing.
+2024-04-21 13:24:34,446 - INFO - The CSRF token is missing.
+2024-04-21 13:24:47,426 - INFO - The CSRF token is missing.
+2024-04-21 13:24:50,540 - INFO - The CSRF token is missing.
+2024-04-21 13:24:52,826 - INFO - The CSRF token is missing.
+2024-04-21 13:24:54,976 - INFO - The CSRF token is missing.
+2024-04-21 13:26:09,211 - INFO - The CSRF token is missing.

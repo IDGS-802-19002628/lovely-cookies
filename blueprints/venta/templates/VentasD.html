@@ -32,8 +32,9 @@
             </tbody>
         </table>
     </div>
-
-    <h1 class="text-center">Pagos realizados a proveedores</h1>
+    <h4 style="text-align: center;">Total de ventas del día: {{ suma_ventas }}</h4>
+<br>
+    <h3 class="text-center">Pagos realizados a proveedores</h3>
     <div id="ventasDiariasContent" class="table-responsive">
         <table class="table table-bordered table-striped table-hover text-center align-middle">
             <thead class="bg-success text-white">
@@ -62,6 +63,24 @@
         </div>
     </form>
     <br>
-    <h4 style="text-align: center;">Total de ventas del día: {{ suma_ventas }}</h4>
+    
+</div>
+
+<br>
+<div  class="center-content">>
+    <table class="table table-bordered table-striped table-hover text-center align-middle">
+        <thead class="bg-success text-white">
+            <tr>
+                <th>TOTAL EN CAJA CHICA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros_cajach %}
+            <tr>
+                <td>{{ registro.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
