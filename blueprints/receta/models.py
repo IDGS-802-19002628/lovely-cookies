@@ -19,3 +19,4 @@ class Galleta(db.Model):
     peso = db.Column(db.Float)
     imagen = db.Column(db.String(120))  # Ruta de la imagen
 
+    

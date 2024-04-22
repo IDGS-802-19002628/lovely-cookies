@@ -18,6 +18,9 @@ class DevelomentConfig(Config):
     DB = os.getenv("DB")
     DB_H = os.getenv("DB_HOST")
     print(usuario)
+    print(pwd)
+    print(DB)
+    print(DB_H)
     SQLALCHEMY_DATABASE_URI=f"mysql+pymysql://{usuario}:{pwd}@{DB_H}/{DB}"
     
 db = SQLAlchemy()

@@ -17,7 +17,7 @@ from blueprints.proveedor.proveedor import proveedor_bp
 from blueprints.receta.recetas import recetas_bp
 from blueprints.merma.merma import merma_bp
 from blueprints.notificacion.notificacion import notificaciones_bp
-
+from blueprints.mp.mp import mp_bp
 
 
 app = Flask(__name__)
@@ -61,6 +61,7 @@ app.register_blueprint(produccion_bp)
 app.register_blueprint(tablero_bp)
 app.register_blueprint(merma_bp)
 app.register_blueprint(notificaciones_bp)
+app.register_blueprint(mp_bp)
 
 if __name__ == '__main__':
     db.init_app(app)

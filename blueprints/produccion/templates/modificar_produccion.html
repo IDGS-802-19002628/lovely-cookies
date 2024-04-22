@@ -11,7 +11,7 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-    <h1 class="mt-5 mb-4">Registrar Nueva Producción</h1>
+    <h1 class="mt-5 mb-4">Actualizar Producción</h1>
 </div>
 <div class="ms-5 mt-5">
     <div class="row justify-content-center">
@@ -24,11 +24,11 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-4">
-                            {{ input_forms(form.cantidad, class="form-select", placeholder="") }}
+                            {{ input_forms(form.cantidad, class="form-control", placeholder="") }}
                             <br>    
                                 <div class="mb-5">
                                     <div>
-                                        {{ input_forms(form.estatus, class="form-select", placeholder="") }}
+                                        {{ input_forms(form.estatus2, class="form-select", placeholder="") }}
                                     </div>
                                 </div>
                             <div class="mb-5">
@@ -39,12 +39,12 @@
                             </div>
                         </div>
                         <div class="col-4">
-                          {{ input_forms(form.galleta, class="form-select", placeholder="") }}
+                            {{ input_forms(form.g, class="form-select", placeholder="" ,disabled="disabled") }}
                           <br>
                                
                         </div>
                         <div class="col-3">
-                          {{ input_forms(form.fecha, class="form-select", placeholder="") }}
+                          {{ input_forms(form.fecha, class="form-select", placeholder="" ,disabled="disabled") }}
                         </div>
                     </div>
                     <div class="row justify-content-start">

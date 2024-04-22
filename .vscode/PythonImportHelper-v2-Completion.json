@@ -249,6 +249,94 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "request",
         "importPath": "flask",
         "description": "flask",
@@ -361,6 +449,14 @@
         "documentation": {}
     },
     {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -417,15 +513,7 @@
         "documentation": {}
     },
     {
-        "label": "abort",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "send_from_directory",
+        "label": "current_app",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -738,6 +826,30 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "current_user",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -763,14 +875,6 @@
     },
     {
         "label": "login_required",
-        "importPath": "flask_login",
-        "description": "flask_login",
-        "isExtraImport": true,
-        "detail": "flask_login",
-        "documentation": {}
-    },
-    {
-        "label": "current_user",
         "importPath": "flask_login",
         "description": "flask_login",
         "isExtraImport": true,
@@ -980,6 +1084,118 @@
     },
     {
         "label": "TextAreaField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "validators",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "StringField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "IntegerField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "FloatField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "SelectField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "validators",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "PasswordField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "EmailField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "StringField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "RadioField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "SelectField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "IntegerField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "DateField",
         "importPath": "wtforms",
         "description": "wtforms",
         "isExtraImport": true,
@@ -1275,51 +1491,75 @@
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "InventarioG",
+        "importPath": "blueprints.venta.model_venta",
+        "description": "blueprints.venta.model_venta",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.venta.model_venta",
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "InventarioG",
+        "importPath": "blueprints.venta.model_venta",
+        "description": "blueprints.venta.model_venta",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.venta.model_venta",
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "InventarioG",
+        "importPath": "blueprints.venta.model_venta",
+        "description": "blueprints.venta.model_venta",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.venta.model_venta",
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "VentaGalleta",
+        "importPath": "blueprints.venta.model_venta",
+        "description": "blueprints.venta.model_venta",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.venta.model_venta",
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "Merma",
+        "importPath": "blueprints.merma.model_merma",
+        "description": "blueprints.merma.model_merma",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.merma.model_merma",
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "Merma",
+        "importPath": "blueprints.merma.model_merma",
+        "description": "blueprints.merma.model_merma",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "blueprints.merma.model_merma",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
         "documentation": {}
     },
     {
@@ -1395,36 +1635,67 @@
         "documentation": {}
     },
     {
-        "label": "login_required",
-        "importPath": "flask_login ",
-        "description": "flask_login ",
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
         "isExtraImport": true,
-        "detail": "flask_login ",
+        "detail": "blueprints.receta.models",
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "detail": "blueprints.receta.models",
         "documentation": {}
     },
     {
-        "label": "MP",
-        "importPath": "blueprints.mp.models",
-        "description": "blueprints.mp.models",
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
         "isExtraImport": true,
-        "detail": "blueprints.mp.models",
+        "detail": "blueprints.receta.models",
         "documentation": {}
     },
     {
-        "label": "MP",
-        "importPath": "blueprints.mp.models",
-        "description": "blueprints.mp.models",
+        "label": "Receta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
         "isExtraImport": true,
-        "detail": "blueprints.mp.models",
+        "detail": "blueprints.receta.models",
+        "documentation": {}
+    },
+    {
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
+        "isExtraImport": true,
+        "detail": "blueprints.receta.models",
+        "documentation": {}
+    },
+    {
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
+        "isExtraImport": true,
+        "detail": "blueprints.receta.models",
+        "documentation": {}
+    },
+    {
+        "label": "Galleta",
+        "importPath": "blueprints.receta.models",
+        "description": "blueprints.receta.models",
+        "isExtraImport": true,
+        "detail": "blueprints.receta.models",
+        "documentation": {}
+    },
+    {
+        "label": "FlaskForm",
+        "importPath": "flask_wtf",
+        "description": "flask_wtf",
+        "isExtraImport": true,
+        "detail": "flask_wtf",
         "documentation": {}
     },
     {
@@ -1452,12 +1723,75 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
+        "label": "DataRequired",
+        "importPath": "wtforms.validators",
+        "description": "wtforms.validators",
         "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
+        "detail": "wtforms.validators",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "wtforms.validators",
+        "description": "wtforms.validators",
+        "isExtraImport": true,
+        "detail": "wtforms.validators",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
         "documentation": {}
     },
     {
@@ -1474,6 +1808,128 @@
         "description": "werkzeug.security",
         "isExtraImport": true,
         "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "Mp",
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "InventarioMP",
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Mp",
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Mp",
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Mp",
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "secure_filename",
+        "importPath": "werkzeug.utils",
+        "description": "werkzeug.utils",
+        "isExtraImport": true,
+        "detail": "werkzeug.utils",
+        "documentation": {}
+    },
+    {
+        "label": "secure_filename",
+        "importPath": "werkzeug.utils",
+        "description": "werkzeug.utils",
+        "isExtraImport": true,
+        "detail": "werkzeug.utils",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "recetas_bp",
+        "importPath": "blueprints.receta.recetas",
+        "description": "blueprints.receta.recetas",
+        "isExtraImport": true,
+        "detail": "blueprints.receta.recetas",
+        "documentation": {}
+    },
+    {
+        "label": "recetas_bp",
+        "importPath": "blueprints.receta.recetas",
+        "description": "blueprints.receta.recetas",
+        "isExtraImport": true,
+        "detail": "blueprints.receta.recetas",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login ",
+        "description": "flask_login ",
+        "isExtraImport": true,
+        "detail": "flask_login ",
+        "documentation": {}
+    },
+    {
+        "label": "FileField",
+        "importPath": "flask_wtf.file",
+        "description": "flask_wtf.file",
+        "isExtraImport": true,
+        "detail": "flask_wtf.file",
+        "documentation": {}
+    },
+    {
+        "label": "FileAllowed",
+        "importPath": "flask_wtf.file",
+        "description": "flask_wtf.file",
+        "isExtraImport": true,
+        "detail": "flask_wtf.file",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -1508,14 +1964,6 @@
         "description": "cryptography.fernet",
         "isExtraImport": true,
         "detail": "cryptography.fernet",
-        "documentation": {}
-    },
-    {
-        "label": "Galleta",
-        "importPath": "blueprints.receta.models",
-        "description": "blueprints.receta.models",
-        "isExtraImport": true,
-        "detail": "blueprints.receta.models",
         "documentation": {}
     },
     {
@@ -1607,19 +2055,27 @@
         "documentation": {}
     },
     {
-        "label": "recetas_bp",
-        "importPath": "blueprints.receta.recetas",
-        "description": "blueprints.receta.recetas",
-        "isExtraImport": true,
-        "detail": "blueprints.receta.recetas",
-        "documentation": {}
-    },
-    {
         "label": "merma_bp",
         "importPath": "blueprints.merma.merma",
         "description": "blueprints.merma.merma",
         "isExtraImport": true,
         "detail": "blueprints.merma.merma",
+        "documentation": {}
+    },
+    {
+        "label": "notificaciones_bp",
+        "importPath": "blueprints.notificacion.notificacion",
+        "description": "blueprints.notificacion.notificacion",
+        "isExtraImport": true,
+        "detail": "blueprints.notificacion.notificacion",
+        "documentation": {}
+    },
+    {
+        "label": "mp_bp",
+        "importPath": "blueprints.mp.mp",
+        "description": "blueprints.mp.mp",
+        "isExtraImport": true,
+        "detail": "blueprints.mp.mp",
         "documentation": {}
     },
     {
@@ -1654,7 +2110,7 @@
         "kind": 2,
         "importPath": "blueprints.login.login",
         "description": "blueprints.login.login",
-        "peekOfCode": "def login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n            messages, contador = desactivar_cuenta().intentos()\n            if alert == 'warning':\n                if contador > 3:",
+        "peekOfCode": "def login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    mostrar = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n            messages, contador = desactivar_cuenta().intentos()\n            if alert == 'warning':",
         "detail": "blueprints.login.login",
         "documentation": {}
     },
@@ -1672,7 +2128,7 @@
         "kind": 5,
         "importPath": "blueprints.login.login",
         "description": "blueprints.login.login",
-        "peekOfCode": "login_bp = Blueprint(\"login\", __name__, template_folder=\"templates\")\n@login_bp.route(\"/login\", methods=['GET', 'POST'])\ndef login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)\n            messages, contador = desactivar_cuenta().intentos()",
+        "peekOfCode": "login_bp = Blueprint(\"login\", __name__, template_folder=\"templates\")\n@login_bp.route(\"/login\", methods=['GET', 'POST'])\ndef login():\n    form_auth = loginForm(request.form)\n    messages = ''\n    alert = ''\n    mostrar = ''\n    if request.method == 'POST':\n        try:\n            messages, alert, user_id = Autenticador().login(form_auth.correo.data, form_auth.pwd.data)",
         "detail": "blueprints.login.login",
         "documentation": {}
     },
@@ -1704,6 +2160,15 @@
         "documentation": {}
     },
     {
+        "label": "GestionMerma",
+        "kind": 6,
+        "importPath": "blueprints.merma.function.abm",
+        "description": "blueprints.merma.function.abm",
+        "peekOfCode": "class GestionMerma:\n    def guardar_merma(self, form, id_Usuario):\n        producto = form.galleta.data\n        cantidad = form.cantidad_m.data\n        observacion = form.observaciones.data\n        alert = ''\n        messages = ''\n        print(producto)\n        id = id_Usuario\n        nueva_merma = Merma(producto=producto,",
+        "detail": "blueprints.merma.function.abm",
+        "documentation": {}
+    },
+    {
         "label": "MermaForm",
         "kind": 6,
         "importPath": "blueprints.merma.form_merma",
@@ -1717,7 +2182,16 @@
         "kind": 2,
         "importPath": "blueprints.merma.merma",
         "description": "blueprints.merma.merma",
-        "peekOfCode": "def merma():\n    merma_form = MermaForm(request.form)\n    return render_template(\"merma.html\", form=merma_form)",
+        "peekOfCode": "def merma():\n    merma_form = MermaForm(request.form)\n    print('Prueba')\n    print(request.method )\n    messages = ''\n    alert = ''\n    g = {}\n    if request.method == 'POST':\n      print('entro a la validacion')\n      id = current_user.id",
+        "detail": "blueprints.merma.merma",
+        "documentation": {}
+    },
+    {
+        "label": "merma_tablero",
+        "kind": 2,
+        "importPath": "blueprints.merma.merma",
+        "description": "blueprints.merma.merma",
+        "peekOfCode": "def merma_tablero():\n    g = Merma.query.all();\n    return render_template(\"tablero_merma.html\", merma = g )",
         "detail": "blueprints.merma.merma",
         "documentation": {}
     },
@@ -1726,17 +2200,116 @@
         "kind": 5,
         "importPath": "blueprints.merma.merma",
         "description": "blueprints.merma.merma",
-        "peekOfCode": "merma_bp = Blueprint(\"merma\", __name__, template_folder=\"templates\")\n@merma_bp.route('/merma')\ndef merma():\n    merma_form = MermaForm(request.form)\n    return render_template(\"merma.html\", form=merma_form)",
+        "peekOfCode": "merma_bp = Blueprint(\"merma\", __name__, template_folder=\"templates\")\n@merma_bp.route('/merma' ,methods=['GET', 'POST'])\ndef merma():\n    merma_form = MermaForm(request.form)\n    print('Prueba')\n    print(request.method )\n    messages = ''\n    alert = ''\n    g = {}\n    if request.method == 'POST':",
         "detail": "blueprints.merma.merma",
         "documentation": {}
     },
     {
-        "label": "MP",
+        "label": "Merma",
+        "kind": 6,
+        "importPath": "blueprints.merma.model_merma",
+        "description": "blueprints.merma.model_merma",
+        "peekOfCode": "class Merma(db.Model):\n    idMerma=db.Column(db.Integer, primary_key=True)\n    fecha=db.Column(db.String(30), default=datetime.datetime.now().strftime(\"%Y-%m-%d %H:%M\"))\n    producto=db.Column(db.String(50))\n    cantidad=db.Column(db.Integer)\n    id=db.Column(db.Integer)\n    observacion=db.Column(db.Text)",
+        "detail": "blueprints.merma.model_merma",
+        "documentation": {}
+    },
+    {
+        "label": "MPForm",
+        "kind": 6,
+        "importPath": "blueprints.mp.forms",
+        "description": "blueprints.mp.forms",
+        "peekOfCode": "class MPForm(FlaskForm):\n    idMP = IntegerField('ID Ingrediente')\n    ingrediente = StringField('Ingrediente', validators=[DataRequired()])\n    medicion_choices = [('gr', 'gr'), ('ml', 'ml'), ('pz', 'pz')]\n    medicion = SelectField('Medicion', choices=medicion_choices, validators=[DataRequired()])\n    descripcion = StringField('Descripcion', validators=[DataRequired()])\n    precio = FloatField('Precio', validators=[DataRequired()])",
+        "detail": "blueprints.mp.forms",
+        "documentation": {}
+    },
+    {
+        "label": "Mp",
         "kind": 6,
         "importPath": "blueprints.mp.models",
         "description": "blueprints.mp.models",
-        "peekOfCode": "class MP(db.Model):\n    idMP = db.Column(db.Integer, primary_key=True)\n    ingrediente = db.Column(db.String(30)) \n    medicion = db.Column(db.String(15))\n    descripcion = db.Column(db.Integer, db.ForeignKey('galleta.idGalleta'))",
+        "peekOfCode": "class Mp(db.Model):\n    __tablename__ = 'mp'\n    idMP = db.Column(db.Integer, primary_key=True)\n    ingrediente = db.Column(db.String) \n    medicion = db.Column(db.String)\n    descripcion = db.Column(db.String)  # Corregido de Integer a String\n    precio = db.Column(db.Float)\nclass InventarioMP(db.Model):\n    __tablename__ = 'InventarioMP'  # Corregido de inventarioMP a InventarioMP\n    idMateria = db.Column(db.Integer, primary_key=True, autoincrement=True)",
         "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "InventarioMP",
+        "kind": 6,
+        "importPath": "blueprints.mp.models",
+        "description": "blueprints.mp.models",
+        "peekOfCode": "class InventarioMP(db.Model):\n    __tablename__ = 'InventarioMP'  # Corregido de inventarioMP a InventarioMP\n    idMateria = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    idMP = db.Column(db.Integer, db.ForeignKey('mp.idMP'))\n    existencias = db.Column(db.Integer)\n    fecha_caducidad = db.Column(db.String(15))\n    mp = db.relationship(\"Mp\")  # Corregido de mp a Mp",
+        "detail": "blueprints.mp.models",
+        "documentation": {}
+    },
+    {
+        "label": "ingresar_mp",
+        "kind": 2,
+        "importPath": "blueprints.mp.mp",
+        "description": "blueprints.mp.mp",
+        "peekOfCode": "def ingresar_mp():\n    mp_form =MPForm(request.form)\n    if request.method=='POST' and mp_form.validate():\n            mp=Mp(ingrediente=mp_form.ingrediente.data,\n                        medicion=mp_form.medicion.data,\n                        descripcion=mp_form.descripcion.data,\n                        precio=mp_form.precio.data\n                        )\n            db.session.add(mp)\n            db.session.commit()",
+        "detail": "blueprints.mp.mp",
+        "documentation": {}
+    },
+    {
+        "label": "eliminar_mp",
+        "kind": 2,
+        "importPath": "blueprints.mp.mp",
+        "description": "blueprints.mp.mp",
+        "peekOfCode": "def eliminar_mp(id):\n    if request.method == 'POST':\n        materia_prima = Mp.query.get_or_404(id)\n        db.session.delete(materia_prima)\n        db.session.commit()\n        flash('Ingrediente eliminado correctamente')\n    return redirect(url_for('mp.ingresar_mp'))\n@mp_bp.route(\"/mp/<int:id>/modificar\", methods=['GET', 'POST'])\n@login_required\ndef modificar_mp(id):",
+        "detail": "blueprints.mp.mp",
+        "documentation": {}
+    },
+    {
+        "label": "modificar_mp",
+        "kind": 2,
+        "importPath": "blueprints.mp.mp",
+        "description": "blueprints.mp.mp",
+        "peekOfCode": "def modificar_mp(id):\n    materia_prima = Mp.query.get_or_404(id)\n    form = MPForm(request.form, obj=materia_prima)\n    if form.validate_on_submit():\n        form.populate_obj(materia_prima)\n        db.session.commit()\n        flash('Ingrediente modificado correctamente')\n        return redirect(url_for('mp.ingresar_mp'))\n    return render_template('modificar_mp.html', form=form)",
+        "detail": "blueprints.mp.mp",
+        "documentation": {}
+    },
+    {
+        "label": "mp_bp",
+        "kind": 5,
+        "importPath": "blueprints.mp.mp",
+        "description": "blueprints.mp.mp",
+        "peekOfCode": "mp_bp = Blueprint(\"mp\", __name__, template_folder=\"templates\")\n@mp_bp.route(\"/mp\", methods=['GET', 'POST'])\n@login_required\ndef ingresar_mp():\n    mp_form =MPForm(request.form)\n    if request.method=='POST' and mp_form.validate():\n            mp=Mp(ingrediente=mp_form.ingrediente.data,\n                        medicion=mp_form.medicion.data,\n                        descripcion=mp_form.descripcion.data,\n                        precio=mp_form.precio.data",
+        "detail": "blueprints.mp.mp",
+        "documentation": {}
+    },
+    {
+        "label": "Notificacion",
+        "kind": 6,
+        "importPath": "blueprints.notificacion.model_notificacion",
+        "description": "blueprints.notificacion.model_notificacion",
+        "peekOfCode": "class Notificacion(db.Model):\n    id=db.Column(db.Integer, primary_key=True)\n    nombre_u=db.Column(db.String(50))\n    nombre_g = db.Column(db.String(10))\n    estatus = db.Column(db.String(10))\n    create_date=db.Column(db.DateTime, default=datetime.datetime.now)",
+        "detail": "blueprints.notificacion.model_notificacion",
+        "documentation": {}
+    },
+    {
+        "label": "ntf",
+        "kind": 2,
+        "importPath": "blueprints.notificacion.notificacion",
+        "description": "blueprints.notificacion.notificacion",
+        "peekOfCode": "def ntf():\n    ntf = NotificacionForm()\n    nombre = current_user.nombre\n    if request.method == 'POST':\n      return redirect('/venta')",
+        "detail": "blueprints.notificacion.notificacion",
+        "documentation": {}
+    },
+    {
+        "label": "notificaciones_bp",
+        "kind": 5,
+        "importPath": "blueprints.notificacion.notificacion",
+        "description": "blueprints.notificacion.notificacion",
+        "peekOfCode": "notificaciones_bp = Blueprint(\"notificaciones\", __name__, template_folder=\"templates\")\n@notificaciones_bp.route(\"/notificacion\")\n@login_required\ndef ntf():\n    ntf = NotificacionForm()\n    nombre = current_user.nombre\n    if request.method == 'POST':\n      return redirect('/venta')",
+        "detail": "blueprints.notificacion.notificacion",
+        "documentation": {}
+    },
+    {
+        "label": "NotificacionForm",
+        "kind": 6,
+        "importPath": "blueprints.notificacion.notificacion_form",
+        "description": "blueprints.notificacion.notificacion_form",
+        "peekOfCode": "class NotificacionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    nombre_U = StringField('Nombre del personal')\n    estatus_choices = [('normal', 'Normal'),('incremento', 'Incremento'), ('urgente','Urgente')]\n    estatus = SelectField(\"Estatus\", choices=estatus_choices, validators=[validators.DataRequired(message='El campo es requerido')])\n    galletas = [('chocolate y menta', 'Chocolate y Menta'),('avena y nueces', 'Avena y Nueces'),  ('limón', 'Limón'), ('coco',' Coco'), ('chocolate blanco y arándanos','Chocolate Blanco y Arándanos'), ('almendra','Almendra'), ('mantequilla de maní','Mantequilla de Maní'), ('chía y coco', 'Chía y Coco'), ('almendra y naranja','Almendra y Naranja'), ('maiz','Maiz')]\n    galleta = SelectField(\"Galletas\", choices=galletas, validators=[validators.DataRequired(message='Es nesesario seleccionar una galleta')])",
+        "detail": "blueprints.notificacion.notificacion_form",
         "documentation": {}
     },
     {
@@ -1744,7 +2317,7 @@
         "kind": 6,
         "importPath": "blueprints.produccion.function.abm",
         "description": "blueprints.produccion.function.abm",
-        "peekOfCode": "class Gestorproduccion:\n    def guardar_produccion(self, form_pro):\n        galleta = form_pro.galleta.data\n        produccion = int(200)\n        fecha = form_pro.fecha.data\n        estatus = 'pendiente'\n        nueva_Produccion = Produccion(nombre=galleta,\n                                cantidad=produccion,\n                                create_date=fecha,\n                                estatus=estatus)",
+        "peekOfCode": "class Gestorproduccion:\n    def guardar_produccion(self, form_pro):\n        lista_cantidad = []\n        lista_idMp = []\n        galleta = form_pro.galleta.data\n        produccion = int(200)\n        fecha = form_pro.fecha.data\n        estatus = 'pendiente'\n        #Recetas, invetario_materia invetario_g\n        if estatus == 'pendiente' or estatus == 'terminado':",
         "detail": "blueprints.produccion.function.abm",
         "documentation": {}
     },
@@ -1780,7 +2353,7 @@
         "kind": 2,
         "importPath": "blueprints.produccion.produccion",
         "description": "blueprints.produccion.produccion",
-        "peekOfCode": "def modificar():\n    form_produccion = ProduccionForm(request.form)\n    id_produccion = request.args.get('id')\n    session['id_produccion'] = id_produccion\n    id_p = session.get('id_produccion')\n    method = request.method\n    print('metodo ejecutado ', method)\n    messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)\n    if request.method == 'POST':\n      messages, form_pro ,alert = Gestorproduccion().modificar_produccion(id_p, form_pro, method)",
+        "peekOfCode": "def modificar():\n    form_produccion = ProduccionForm(request.form)\n    id_produccion = request.args.get('id')\n    galletas = {}\n    session['id_produccion'] = id_produccion\n    id_p = session.get('id_produccion')\n    method = request.method\n    print('metodo ejecutado ', method)\n    messages, form_pro, alert = Gestorproduccion().modificar_produccion(id_p, form_produccion, method)\n    print(alert)",
         "detail": "blueprints.produccion.produccion",
         "documentation": {}
     },
@@ -1816,7 +2389,7 @@
         "kind": 6,
         "importPath": "blueprints.produccion.produccion_form",
         "description": "blueprints.produccion.produccion_form",
-        "peekOfCode": "class ProduccionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad = IntegerField(\"Cantidad\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"La cantodad valida\")\n    ])\n    fecha = DateField('Fecha de Produccion')\n    estatus_choices = [('pendiente', 'Pendiente'),('proceso', 'Proceso'), ('terminado','Terminado')]\n    estatus = SelectField(\"Estatus\", choices=estatus_choices, validators=[validators.DataRequired(message='El campo es requerido')])\n    galletas = [('chocolate y menta', 'Chocolate y Menta'),('avena y nueces', 'Avena y Nueces'),  ('limón', 'Limón'), ('coco',' Coco'), ('chocolate blanco y arándanos','Chocolate Blanco y Arándanos'), ('almendra','Almendra'), ('mantequilla de maní','Mantequilla de Maní'), ('chía y coco', 'Chía y Coco'), ('almendra y naranja','Almendra y Naranja'), ('maiz','Maiz')]",
+        "peekOfCode": "class ProduccionForm(Form):\n    id = IntegerField('id', [validators.number_range(min=1, max=20, message='valor no valido')])\n    cantidad = IntegerField(\"Cantidad\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"La cantodad valida\")\n    ])\n    g = StringField(\"Galleta\",[\n        validators.DataRequired(message='El campo es requerido'),\n        validators.length(min=0, max=30, message=\"La cantodad valida\")\n    ])",
         "detail": "blueprints.produccion.produccion_form",
         "documentation": {}
     },
@@ -1875,6 +2448,15 @@
         "documentation": {}
     },
     {
+        "label": "updProveedor",
+        "kind": 2,
+        "importPath": "blueprints.proveedor.proveedor",
+        "description": "blueprints.proveedor.proveedor",
+        "peekOfCode": "def updProveedor(id):\n    rol = current_user.rol\n    if rol != 'administrador':\n        abort(403)\n    proveedor = Proveedor.query.get_or_404(id)\n    form = ProveedorForm(request.form, obj=proveedor)\n    formMateP = MateriaPForm(request.form)\n    ingredientes_choices = [(ingrediente.idMP, ingrediente.ingrediente) for ingrediente in Mp.query.all()]\n    if request.method == 'POST' and form.validate():\n        form.populate_obj(proveedor)",
+        "detail": "blueprints.proveedor.proveedor",
+        "documentation": {}
+    },
+    {
         "label": "proveedor_bp",
         "kind": 5,
         "importPath": "blueprints.proveedor.proveedor",
@@ -1915,7 +2497,7 @@
         "kind": 6,
         "importPath": "blueprints.receta.forms",
         "description": "blueprints.receta.forms",
-        "peekOfCode": "class RecetaForm(Form):\n    cantidad = StringField('Cantidad', [\n        validators.DataRequired(message='El campo es requerido'),\n        validators.Regexp('^\\d+(\\.\\d+)?$', message='Ingresa una cantidad válida')\n    ])\n    idMp= SelectField(\"Ingrediente\",coerce=int)\n    idGalleta = SelectField(\"Galleta\", coerce=int)  # Se asume que se cargarán \n    nombreGalleta = HiddenField()\nclass GalletaForm(Form):\n    idGalleta = IntegerField('Ingrediente')",
+        "peekOfCode": "class RecetaForm(Form):\n    cantidad = StringField('Cantidad', [\n        validators.DataRequired(message='El campo es requerido'),\n        validators.Regexp('^\\d+(\\.\\d+)?$', message='Ingresa una cantidad válida')\n    ])\n    idMp= SelectField(\"Ingrediente\",coerce=int)\n    idGalleta = SelectField(\"Galleta\", coerce=int)  # Se asume que se cargarán \n    nombreGalleta = HiddenField()\nclass GalletaForm(Form):\n    idGalleta = IntegerField('Ingrediente',)",
         "detail": "blueprints.receta.forms",
         "documentation": {}
     },
@@ -1924,7 +2506,7 @@
         "kind": 6,
         "importPath": "blueprints.receta.forms",
         "description": "blueprints.receta.forms",
-        "peekOfCode": "class GalletaForm(Form):\n    idGalleta = IntegerField('Ingrediente')\n    nombre = StringField('Nombre')\n    descripcion = StringField('Descripcion')\n    precio=FloatField('Precio')\n    peso=FloatField('Peso')\nclass MpForm(Form):\n    ingredientes = FieldList(SelectField('Ingrediente', coerce=int), min_entries=1)",
+        "peekOfCode": "class GalletaForm(Form):\n    idGalleta = IntegerField('Ingrediente',)\n    nombre = StringField('Nombre')\n    descripcion = StringField('Descripcion')\n    precio=FloatField('Precio')\n    peso=FloatField('Peso')\n    imagen = FileField('Imagen', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Solo imágenes!')])\nclass MpForm(Form):\n    ingredientes = FieldList(SelectField('Ingrediente', coerce=int), min_entries=1)",
         "detail": "blueprints.receta.forms",
         "documentation": {}
     },
@@ -1951,17 +2533,8 @@
         "kind": 6,
         "importPath": "blueprints.receta.models",
         "description": "blueprints.receta.models",
-        "peekOfCode": "class Galleta(db.Model):\n    idGalleta = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    nombre = db.Column(db.String(50))\n    descripcion = db.Column(db.String(80))\n    precio = db.Column(db.Float)\n    peso = db.Column(db.Float)\n    # Ruta de la imagen",
+        "peekOfCode": "class Galleta(db.Model):\n    idGalleta = db.Column(db.Integer, primary_key=True, autoincrement=True)\n    nombre = db.Column(db.String(50))\n    descripcion = db.Column(db.String(80))\n    precio = db.Column(db.Float)\n    peso = db.Column(db.Float)\n    imagen = db.Column(db.String(120))  # Ruta de la imagen",
         "detail": "blueprints.receta.models",
-        "documentation": {}
-    },
-    {
-        "label": "acceso_forbidden",
-        "kind": 2,
-        "importPath": "blueprints.receta.recetas",
-        "description": "blueprints.receta.recetas",
-        "peekOfCode": "def acceso_forbidden(error):\n    static_folder = 'static'\n    return send_from_directory(static_folder, 'acceso_rol.html'), 403\n@recetas_bp.route(\"/recetas\", methods=['GET', 'POST'])\n@login_required\ndef crear_receta():\n    rol = current_user.rol\n    print('rol:', rol)\n    if rol != 'administrador':\n      print('entro a la validacion')",
-        "detail": "blueprints.receta.recetas",
         "documentation": {}
     },
     {
@@ -1969,7 +2542,25 @@
         "kind": 2,
         "importPath": "blueprints.receta.recetas",
         "description": "blueprints.receta.recetas",
-        "peekOfCode": "def crear_receta():\n    rol = current_user.rol\n    print('rol:', rol)\n    if rol != 'administrador':\n      print('entro a la validacion')\n      print(static_folder)\n      abort(403)\n    # Crear las instancias de los formularios\n    galleta_form = GalletaForm(request.form)\n    recetas_form = RecetaForm(request.form)",
+        "peekOfCode": "def crear_receta():\n    # Crear las instancias de los formularios\n    galleta_form = GalletaForm(request.form)\n    recetas_form = RecetaForm(request.form)\n    ingredientes_texto = request.form.get('ingredientes_texto')\n    ingredientes = []\n    if ingredientes_texto is not None:\n        ingredientes = json.loads(ingredientes_texto)\n    # Obtener las opciones para los campos de selección\n    lista_ingredientes = [(mp.idMP, mp.ingrediente) for mp in Mp.query.all()]",
+        "detail": "blueprints.receta.recetas",
+        "documentation": {}
+    },
+    {
+        "label": "eliminar_receta",
+        "kind": 2,
+        "importPath": "blueprints.receta.recetas",
+        "description": "blueprints.receta.recetas",
+        "peekOfCode": "def eliminar_receta():\n    id_galleta = request.form.get('idGalleta')\n    recetas = Receta.query.filter_by(idGalleta=id_galleta).all()\n    for receta in recetas:\n        db.session.delete(receta)\n    # Guardar los cambios en la base de datos\n    db.session.commit()\n    flash('¡Recetas eliminadas correctamente!', 'success')\n    # Redireccionar a la página principal para evitar reenvío del formulario\n    return redirect(url_for('recetas.crear_receta'))",
+        "detail": "blueprints.receta.recetas",
+        "documentation": {}
+    },
+    {
+        "label": "calcular_utilidades",
+        "kind": 2,
+        "importPath": "blueprints.receta.recetas",
+        "description": "blueprints.receta.recetas",
+        "peekOfCode": "def calcular_utilidades():\n    # Obtener todas las galletas de la base de datos\n    galletas = Galleta.query.all()\n    # Lista para almacenar los resultados de los cálculos\n    resultados = []\n    # Iterar sobre cada galleta y calcular su costo y utilidad\n    for galleta in galletas:\n        # Obtener los ingredientes y cantidades de la receta de la galleta\n        recetas = Receta.query.filter_by(idGalleta=galleta.idGalleta).all()\n        costo_total = 0",
         "detail": "blueprints.receta.recetas",
         "documentation": {}
     },
@@ -1978,16 +2569,7 @@
         "kind": 5,
         "importPath": "blueprints.receta.recetas",
         "description": "blueprints.receta.recetas",
-        "peekOfCode": "recetas_bp = Blueprint(\"recetas\", __name__, template_folder=\"templates\")\nstatic_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')\n# Definir la ruta y la vista correspondiente\n@recetas_bp.errorhandler(403)\ndef acceso_forbidden(error):\n    static_folder = 'static'\n    return send_from_directory(static_folder, 'acceso_rol.html'), 403\n@recetas_bp.route(\"/recetas\", methods=['GET', 'POST'])\n@login_required\ndef crear_receta():",
-        "detail": "blueprints.receta.recetas",
-        "documentation": {}
-    },
-    {
-        "label": "static_folder",
-        "kind": 5,
-        "importPath": "blueprints.receta.recetas",
-        "description": "blueprints.receta.recetas",
-        "peekOfCode": "static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')\n# Definir la ruta y la vista correspondiente\n@recetas_bp.errorhandler(403)\ndef acceso_forbidden(error):\n    static_folder = 'static'\n    return send_from_directory(static_folder, 'acceso_rol.html'), 403\n@recetas_bp.route(\"/recetas\", methods=['GET', 'POST'])\n@login_required\ndef crear_receta():\n    rol = current_user.rol",
+        "peekOfCode": "recetas_bp = Blueprint(\"recetas\", __name__, template_folder=\"templates\")\n@recetas_bp.route(\"/recetas\", methods=['GET', 'POST'])\n@login_required\ndef crear_receta():\n    # Crear las instancias de los formularios\n    galleta_form = GalletaForm(request.form)\n    recetas_form = RecetaForm(request.form)\n    ingredientes_texto = request.form.get('ingredientes_texto')\n    ingredientes = []\n    if ingredientes_texto is not None:",
         "detail": "blueprints.receta.recetas",
         "documentation": {}
     },
@@ -1996,16 +2578,7 @@
         "kind": 6,
         "importPath": "blueprints.tablero.function.abm",
         "description": "blueprints.tablero.function.abm",
-        "peekOfCode": "class Dashboard:\n    def guardar_dashboard(self,):\n        df = pd.DataFrame({\n            \"A\": [1,2,3,4,5],\n            \"B\": [5,4,3,2,1]\n        })\n        fig = px.bar(df, x=\"A\", y=\"B\", title=\"Gráfico de Ventas\")\n        ruta_carpeta = os.path.join(\"blueprints\", \"tablero\", \"templates\")\n        os.makedirs(ruta_carpeta, exist_ok=True)  \n        ruta_archivo = os.path.join(ruta_carpeta, \"tablero.html\")",
-        "detail": "blueprints.tablero.function.abm",
-        "documentation": {}
-    },
-    {
-        "label": "dash",
-        "kind": 5,
-        "importPath": "blueprints.tablero.function.abm",
-        "description": "blueprints.tablero.function.abm",
-        "peekOfCode": "dash = Dashboard()\ndash.guardar_dashboard()",
+        "peekOfCode": "class Dashboard:\n    def guardar_dashboard(self):\n        ventas = VentaGalleta.query.all()\n        galletas = Galleta.query.all()\n        lista1_ = []\n        lista2_ = []\n        lista_nombres_galletas = []  \n        for venta in ventas:\n            lista1_.append(venta.subTotal)\n            lista2_.append(venta.cantidad)",
         "detail": "blueprints.tablero.function.abm",
         "documentation": {}
     },
@@ -2023,7 +2596,7 @@
         "kind": 2,
         "importPath": "blueprints.tablero.tablero",
         "description": "blueprints.tablero.tablero",
-        "peekOfCode": "def tablero():\n    print('Antes de la validacion')\n    rol = current_user.rol\n    print('rol:', rol)\n    if rol != 'administrador':\n      print('entro a la validacion')\n      print(static_folder)\n      abort(403)\n    Dashboard().guardar_dashboard\n    return render_template(\"tablero.html\")",
+        "peekOfCode": "def tablero():\n    print('Antes de la validacion')\n    rol = current_user.rol\n    print('rol:', rol)\n    if rol != 'administrador':\n      print('entro a la validacion')\n      print(static_folder)\n      abort(403)\n    dash = Dashboard()\n    dash.guardar_dashboard()",
         "detail": "blueprints.tablero.tablero",
         "documentation": {}
     },
@@ -2104,7 +2677,7 @@
         "kind": 2,
         "importPath": "blueprints.usuario.usuario",
         "description": "blueprints.usuario.usuario",
-        "peekOfCode": "def acceso_forbidden(error):\n    static_folder = 'static'\n    return send_from_directory(static_folder, 'acceso_rol.html'), 403\n@usuario_bp.route(\"/usuario\", methods=['GET', 'POST'])\n@login_required\ndef usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''",
+        "peekOfCode": "def acceso_forbidden(error):\n    static_folder = 'static'\n    return send_from_directory(static_folder, 'acceso_rol.html'), 403\n@usuario_bp.route(\"/usuario\", methods=['GET', 'POST'])\n#@login_required\ndef usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''",
         "detail": "blueprints.usuario.usuario",
         "documentation": {}
     },
@@ -2113,7 +2686,7 @@
         "kind": 2,
         "importPath": "blueprints.usuario.usuario",
         "description": "blueprints.usuario.usuario",
-        "peekOfCode": "def usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    messages =''\n    print('Antes de la validacion')\n    rol = current_user.rol\n    print('rol:', rol)\n    if rol != 'administrador':",
+        "peekOfCode": "def usuario():\n    form_user = UserForm(request.form)\n    gestor_usuario = GestorUsuario()\n    usuarios = ''\n    alert = ''\n    messages =''\n    print('Antes de la validacion')\n    if request.method == \"POST\":\n        messages, alert = gestor_usuario.guardar_usuario(form_user)\n        print('prueba')",
         "detail": "blueprints.usuario.usuario",
         "documentation": {}
     },
@@ -2307,6 +2880,15 @@
         "documentation": {}
     },
     {
+        "label": "eliminarGaTab",
+        "kind": 2,
+        "importPath": "blueprints.venta.ventas",
+        "description": "blueprints.venta.ventas",
+        "peekOfCode": "def eliminarGaTab():\n    posicion = int(request.args.get('id'))\n    if request.method=='GET':\n        preVenGa.pop(posicion)\n    return redirect(url_for('.venta'))",
+        "detail": "blueprints.venta.ventas",
+        "documentation": {}
+    },
+    {
         "label": "venta_bp",
         "kind": 5,
         "importPath": "blueprints.venta.ventas",
@@ -2347,7 +2929,7 @@
         "kind": 6,
         "importPath": "config",
         "description": "config",
-        "peekOfCode": "class DevelomentConfig(Config):\n    DEBUG=True\n    usuario = os.getenv(\"DB_USERNAME\")\n    pwd = os.getenv(\"DB_PASSWORD\")\n    DB = os.getenv(\"DB\")\n    DB_H = os.getenv(\"DB_HOST\")\n    print(usuario)\n    SQLALCHEMY_DATABASE_URI=f\"mysql+pymysql://{usuario}:{pwd}@{DB_H}/{DB}\"\ndb = SQLAlchemy()",
+        "peekOfCode": "class DevelomentConfig(Config):\n    DEBUG=True\n    usuario = os.getenv(\"DB_USERNAME\")\n    pwd = os.getenv(\"DB_PASSWORD\")\n    DB = os.getenv(\"DB\")\n    DB_H = os.getenv(\"DB_HOST\")\n    print(usuario)\n    print(pwd)\n    print(DB)\n    print(DB_H)",
         "detail": "config",
         "documentation": {}
     },
@@ -2365,7 +2947,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)",
+        "peekOfCode": "def unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id): \n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)",
         "detail": "main",
         "documentation": {}
     },
@@ -2374,7 +2956,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)\napp.register_blueprint(venta_bp)\napp.register_blueprint(recetas_bp)\napp.register_blueprint(proveedor_bp)",
+        "peekOfCode": "def load_user(user_id): \n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404\napp.register_blueprint(menu_bp)\napp.register_blueprint(usuario_bp)\napp.register_blueprint(venta_bp)\napp.register_blueprint(recetas_bp)\napp.register_blueprint(proveedor_bp)",
         "detail": "main",
         "documentation": {}
     },
@@ -2428,7 +3010,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "login_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):",
+        "peekOfCode": "login_manager = LoginManager(app)\nlog_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id): ",
         "detail": "main",
         "documentation": {}
     },
@@ -2437,7 +3019,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "log_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))",
+        "peekOfCode": "log_directory = '/logs'\nlogging.basicConfig(filename=os.path.join('logs/app.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogging.getLogger('werkzeug').setLevel(logging.ERROR)\ncsrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id): \n    return Usuario.query.get(int(user_id))",
         "detail": "main",
         "documentation": {}
     },
@@ -2446,7 +3028,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "csrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id):\n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
+        "peekOfCode": "csrf = CSRFProtect(app)\n@app.errorhandler(401)\ndef unauthorized_error(error):\n    return send_from_directory(app.static_folder,'no_autorizado.html'), 401\n@login_manager.user_loader\ndef load_user(user_id): \n    return Usuario.query.get(int(user_id))\n@app.errorhandler(404)\ndef page_not_found(e):\n    return send_from_directory(app.static_folder,'404.html'), 404",
         "detail": "main",
         "documentation": {}
     }
