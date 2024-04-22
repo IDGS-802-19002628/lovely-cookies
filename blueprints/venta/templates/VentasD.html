@@ -1,6 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
 {% import "_macros.html" as macros %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <style>
     #ventasDiariasContent {
       max-height: 600px; /* Limita la altura de la tabla para que tenga una barra de desplazamiento si hay demasiados registros */
@@ -13,6 +22,41 @@
 </style>
 
 <div class="center-content">
+    <div class="center-content">
+        <button class="btn btn-success" onclick="toggleTabla()">Registrar/Mostrar/Ocultar Pago a proveedores</button> <!-- Botón para mostrar/ocultar la tabla -->
+    </div>
+    <br>
+    <div id="tablaPagos" style="display: none;">
+        <form action="/restar_venta" method="post">
+            <div style="text-align: right;">
+                <label for="cantidad">Cantidad pagada a proveedor:</label>
+                <input type="number" id="cantidad" name="cantidad" required>
+                <input type="submit" value="Registrar">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            </div>
+        </form> 
+        <br>
+        <div id="ventasDiariasContent" class="table-responsive">
+            <table class="table table-bordered table-striped table-hover text-center align-middle">
+                <thead class="bg-success text-white">
+                    <tr>
+                        <th>Pago a proveedor</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pago in pagos %}
+                    <tr>
+                        <td>{{ pago.cantidad }}</td>
+                        <td>{{ pago.fecha }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+
     <h1 class="text-center">Ventas Diarias</h1>
     <div id="ventasDiariasContent" class="table-responsive">
         <table class="table table-bordered table-striped table-hover text-center align-middle">
@@ -32,46 +76,20 @@
             </tbody>
         </table>
     </div>
-    <h4 style="text-align: center;">Total de ventas del día: {{ suma_ventas }}</h4>
-<br>
-    <h3 class="text-center">Pagos realizados a proveedores</h3>
-    <div id="ventasDiariasContent" class="table-responsive">
-        <table class="table table-bordered table-striped table-hover text-center align-middle">
-            <thead class="bg-success text-white">
-                <tr>
-                    <th>Pago a proveedor</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for pago in pagos %}
-                <tr>
-                    <td>{{ pago.cantidad }}</td>
-                    <td>{{ pago.fecha }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <form action="/restar_venta" method="post">
-        <div style="text-align: right;">
-            <label for="cantidad">Cantidad pagada a proveedor:</label>
-            <input type="number" id="cantidad" name="cantidad" required>
-            <input type="submit" value="Registrar">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        </div>
-    </form>
+    <h4 style="text-align: center;">Total de ventas del día: ${{ suma_ventas }}</h4>
     <br>
+   
+    
     
 </div>
 
 <br>
-<div  class="center-content">>
+<!--
+<div  class="center-content">
     <table class="table table-bordered table-striped table-hover text-center align-middle">
         <thead class="bg-success text-white">
             <tr>
-                <th>TOTAL EN CAJA CHICA</th>
+                <th>TOTAL EN CAJA </th>
             </tr>
         </thead>
         <tbody>
@@ -83,4 +101,16 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function toggleTabla() {
+        var tabla = document.getElementById("tablaPagos");
+        if (tabla.style.display === "none") {
+            tabla.style.display = "block";
+        } else {
+            tabla.style.display = "none";
+        }
+    }
+</script>-->
+
 {% endblock %}

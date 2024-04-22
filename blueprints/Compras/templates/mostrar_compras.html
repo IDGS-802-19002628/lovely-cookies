@@ -1,0 +1,61 @@
+{% extends 'layoutCom.html' %}
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header bg-gradient" style="background-color: #000000;">
+            <h5 class="text-white">Detalle de Compras</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Detalle de Compra</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if datos_compras %}
+                        {% for id_compra, detalles_compra in datos_compras.items() %}
+                        <tr>
+                            <td>{{ id_compra }}</td>
+                            <td>
+                                {% for detalle in detalles_compra %}
+                                <p>Proveedor: {{ detalle.proveedor }}</p>
+                                <p>Ingrediente: {{ detalle.ingrediente }}</p>
+                                <p>Cantidad: {{ detalle.cantidad }}</p>
+                                <p>Subtotal: {{ detalle.subtotal }}</p>
+                                {% endfor %}
+                            </td>
+                            <td>{{ detalles_compra[0].total }}</td>
+                            <td><a class="btn btn-primary" href="/aceptar_pedido?id={{ id_compra }}">Recibi pedido</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="4">No hay datos disponibles</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

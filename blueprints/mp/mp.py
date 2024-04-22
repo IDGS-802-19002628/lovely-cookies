@@ -6,7 +6,9 @@ from .forms import MPForm
 from blueprints.mp.models import Mp
 from flask_login import login_required
 from werkzeug.utils import secure_filename
+from blueprints.inventario_mp.models import Inventariomp
 import os
+import datetime
 # Crear el Blueprint
 
 mp_bp = Blueprint("mp", __name__, template_folder="templates")
@@ -22,6 +24,14 @@ def ingresar_mp():
                         precio=mp_form.precio.data
                         )
             db.session.add(mp)
+            db.session.commit()
+            ulmp = Mp.query.order_by(Mp.idMP.desc()).first()
+            fecha = datetime.datetime.now()
+            invMP=Inventariomp(idMP=ulmp.idMP,
+                        existencias= 1 ,
+                        fecha_caducidad= fecha
+                        )
+            db.session.add(invMP)
             db.session.commit()
             flash('Ingrediente agregado correctamente')
             return redirect(url_for('mp.ingresar_mp'))
@@ -48,4 +58,4 @@ def modificar_mp(id):
         db.session.commit()
         flash('Ingrediente modificado correctamente')
         return redirect(url_for('mp.ingresar_mp'))
-    return render_template('modificar_mp.html', form=form)
+    return render_template('mp.html', mp_form=form)

@@ -1,0 +1,237 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% import "_macros.html" as macros %}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-header bg-gradient" style="background-color: #000000;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="h5 text-white"
+                                style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">
+                                Compras
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Formulario de selección de proveedor -->
+                    <form method="get" action="/compras">
+                        <div class="form-group">
+                            <label for="proveedor">Seleccionar proveedor:</label>
+                            <select name="proveedor_id" id="proveedor" class="form-select"
+                                onchange="this.form.submit()">
+                                <option value="">-- Seleccionar --</option>
+                                {% for proveedor in lista_proveedores %}
+                                <option value="{{ proveedor.idProveedor }}" {% if proveedor.idProveedor==proveedor_id %}
+                                    selected {% endif %}>
+                                    {{ proveedor.nomEmpresa }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+
+                    <!-- Formulario de ingreso de datos -->
+                    {% if listaIngre %}
+                    <h2>Seleccionar ingrediente:</h2>
+                    <form id="compraForm" method="POST" action="/guatablaCom">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <!-- Campo oculto para almacenar el ID del proveedor seleccionado -->
+                        <input type="hidden" name="proveedor_id" id="proveedor_id" value="{{ proveedor_id }}">
+                        <div class="form-group">
+                            <label for="ingrediente">Ingrediente:</label>
+                            <select name="ingrediente_id" id="ingrediente" class="form-select">
+                                {% for materia in listaIngre %}
+                                <option value="{{ materia.idMP }}">{{ materia.ingrediente }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_caducidad">Fecha de caducidad:</label>
+                            <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="form-control" required>
+                        </div>
+                        <button type="submit" id="guardarBtn" class="btn btn-primary">Guardar</button>
+                        <!-- Cambiado a tipo "button" -->
+                    </form>
+                    {% else %}
+                    <p>Seleccione un proveedor para ver las materias primas disponibles.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-header text-white card-hform" style="background-color: #000000;">
+                    Inventario
+                </div>
+                <div class="card-body" id="contenidoTicket">
+                    <!-- Tabla de productos por comprar -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ingrediente</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Medicion</th>
+                                    <th>Subtotal</th>
+                                    <th>Cancelar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if comprasIng %}
+                                {% for compra in comprasIng %}
+                                <tr>
+                                    <td>{{ compra.nomPro }}</td>
+                                    <td>{{ compra.cantidad }}</td>
+                                    <td>{{ compra.precio }}</td>
+                                    <td>{{ compra.medida }}</td>
+                                    <td>{{ compra.subTotal }}</td>
+                                    <td><a class="btn btn-danger"
+                                            href="/eliminarIngTab?id={{ loop.index-1 }}&proveedor_id={{ compra.idProveedor }}">Eliminar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="6">No hay datos disponibles</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                            {% if total %}
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>Total</td>
+                                <td>{{total}}</td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                        <div class="d-flex justify-content-end mt-4">
+                            <a class="btn btn-danger" href="/limTablaCom">Cancelar</a>
+                            <form action="/guardarCompras" method="get" id="formGuardarVenta">
+                                <input type="hidden" name="total" value="{{ total }}">
+                                <button type="submit" onclick="guardarVenta(event)"
+                                    class="btn btn-primary">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('compras.mostrar_compras') }}" class="btn btn-success">Ver compras por entregar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    // Verificar si hay un proveedor seleccionado
+    "{% if comprasIng %}"
+    var proveedorId = "{{ comprasIng[0].idProveedor }}";
+    "{% else %}"
+    var proveedorId = null;
+    "{% endif %}"
+    console.log(proveedorId)
+
+    if (proveedorId) {
+        var proveedorSelect = document.getElementById("proveedor");
+        var proveedorIdHidden = document.getElementById("proveedor_id");
+        // Establecer el valor del campo de selección de proveedor
+        proveedorSelect.value = proveedorId;
+        // Desactivar el campo de selección de proveedor
+        proveedorSelect.disabled = true;
+
+        // Escuchar el evento de cambio en el campo de selección de proveedor
+        proveedorSelect.addEventListener('change', function () {
+            // Actualizar el valor del campo oculto con el ID del proveedor seleccionado
+            proveedorIdHidden.value = this.value;
+        });
+    }
+
+    function guardarVenta(event) {
+        event.preventDefault(); // Evita el envío inmediato del formulario.
+    
+        Swal.fire({
+            title: 'Venta guardada correctamente.',
+            text: '¿Desea imprimir el Ticket?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Imprimir Ticket',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // El usuario eligió imprimir el ticket.
+                imprimirTicket();
+                // Envía el formulario después de imprimir el ticket.
+                document.getElementById('formGuardarVenta').submit();
+            } else {
+                // El usuario eligió no imprimir el ticket.
+                document.getElementById('formGuardarVenta').submit();
+                // Muestra un mensaje de información.
+                Swal.fire('Venta guardada', 'La venta ha sido guardada sin imprimir el Ticket.', 'info');
+            }
+        });
+    }
+    
+    function imprimirTicket() {
+        // Clona el contenido del ticket.
+        var contenidoTicket = document.getElementById('contenidoTicket').cloneNode(true);
+        
+        // Selecciona y elimina los elementos no deseados, incluyendo los botones de eliminación.
+        var elementosNoDeseados = contenidoTicket.querySelectorAll('script, button, input, label, select, a.btn-danger, td:nth-child(6), th:nth-child(6)');
+        elementosNoDeseados.forEach(function (elemento) {
+            elemento.remove();
+        });
+        
+        // Guarda el contenido original de la página.
+        var contenidoOriginal = document.body.innerHTML;
+        
+        // Reemplaza el contenido de la página actual con el contenido del ticket.
+        document.body.innerHTML = '<html><head><title>Ticket</title></head><body>';
+        document.body.innerHTML += '<h1>Lovely Cookies</h1>';
+        document.body.innerHTML += contenidoTicket.innerHTML;
+        document.body.innerHTML += '</body></html>';
+        
+        // Imprime el contenido de la ventana actual.
+        window.print();
+        
+        // Restaura el contenido original de la página.
+        document.body.innerHTML = contenidoOriginal;
+    }
+    document.getElementById('compraForm').addEventListener('submit', function(event) {
+        // Validación del select
+        var select = document.getElementById('ingrediente');
+        if (select.value === '') {
+            alert('Por favor, selecciona un ingrediente.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validación del input de tipo number
+        var cantidadInput = document.getElementById('cantidad');
+        if (isNaN(cantidadInput.value) || cantidadInput.value === '') {
+            alert('Por favor, introduce una cantidad válida.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validación del input de tipo date
+        var fechaInput = document.getElementById('fecha_vencimiento');
+        var fecha = new Date(fechaInput.value);
+        if (isNaN(fecha.getTime())) {
+            alert('Por favor, selecciona una fecha de vencimiento válida.');
+            event.preventDefault();
+            return;
+        }
+    });
+</script>
+{% endblock %}

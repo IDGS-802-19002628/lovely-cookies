@@ -22,8 +22,14 @@ class GalletaForm(Form):
     idGalleta = IntegerField('Ingrediente',)
     nombre = StringField('Nombre')
     descripcion = StringField('Descripcion')
-    precio=FloatField('Precio')
-    peso=FloatField('Peso')
+    precio=FloatField('Precio', validators=[
+        validators.DataRequired(message='El campo es requerido'),
+        validators.NumberRange(min=0, message='El precio debe ser mayor a cero')
+    ])
+    peso=FloatField('Peso', validators=[
+        validators.DataRequired(message='El campo es requerido'),
+        validators.NumberRange(min=0, message='El peso debe ser mayor a cero')
+    ])
     imagen = FileField('Imagen', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Solo imágenes!')])
 
 class MpForm(Form):

@@ -38,6 +38,7 @@ def venta():
     galletaInven = InventarioG.query.all()
     galletas = Galleta.query.all()
     
+    
     if request.method == 'POST' or 'GET':
         if idg is not None:
             galleta = consultar_galleta_por_id(idg)
@@ -281,14 +282,23 @@ def restar_venta():
     cantidad = request.form.get('cantidad')
 
     # Convertir la cantidad a float
-    cantidad = float(cantidad)
+    try:
+        cantidad = float(cantidad)
+    except ValueError:
+        flash('La cantidad proporcionada no es un número válido.', 'error')
+        return redirect(url_for('venta.ventas_totales'))
+
+    # Verificar si la cantidad es un número positivo mayor que cero
+    if cantidad <= 0:
+        flash('Cantidad invalida.', 'error')
+        return redirect(url_for('venta.ventas_totales'))
 
     # Consultar el registro de CajaCh
     caja_ch = Cajach.query.first()
 
     # Verificar si hay suficiente total en CajaCh
     if caja_ch.total < cantidad:
-        flash('No hay suficiente total en CajaCh para restar esta cantidad.', 'error')
+        flash('Cantidad invalida.', 'error')
         return redirect(url_for('venta.ventas_totales'))
 
     # Restar la cantidad al total de CajaCh
@@ -303,6 +313,5 @@ def restar_venta():
 
     flash('La cantidad ha sido restada exitosamente.', 'success')
     return redirect(url_for('venta.ventas_totales'))
-
 
 

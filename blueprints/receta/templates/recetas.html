@@ -86,8 +86,9 @@ Recetas
 
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaGalletaModal">Registrar Nueva Galleta</button>
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaRecetaModal">Registrar Ingredientes a Receta</button>
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarRecetaModal">Eliminar Receta</button>
-    <div class="text-center mt-4">
+    <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarRecetaModal">Eliminar Receta</button>
+     -->
+        <div class="text-center mt-4">
         <a href="{{ url_for('recetas.calcular_utilidades') }}" class="btn btn-success">Utilidades</a>
     </div>
 </div>
@@ -238,7 +239,7 @@ Recetas
         
             // Validar que la cantidad sea mayor que cero
             if (cantidad <= 0) {
-                swal("Error", "La cantidad debe ser mayor que cero", "error");
+                swal("Error", "Cantidad ivalida", "error");
                 return; // Salir de la función si la cantidad es inválida
             }
 

@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template,json, request, redirect, url_for, flash
+from flask import Blueprint, render_template,json,current_app,request, redirect, url_for, flash
 from collections import defaultdict
 from werkzeug.security import generate_password_hash
 from .models import Receta, Galleta, db
 from .forms import RecetaForm,GalletaForm
 from blueprints.mp.models import Mp
+from blueprints.venta.model_venta import InventarioG
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 import os
@@ -45,11 +46,21 @@ def crear_receta():
                 # Guardar la imagen
                 imagen = request.files['imagen']
                 if imagen:
-                    filename = secure_filename(imagen.filename)
-                    imagen.save(os.path.join('C:/Users/Julian/Pictures/imagenes galletas', filename))
-                    nueva_galleta.imagen = filename
-
+                    # Cambia la extensión del archivo a .jfif
+                    filename = secure_filename(imagen.filename.rsplit('.', 1)[0] + '.jfif')
+        # Ruta de guardado relativa a la carpeta 'static/img/Galletas'
+                    filepath = os.path.join(current_app.root_path, 'static', 'img', 'Galletas', filename)
+                    print(filepath)
+                    imagen.save(filepath)
+                    filepath1 = os.path.join('static', 'img', 'Galletas', filename)
+                    print(filepath1)
+                nueva_galleta.imagen = filepath1
                 db.session.add(nueva_galleta)
+                db.session.commit()
+                ultima_galleta_1 = Galleta.query.order_by(Galleta.idGalleta.desc()).first()
+                nuevo_in = InventarioG(idGalleta=ultima_galleta_1.idGalleta,
+                                       cantidad = 0)
+                db.session.add(nuevo_in)
                 db.session.commit()
                 flash('¡Galleta creada correctamente!', 'success')
 
@@ -98,6 +109,7 @@ def crear_receta():
     # Renderizar la plantilla HTML con los datos
     return render_template('recetas.html', galleta_form=galleta_form, recetas_form=recetas_form,
                            recetas_agrupadas=recetas_agrupadas)
+
 
 @recetas_bp.route("/eliminar_receta", methods=['POST'])
 @login_required

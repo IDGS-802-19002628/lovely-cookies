@@ -26,7 +26,7 @@
                                     {% for gatas, gatasinv in galletas_y_inventario %}
                                     <div class="boton-con-info">
                                         <a href="/venta?id={{gatas.idGalleta}}" class="boton-circular">
-                                            <img src="../static/img/Galletas/{{gatas.idGalleta}}.jfif"
+                                            <img src="{{gatas.imagen}}"
                                                 alt="Imagen de {{gatas.nombre}}">
                                         </a>
                                         <label>{{gatas.nombre}} <br> ${{gatas.precio}} Cantidad

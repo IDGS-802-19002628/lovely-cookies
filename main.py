@@ -19,6 +19,7 @@ from blueprints.proveedor.proveedor import proveedor_bp
 from blueprints.receta.recetas import recetas_bp
 from blueprints.tablero.tablero import tablero_bp
 from blueprints.merma.merma import merma_bp
+from blueprints.Compras.compra import compra_dp
 
 
 
@@ -61,6 +62,8 @@ app.register_blueprint(mp_bp)
 app.register_blueprint(tablero_bp)
 app.register_blueprint(merma_bp)
 app.register_blueprint(inventario_mp_bp)
+app.register_blueprint(compra_dp)
+
 
 if __name__ == '__main__':
     db.init_app(app)
