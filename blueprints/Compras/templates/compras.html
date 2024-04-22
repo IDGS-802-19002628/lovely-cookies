@@ -44,7 +44,6 @@
                         <div class="form-group">
                             <label for="ingrediente">Ingrediente:</label>
                             <select name="ingrediente_id" id="ingrediente" class="form-select">
-                                <option value="">-- Seleccionar --</option>
                                 {% for materia in listaIngre %}
                                 <option value="{{ materia.idMP }}">{{ materia.ingrediente }}</option>
                                 {% endfor %}
@@ -52,11 +51,11 @@
                         </div>
                         <div class="form-group">
                             <label for="cantidad">Cantidad:</label>
-                            <input type="number" name="cantidad" id="cantidad" class="form-control">
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="fecha_caducidad">Fecha de caducidad:</label>
-                            <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="form-control">
+                            <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="form-control" required>
                         </div>
                         <button type="submit" id="guardarBtn" class="btn btn-primary">Guardar</button>
                         <!-- Cambiado a tipo "button" -->
@@ -125,6 +124,7 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{ url_for('compras.mostrar_compras') }}" class="btn btn-success">Ver compras por entregar</a>
             </div>
         </div>
     </div>
@@ -207,5 +207,31 @@
         // Restaura el contenido original de la página.
         document.body.innerHTML = contenidoOriginal;
     }
+    document.getElementById('compraForm').addEventListener('submit', function(event) {
+        // Validación del select
+        var select = document.getElementById('ingrediente');
+        if (select.value === '') {
+            alert('Por favor, selecciona un ingrediente.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validación del input de tipo number
+        var cantidadInput = document.getElementById('cantidad');
+        if (isNaN(cantidadInput.value) || cantidadInput.value === '') {
+            alert('Por favor, introduce una cantidad válida.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validación del input de tipo date
+        var fechaInput = document.getElementById('fecha_vencimiento');
+        var fecha = new Date(fechaInput.value);
+        if (isNaN(fecha.getTime())) {
+            alert('Por favor, selecciona una fecha de vencimiento válida.');
+            event.preventDefault();
+            return;
+        }
+    });
 </script>
 {% endblock %}

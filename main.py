@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from config import DevelomentConfig, db
 from flask_wtf.csrf import CSRFProtect
 from blueprints.menu.menu import menu_bp
+from blueprints.inventario_mp.inventario_mp import inventario_mp_bp
 from blueprints.login.login import login_bp
 from blueprints.produccion.produccion import produccion_bp
 from blueprints.usuario.usuario import usuario_bp
@@ -61,6 +62,7 @@ app.register_blueprint(mp_bp)
 app.register_blueprint(tablero_bp)
 app.register_blueprint(compra_dp)
 app.register_blueprint(merma_bp)
+app.register_blueprint(inventario_mp_bp)
 
 if __name__ == '__main__':
     db.init_app(app)

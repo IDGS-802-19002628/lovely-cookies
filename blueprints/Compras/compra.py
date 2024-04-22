@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .model_compras import CompraProducto, CompraTotal, db
 from blueprints.proveedor.model_proveedor import Proveedor, ingredienteProveedor
 from blueprints.mp.models import Mp
+from blueprints.inventario_mp.models import Inventariomp
 from flask_login import login_required
 from flask_login import current_user  # Agregado
 from datetime import datetime
@@ -157,19 +158,22 @@ def generar_folio():
 @compra_dp.route("/mostrar_compras")
 def mostrar_compras():
     datos_compras = db.session.query(
-        CompraTotal.idCompraTotal,
-        Proveedor.nomEmpresa,
-        Mp.ingrediente,
-        CompraProducto.cantidad,
-        CompraProducto.subTotal,
-        CompraTotal.total
-    ).join(
-        CompraProducto, CompraTotal.idCompraTotal == CompraProducto.idCompraTotal
-    ).join(
-        Mp, CompraProducto.idMP == Mp.idMP
-    ).join(
-        Proveedor, CompraProducto.idProveedor == Proveedor.idProveedor
-    ).all()
+    CompraTotal.idCompraTotal,
+    Proveedor.nomEmpresa,
+    Mp.ingrediente,
+    CompraProducto.cantidad,
+    CompraProducto.subTotal,
+    CompraTotal.total
+).join(
+    CompraProducto, CompraTotal.idCompraTotal == CompraProducto.idCompraTotal
+).join(
+    Mp, CompraProducto.idMP == Mp.idMP
+).join(
+    Proveedor, CompraProducto.idProveedor == Proveedor.idProveedor
+).filter(
+    CompraTotal.estatus == 0
+).all()
+
 
     # Agrupar los datos por ID de compra total
     datos_compras_grouped = {}
@@ -203,9 +207,10 @@ def aceptar_pedido():
                 try:
                     # Actualizar las cantidades de los ingredientes
                     for detalle in detalles_compra:
-                        ingrediente = Mp.query.get(detalle.idMP)
+                        ingrediente = Inventariomp.query.get(detalle.idMP)
                         if ingrediente:
-                            ingrediente.cantidad -= detalle.cantidad
+                            ingrediente.existencias += detalle.cantidad
+                            ingrediente.fecha_caducidad == detalle.fecha_caducidad
                             db.session.commit()
 
                     # Cambiar el estado de la compra a 1 (aceptada)

@@ -248,6 +248,7 @@ def sumar_totales_ventas(tota):
 @login_required
 def ventas_totales():
     # Consulta todos los registros en la tabla VentaTotal
+    registros_cajach = Cajach.query.all()
     ventas_totales = VentaTotal.query.filter(VentaTotal.fecha == datetime.now().date()).all()
     pagosp = Pago_p.query.all()
     # Crear una lista para almacenar los datos de las ventas
@@ -267,8 +268,11 @@ def ventas_totales():
 
         suma_ventas += venta.total  # Sumar el total de cada venta
 
+        
     # Renderizar la plantilla y pasar los datos de las ventas totales y la suma de las ventas
-    return render_template('ventasD.html', ventas_totales=ventas_totales_datos, suma_ventas=suma_ventas,pagos=pagosp)
+    return render_template('ventasD.html', ventas_totales=ventas_totales_datos, suma_ventas=suma_ventas,pagos=pagosp, registros_cajach=registros_cajach)
+
+
 
 @venta_bp.route("/restar_venta", methods=['POST'])
 @login_required
@@ -301,4 +305,4 @@ def restar_venta():
     return redirect(url_for('venta.ventas_totales'))
 
 
-
+    

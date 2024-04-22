@@ -102,20 +102,35 @@ def crear_receta():
 @recetas_bp.route("/eliminar_receta", methods=['POST'])
 @login_required
 def eliminar_receta():
-
+    # Obtener el ID de la galleta a eliminar desde el formulario
     id_galleta = request.form.get('idGalleta')
-    recetas = Receta.query.filter_by(idGalleta=id_galleta).all()
 
+    # Verificar si el ID de la galleta es válido
+    if id_galleta is None:
+        flash('No se proporcionó un ID de galleta válido.', 'error')
+        return redirect(url_for('recetas.crear_receta'))
+
+    # Buscar todas las recetas asociadas a la galleta y eliminarlas
+    recetas = Receta.query.filter_by(idGalleta=id_galleta).all()
     for receta in recetas:
         db.session.delete(receta)
+
+    # Eliminar la galleta misma
+    galleta = Galleta.query.get(id_galleta)
+    if galleta is not None:
+        db.session.delete(galleta)
+    else:
+        flash('No se encontró una galleta con el ID proporcionado.', 'error')
+        return redirect(url_for('recetas.crear_receta'))
 
     # Guardar los cambios en la base de datos
     db.session.commit()
 
-    flash('¡Recetas eliminadas correctamente!', 'success')
+    flash('¡Galleta y recetas asociadas eliminadas correctamente!', 'success')
 
     # Redireccionar a la página principal para evitar reenvío del formulario
     return redirect(url_for('recetas.crear_receta'))
+
 
 @recetas_bp.route("/calcular_utilidades", methods=['GET'])
 @login_required

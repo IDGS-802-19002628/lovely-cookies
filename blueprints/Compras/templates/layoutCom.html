@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static//boxicons-2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="../static/sweetalert2/sweetalert2.min.css"/>
+    <style>
+        .btn-circle {
+            width: 40px; /* ajusta el tamaño según sea necesario */
+            height: 40px; /* ajusta el tamaño según sea necesario */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <title>lovely cookies</title>
+</head>
+<body>
+    <div class="d-flex justify-content-between mt-1">
+        <div class="ms-2">
+            <a href="/compras" class="btn btn-light text-black border border-1">
+                <i class='bx bx-chevron-left'></i>
+                Volver
+            </a>
+        </div>
+        <div class="ms-2 me-2">
+            <a href="/menu" class="btn btn-outline-light text-black border border-1 rounded-circle btn-circle" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                <i class='bx bxs-bell bx-tada-hover bx-sm'></i>
+            </a>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Notificaciones</h5>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>notificacion 1</p>
+            <p>notificacion 2</p>
+            
+        </div>
+        
+      </div>
+    <main>
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+</body>
+<script src="/static/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bootstrap-5/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap-5/js/popper.min.js"></script>
+<script src="../static/sweetalert2/sweetalert2.all.min.js"></script>
+
+{% block script %}
+
+{% endblock %}
+</html>

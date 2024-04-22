@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'layoutCom.html' %}
 {% block content %}
 
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -29,6 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% if datos_compras %}
                         {% for id_compra, detalles_compra in datos_compras.items() %}
                         <tr>
                             <td>{{ id_compra }}</td>
@@ -41,10 +42,15 @@
                                 {% endfor %}
                             </td>
                             <td>{{ detalles_compra[0].total }}</td>
-                            <td><a class="btn btn-danger" href="/aceptar_pedido?id={{ id_compra }}">Eliminar</a>
+                            <td><a class="btn btn-primary" href="/aceptar_pedido?id={{ id_compra }}">Recibi pedido</a>
                             </td>
                         </tr>
                         {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="4">No hay datos disponibles</td>
+                        </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

@@ -1,0 +1,43 @@
+{% extends "layout1.html" %}
+{% import "_macros.html" as macros %}
+{% from "_macros.html" import input_forms %}
+
+{% block content %}
+<style>
+    .mi-tabla {
+        margin: 0 auto;
+        width: 90%;
+        font-size: 18px; /* Tamaño de la fuente del título */
+        text-align: center; /* Centra el texto */
+        font-family: 'Times New Roman', Times, serif; /* Cambia la fuente de la tabla */
+        font-weight: bold;
+       
+    }
+    .mi-tabla th {
+        background-color: #008f39 ; /* Color de fondo del encabezado */
+        color: #ffffff; /* Color del texto del encabezado */
+    }
+</style>
+<h2 class="text-center">INVENTARIO DE MATERIAS PRIMAS</h2>
+<br>
+    <div class="table-container">
+        <table class="table table-bordered table-striped mi-tabla">        
+                <tr>
+                    <th>Ingrediente</th>
+                    <th>Existencias</th>
+                    <th>Fecha de Caducidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inventario_item, mp_item in inventario %}
+                <tr>
+                    <td>{{ mp_item.ingrediente }}</td>
+                    <td>{{ inventario_item.existencias }}</td>
+                    <td>{{ inventario_item.fecha_caducidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
