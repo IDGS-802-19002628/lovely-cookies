@@ -223,7 +223,6 @@ def aceptar_pedido():
                 except Exception as e:
                     # Manejar cualquier error que pueda ocurrir durante la actualización de la base de datos
                     db.session.rollback()
-                    flash("Error al procesar el pedido: " + str(e), "error")
             else:
                 flash("No se encontraron detalles de compra para esta compra total.", "error")
         else:
