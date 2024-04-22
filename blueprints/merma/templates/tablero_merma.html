@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/boxicons-2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="/static/DataTables/DataTables-2.0.2/css/dataTables.bootstrap5.css">
+    
+    
+    <!-- DataTables CSS -->
+</head>
+<body>
+    <div class="justify-content-start">
+        <div class="mt-1 ms-2 text-black">
+            <a href="/menu" class="btn btn-light border border-1">
+                <i class='bx bx-chevron-left bx-sm align-middle'></i>
+                Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="mt-5 mb-4">Registro de Merma</h1>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table table-striped table-hover text-center display" id="tabla_" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">Galleta</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Reporte de usuario</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in merma %}
+                <tr>
+                    <td>{{m.producto}}</td>
+                    <td>{{m.observacion}}</td>
+                    <td>{{m.cantidad}}</td>
+                    <td>{{m.id}}</td>
+                    <td>{{m.fecha}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/static/bootstrap-5/js/bootstrap.bundle.js"></script>
+    <script src="/static/bootstrap-5/js/bootstrap.min.js"></script>
+    <script src="/static/boxicons-2.1.4/js/boxicons.min.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/jquery-3.7.1.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/dataTables.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/dataTables.buttons.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/buttons.dataTables.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/jszip.min.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/pdfmake.min.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/vfs_fonts.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/buttons.html5.min.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/buttons.print.min.js"></script>
+    <script src="/static/DataTables/DataTables-2.0.2/js/dataTables.bootstrap5.js"></script>
+    <script src="/static/poppers.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tabla_').DataTable({
+                'layout': {
+                    'topStart': {
+                        'buttons': [
+                        {
+                            'extend': 'excel',
+                            'className': 'btn btn-success',
+                            'text': '<i class="bx bx-export bx-sm align-middle"></i> Exportar a Excel'
+                        }
+                    ]
+                    }
+                },
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "search": "Buscar:",
+                    
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "processing": "Procesando..."
+                }
+            });
+        });
+    </script>
+</body>
+</html>

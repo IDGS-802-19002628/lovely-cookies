@@ -12,7 +12,10 @@
                             <div class="d-flex align-items-center">
                                 <span class="h5 text-white"
                                     style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">
-                                    Menu de Galletas </span>
+                                    Menu de Galletas </span>  
+                            </div>
+                            <div class="div">
+                                <a href="/merma" class="btn btn-primary"> <i class='bx bx-error-alt bx-sm align-middle'></i> Merma</a>
                             </div>
                         </div>
                     </div>
@@ -36,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6 col-sm-12">
                 <!-- Este es el contenedor donde va el cuestionario y la tabla superpuestos -->
                 <div class="card">
@@ -152,15 +155,14 @@
                         </div>
                     </div>
                     <a href="{{ url_for('venta.ventas_totales') }}" class="btn btn-success">Ver ventas totales del día</a>
+
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 {% endblock %}
 {% block script %}
-
 <script>
     function cargarContenido(categoria) {
         let ruta;

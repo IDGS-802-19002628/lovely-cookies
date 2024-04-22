@@ -168,4 +168,36 @@
 2024-04-19 11:28:25,576 - INFO - The CSRF token is missing.
 2024-04-19 11:30:10,967 - INFO - The CSRF token is missing.
 2024-04-19 11:30:14,022 - INFO - The CSRF token is missing.
-2024-04-19 16:20:11,228 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-19 16:20:11,228 - INFO - Inicio de sesiï¿½n con el correo francis@gmail.com
+2024-04-19 16:01:20,531 - INFO - Inicio de sesiï¿½n con el correo julian@gmail.com
+2024-04-19 18:04:13,885 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com
+2024-04-19 18:04:34,252 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com
+2024-04-19 18:26:07,661 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com
+2024-04-19 18:42:09,818 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com
+2024-04-19 18:43:23,431 - INFO - Inicio de sesiï¿½n con el correo Carlos@gmail.com
+2024-04-19 18:47:00,192 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com
+2024-04-19 19:05:31,574 - INFO - Inicio de sesiï¿½n con el correo Carlos@gmail.com
+2024-04-19 19:11:07,692 - INFO - Inicio de sesiï¿½n con el correo Pedro@gmail.com2024-04-20 18:28:41,391 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-20 19:23:42,335 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-20 19:55:02,645 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-20 20:02:15,794 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-20 20:12:16,982 - INFO - The CSRF token is missing.
+2024-04-20 20:13:39,504 - INFO - The CSRF token is missing.
+2024-04-20 20:20:54,628 - INFO - The CSRF token is missing.
+2024-04-20 20:23:27,042 - INFO - The CSRF token is missing.
+2024-04-20 20:27:08,376 - INFO - The CSRF token is missing.
+2024-04-20 20:29:21,653 - INFO - The CSRF token is missing.
+2024-04-20 20:49:05,540 - INFO - The CSRF token is missing.
+2024-04-20 20:49:32,705 - INFO - The CSRF token is missing.
+2024-04-20 22:06:46,010 - INFO - Inicio de sesión con el correo francis@gmail.com
+2024-04-20 23:51:32,162 - INFO - Inicio de sesión con el correo francis12@gmail.com
+2024-04-20 23:56:44,346 - INFO - The CSRF token is missing.
+2024-04-20 23:57:19,913 - INFO - The CSRF token is missing.
+2024-04-20 23:57:42,299 - INFO - Inicio de sesión con el correo francis12@gmail.com
+2024-04-20 23:57:46,584 - INFO - The CSRF token is missing.
+2024-04-20 23:58:29,304 - INFO - The CSRF token is missing.
+2024-04-21 02:59:46,315 - INFO - Inicio de sesión con el correo francis12@gmail.com
+2024-04-21 04:52:49,065 - INFO - Inicio de sesión con el correo francis1@gmail.com
+2024-04-21 16:22:48,244 - INFO - Inicio de sesión con el correo francis1@gmail.com
+2024-04-21 17:29:45,786 - INFO - Inicio de sesión con el correo francis1@gmail.com
+2024-04-21 19:14:15,627 - ERROR - Error al ejecutar la consulta SQL: 'Engine' object has no attribute 'execute'

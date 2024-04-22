@@ -8,6 +8,7 @@ class Autenticador:
         usuario_a_login = Usuario.query.filter_by(correo=correo).first()
         id = usuario_a_login.id
         
+        
         if not usuario_a_login:
           print("No se encontro usuario")
           alert = 'warning'

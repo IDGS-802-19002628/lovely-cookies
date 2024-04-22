@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request,flash, redirect, url_for, jsonify, Response, send_from_directory
+from flask import Blueprint, render_template, request, flash,redirect, url_for, jsonify, Response, send_from_directory
 from blueprints.receta.models import Galleta
 from .venta_form import GalletaForm
 from flask_login import login_required, current_user
-from .model_venta import  InventarioG, VentaGalleta, VentaTotal, Cajach,Pago_p
+from .model_venta import  InventarioG, Pago_p, Cajach,VentaGalleta, VentaTotal
 from config import db
 from datetime import datetime
 
@@ -173,7 +173,6 @@ def guardar():
             id = user_id,
             fecha = fecha_actual
         )
-    sumar_totales_ventas(tota)
     db.session.add(ventaTotaldb)
     db.session.commit()
     ultimoVenta = VentaTotal.query.order_by(VentaTotal.idVentaTotal.desc()).first()
@@ -300,3 +299,6 @@ def restar_venta():
 
     flash('La cantidad ha sido restada exitosamente.', 'success')
     return redirect(url_for('venta.ventas_totales'))
+
+
+

@@ -33,7 +33,7 @@ class GestorUsuario:
         alert = 'success'
         return messages, alert
     def obtener_usuarios(self):
-         b = Usuario.query.all()
+         b = Usuario.query.filter_by(rol='empleado').all()
          return b
     def eliminar_usuario(self, id_usuario):
          alert = 'success'
@@ -48,8 +48,10 @@ class GestorUsuario:
          print('pass desde form {}'.format(pwd))
          usuario_a_modificar = {}
          id = 0
+         print(id)
          if method == 'GET':
-           usuario_a_modificar = Usuario.query.filter(Usuario.id == id_usuario).first()
+           
+           usuario_a_modificar = Usuario.query.filter(Usuario.id == id_usuario).first()  
            form_usuario.id.data = usuario_a_modificar.id
            form_usuario.nombre.data = usuario_a_modificar.nombre
            form_usuario.pwd.data = usuario_a_modificar.pwd
@@ -59,6 +61,7 @@ class GestorUsuario:
          print("cargando datos en form", form_usuario.pwd.data)
          if method == 'POST':
            id = form_usuario.id.data
+           
            usuario_a_modificar = Usuario.query.filter(Usuario.id == id).first()
            if not form_usuario.pwd.data:
              usuario_a_modificar.nombre = form_usuario.nombre.data
